@@ -2,13 +2,11 @@
 title: API Reference
 
 language_tabs:
-  - shell
-  - ruby
-  - python
+  - javascript
 
 toc_footers:
-  - <a href='#'>Sign Up for a Developer Key</a>
-  - <a href='https://github.com/tripit/slate'>Documentation Powered by Slate</a>
+  - <a href='https://tuxlab.org'>Check out our webpage</a>
+  - <a href='https://github.com/learnlinux'>View Our Source Code</a>
 
 includes:
   - errors
@@ -18,7 +16,8 @@ search: true
 
 # TuxLab
 
-Welcome to the TuxLab API! You can use our API to access Kittn API endpoints, which can get information on various cats, kittens, and breeds in our database.
+Welcome to the TuxLab API! You can use our API to create and run linux tasks and lessons on Docker Swarm or container modules.
+
 
 We have language bindings in Shell, Ruby, and Python! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.
 
