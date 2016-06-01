@@ -71,7 +71,7 @@ env.init()
 
 ```javascript
 var vmOpts = {
-  dockerodeCreateOptions: {name: "jonathan, Image: "ubuntu"},
+  dockerodeCreateOptions: {name: "jonathan", Image: "ubuntu"},
   dockerodeStartOptions: {}}
 
 env.init()
