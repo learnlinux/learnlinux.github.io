@@ -139,7 +139,7 @@ env.init()
 env.init()
   .then(env.shell(labVm,"echo hello-world"))
   .then(env.createVm({dockerodeCreateOptions:{name: "jonathan"}}));
-
+```
 Runs a given command on the virtual machine with the given name. To fully utilize <code>env.shell</code> a basic understanding of promises is helpful. A documentation and tutorial on promises can be found on [the promise.js webpage] (https://this is the link)
 
 After a command is executed the promise is resolved with the stdout output, <code>resolve(sOut)</code> or rejected with the stdout, stderr and docker error messages, <code>reject(sOut,sErr,dockerErr)</code>
@@ -149,6 +149,5 @@ env.shell will run if the output is not handled, but this is necessary to verify
 </aside>
 
 
-```
 ## createTask()
 ## nextTask()

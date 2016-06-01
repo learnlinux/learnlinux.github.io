@@ -230,17 +230,15 @@ The name of a Virtual Machine is how you access and run commands on the virtual 
 <span class="nx">env</span><span class="p">.</span><span class="nx">init</span><span class="p">()</span>
   <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">env</span><span class="p">.</span><span class="nx">shell</span><span class="p">(</span><span class="nx">labVm</span><span class="p">,</span><span class="s2">"echo hello-world"</span><span class="p">))</span>
   <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">env</span><span class="p">.</span><span class="nx">createVm</span><span class="p">({</span><span class="na">dockerodeCreateOptions</span><span class="p">:{</span><span class="na">name</span><span class="p">:</span> <span class="s2">"jonathan"</span><span class="p">}}));</span>
-
-<span class="nx">Runs</span> <span class="nx">a</span> <span class="nx">given</span> <span class="nx">command</span> <span class="nx">on</span> <span class="nx">the</span> <span class="nx">virtual</span> <span class="nx">machine</span> <span class="kd">with</span> <span class="nx">the</span> <span class="nx">given</span> <span class="nx">name</span><span class="p">.</span> <span class="nx">To</span> <span class="nx">fully</span> <span class="nx">utilize</span> <span class="o">&lt;</span><span class="nx">code</span><span class="o">&gt;</span><span class="nx">env</span><span class="p">.</span><span class="nx">shell</span><span class="o">&lt;</span><span class="sr">/code&gt; a basic understanding of promises is helpful. A documentation and tutorial on promises can be found on </span><span class="se">[</span><span class="sr">the promise.js webpage</span><span class="se">]</span><span class="sr"> </span><span class="se">(</span><span class="sr">https:/</span><span class="o">/</span><span class="k">this</span> <span class="nx">is</span> <span class="nx">the</span> <span class="nx">link</span><span class="p">)</span>
-
-<span class="nx">After</span> <span class="nx">a</span> <span class="nx">command</span> <span class="nx">is</span> <span class="nx">executed</span> <span class="nx">the</span> <span class="nx">promise</span> <span class="nx">is</span> <span class="nx">resolved</span> <span class="kd">with</span> <span class="nx">the</span> <span class="nx">stdout</span> <span class="nx">output</span><span class="p">,</span> <span class="o">&lt;</span><span class="nx">code</span><span class="o">&gt;</span><span class="nx">resolve</span><span class="p">(</span><span class="nx">sOut</span><span class="p">)</span><span class="o">&lt;</span><span class="sr">/code&gt; or rejected with the stdout, stderr and docker error messages, &lt;code&gt;reject</span><span class="se">(</span><span class="sr">sOut,sErr,dockerErr</span><span class="se">)</span><span class="sr">&lt;/</span><span class="nx">code</span><span class="o">&gt;</span>
-
-<span class="o">&lt;</span><span class="nx">aside</span> <span class="kr">class</span><span class="o">=</span><span class="s2">"notice"</span><span class="o">&gt;</span>
-<span class="nx">env</span><span class="p">.</span><span class="nx">shell</span> <span class="nx">will</span> <span class="nx">run</span> <span class="k">if</span> <span class="nx">the</span> <span class="nx">output</span> <span class="nx">is</span> <span class="nx">not</span> <span class="nx">handled</span><span class="p">,</span> <span class="nx">but</span> <span class="k">this</span> <span class="nx">is</span> <span class="nx">necessary</span> <span class="nx">to</span> <span class="nx">verify</span> <span class="nx">the</span> <span class="nx">command</span> <span class="nx">ran</span> <span class="nx">as</span> <span class="nx">planned</span>
-<span class="o">&lt;</span><span class="sr">/aside</span><span class="err">&gt;
-</span>
-
 </code></pre>
+
+<p>Runs a given command on the virtual machine with the given name. To fully utilize <code>env.shell</code> a basic understanding of promises is helpful. A documentation and tutorial on promises can be found on <a href="https://this is the link">the promise.js webpage</a></p>
+
+<p>After a command is executed the promise is resolved with the stdout output, <code>resolve(sOut)</code> or rejected with the stdout, stderr and docker error messages, <code>reject(sOut,sErr,dockerErr)</code></p>
+
+<aside class="notice">
+env.shell will run if the output is not handled, but this is necessary to verify the command ran as planned
+</aside>
 
 <h2 id="createtask">createTask()</h2>
 
