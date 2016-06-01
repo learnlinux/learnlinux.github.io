@@ -134,40 +134,41 @@
 </code></pre>
 
 <blockquote>
-<p>you can chain function calls just like promises
-&ldquo;`javascript
-env.init()
-  .then(env.createVm(opts1))
-  .then(env.createVm(opts2))</p>
+<p>you can chain function calls just like promises</p>
 </blockquote>
-<pre class="highlight plaintext"><code>
+<pre class="highlight javascript"><code><span class="nx">env</span><span class="p">.</span><span class="nx">init</span><span class="p">()</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">env</span><span class="p">.</span><span class="nx">createVm</span><span class="p">(</span><span class="nx">opts1</span><span class="p">))</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">env</span><span class="p">.</span><span class="nx">createVm</span><span class="p">(</span><span class="nx">opts2</span><span class="p">))</span>
 
-The Tuxlab API is based on Promise.js, all API functions return promises as explained below. Therefore, function calls can be chained as promises by the &lt;code&gt;.then&lt;/code&gt; function call. Alternatively, you can use the promise-waterfall api and use function calls in a list with lambda functions.
-
-
-
-## env.init(opts)
-
-initializes the environment. This function creates the lab Virtual Machine, the virtual machine students connect to from their interface. All lessons should start with the env.init() call. 
-&lt;aside class="warning"&gt;
-Lessons that are not initialized might result in unwanted behavior
-&lt;/aside&gt;
-
-The parameter opts is optional, the environment defaults to a simple alpine linux virtual machine if not otherwise specified. You can specify additional options as a json file as documented on [our options page] (https://github.com/learnlinux)
-
-## env.createVm(opts)
-
-&gt; to create a vm with as little options as possible
-```javascript
-var tux = require('tuxlab');
-var env = tuxlab.env;
-
-var vmOpts = {dockerodeCreateOptions: {name: "jonathan"}};
-env.init()
-  .then(createVm(vmOpts));
-
-/*notice how we initialize the environment before creating and additional virtual machine*/
 </code></pre>
+
+<p>I CHANGED THIS
+The Tuxlab API is based on Promise.js, all API functions return promises as explained below. Therefore, function calls can be chained as promises by the <code>.then</code> function call. Alternatively, you can use the promise-waterfall api and use function calls in a list with lambda functions.</p>
+
+<h2 id="env-init-opts">env.init(opts)</h2>
+
+<p>initializes the environment. This function creates the lab Virtual Machine, the virtual machine students connect to from their interface. All lessons should start with the env.init() call. 
+<aside class="warning">
+Lessons that are not initialized might result in unwanted behavior
+</aside></p>
+
+<p>The parameter opts is optional, the environment defaults to a simple alpine linux virtual machine if not otherwise specified. You can specify additional options as a json file as documented on <a href="https://github.com/learnlinux">our options page</a></p>
+
+<h2 id="env-createvm-opts">env.createVm(opts)</h2>
+
+<blockquote>
+<p>to create a vm with as little options as possible
+&ldquo;`javascript
+var tux = require(&lsquo;tuxlab&rsquo;);
+var env = tuxlab.env;</p>
+</blockquote>
+
+<p>var vmOpts = {dockerodeCreateOptions: {name: &quot;jonathan&rdquo;}};
+env.init()
+  .then(createVm(vmOpts));</p>
+
+<p>/<em>notice how we initialize the environment before creating and additional virtual machine</em>/
+&ldquo;`</p>
 
 <blockquote>
 <p>to create a vm with more options specified

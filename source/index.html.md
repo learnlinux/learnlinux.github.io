@@ -33,6 +33,7 @@ var env = tuxlab.env;
 // but is easier and cleaner to use as a separate variable
 ```
 > you can chain function calls just like promises
+
 ```javascript
 env.init()
   .then(env.createVm(opts1))
@@ -40,7 +41,7 @@ env.init()
 
 ```
 
-
+I CHANGED THIS
 The Tuxlab API is based on Promise.js, all API functions return promises as explained below. Therefore, function calls can be chained as promises by the <code>.then</code> function call. Alternatively, you can use the promise-waterfall api and use function calls in a list with lambda functions.
 
 
