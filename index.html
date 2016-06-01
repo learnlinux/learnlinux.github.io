@@ -122,56 +122,64 @@
 <p>Welcome to Tuxlab! You can use our platform and APIs to create linux lessons and tutorials.</p>
 
 <h1 id="tuxlab-api">Tuxlab API</h1>
-<pre class="highlight javascript"><code>
-<span class="o">&gt;</span> <span class="nx">you</span> <span class="nx">can</span> <span class="kr">import</span> <span class="nx">the</span> <span class="nx">Tuxlab</span> <span class="nx">API</span> <span class="nx">as</span> <span class="nx">you</span> <span class="nx">would</span> <span class="nx">any</span> <span class="nx">other</span> <span class="nx">node</span> <span class="nx">module</span>
 
-<span class="kd">var</span> <span class="nx">tux</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'tuxlab'</span><span class="p">);</span>
+<blockquote>
+<p>you can import the Tuxlab API as you would any other node module</p>
+</blockquote>
+<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">tux</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'tuxlab'</span><span class="p">);</span>
 <span class="kd">var</span> <span class="nx">env</span> <span class="o">=</span> <span class="nx">tuxlab</span><span class="p">.</span><span class="nx">env</span><span class="p">;</span>
 
 <span class="c1">//env is defined as part of the tuxlab api,</span>
 <span class="c1">// but is easier and cleaner to use as a separate variable</span>
-
-<span class="o">&gt;</span> <span class="nx">you</span> <span class="nx">can</span> <span class="nx">chain</span> <span class="kd">function</span> <span class="nx">calls</span> <span class="nx">just</span> <span class="nx">like</span> <span class="nx">promises</span>
-
-<span class="nx">env</span><span class="p">.</span><span class="nx">init</span><span class="p">()</span>
-  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">env</span><span class="p">.</span><span class="nx">createVm</span><span class="p">(</span><span class="nx">opts1</span><span class="p">))</span>
-  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">env</span><span class="p">.</span><span class="nx">createVm</span><span class="p">(</span><span class="nx">opts2</span><span class="p">))</span>
-
 </code></pre>
 
-<p>The Tuxlab API is based on Promise.js, all API functions return promises as explained below. Therefore, function calls can be chained as promises by the <code>.then</code> function call. Alternatively, you can use the promise-waterfall api and use function calls in a list with lambda functions.</p>
+<blockquote>
+<p>you can chain function calls just like promises
+&ldquo;`javascript
+env.init()
+  .then(env.createVm(opts1))
+  .then(env.createVm(opts2))</p>
+</blockquote>
+<pre class="highlight plaintext"><code>
 
-<h2 id="env-init-opts">env.init(opts)</h2>
+The Tuxlab API is based on Promise.js, all API functions return promises as explained below. Therefore, function calls can be chained as promises by the &lt;code&gt;.then&lt;/code&gt; function call. Alternatively, you can use the promise-waterfall api and use function calls in a list with lambda functions.
 
-<p>initializes the environment. This function creates the lab Virtual Machine, the virtual machine students connect to from their interface. All lessons should start with the env.init() call. 
-<aside class="warning">
+
+
+## env.init(opts)
+
+initializes the environment. This function creates the lab Virtual Machine, the virtual machine students connect to from their interface. All lessons should start with the env.init() call. 
+&lt;aside class="warning"&gt;
 Lessons that are not initialized might result in unwanted behavior
-</aside></p>
+&lt;/aside&gt;
 
-<p>The parameter opts is optional, the environment defaults to a simple alpine linux virtual machine if not otherwise specified. You can specify additional options as a json file as documented on <a href="https://github.com/learnlinux">our options page</a></p>
+The parameter opts is optional, the environment defaults to a simple alpine linux virtual machine if not otherwise specified. You can specify additional options as a json file as documented on [our options page] (https://github.com/learnlinux)
 
-<h2 id="env-createvm-opts">env.createVm(opts)</h2>
-<pre class="highlight javascript"><code>
-<span class="o">&gt;</span> <span class="nx">to</span> <span class="nx">create</span> <span class="nx">a</span> <span class="nx">vm</span> <span class="kd">with</span> <span class="nx">as</span> <span class="nx">little</span> <span class="nx">options</span> <span class="nx">as</span> <span class="nx">possible</span>
+## env.createVm(opts)
 
-<span class="kd">var</span> <span class="nx">tux</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'tuxlab'</span><span class="p">);</span>
-<span class="kd">var</span> <span class="nx">env</span> <span class="o">=</span> <span class="nx">tuxlab</span><span class="p">.</span><span class="nx">env</span><span class="p">;</span>
+&gt; to create a vm with as little options as possible
+```javascript
+var tux = require('tuxlab');
+var env = tuxlab.env;
 
-<span class="kd">var</span> <span class="nx">vmOpts</span> <span class="o">=</span> <span class="p">{</span><span class="na">dockerodeCreateOptions</span><span class="p">:</span> <span class="p">{</span><span class="na">name</span><span class="p">:</span> <span class="s2">"jonathan"</span><span class="p">}};</span>
-<span class="nx">env</span><span class="p">.</span><span class="nx">init</span><span class="p">()</span>
-  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">createVm</span><span class="p">(</span><span class="nx">vmOpts</span><span class="p">));</span>
+var vmOpts = {dockerodeCreateOptions: {name: "jonathan"}};
+env.init()
+  .then(createVm(vmOpts));
 
-<span class="cm">/*notice how we initialize the environment before creating and additional virtual machine*/</span>
-
-<span class="o">&gt;</span> <span class="nx">to</span> <span class="nx">create</span> <span class="nx">a</span> <span class="nx">vm</span> <span class="kd">with</span> <span class="nx">more</span> <span class="nx">options</span> <span class="nx">specified</span>
-
-<span class="kd">var</span> <span class="nx">vmOpts</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="na">dockerodeCreateOptions</span><span class="p">:</span> <span class="p">{</span><span class="na">name</span><span class="p">:</span> <span class="s2">"jonathan, Image: "</span><span class="nx">ubuntu</span><span class="err">"</span><span class="p">},</span>
-  <span class="na">dockerodeStartOptions</span><span class="p">:</span> <span class="p">{}}</span>
-
-<span class="nx">env</span><span class="p">.</span><span class="nx">init</span><span class="p">()</span>
-  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">createVm</span><span class="p">(</span><span class="nx">vmOpts</span><span class="p">));</span>
+/*notice how we initialize the environment before creating and additional virtual machine*/
 </code></pre>
+
+<blockquote>
+<p>to create a vm with more options specified
+&rdquo;`javascript
+var vmOpts = {
+  dockerodeCreateOptions: {name: &ldquo;jonathan, Image: &quot;ubuntu&rdquo;},
+  dockerodeStartOptions: {}}</p>
+</blockquote>
+
+<p>env.init()
+  .then(createVm(vmOpts));
+&ldquo;`</p>
 
 <p>Creates and starts a new virtual machine. This command is ideal for tasks where students are expected to interact with another environment. An example usage might be a simulated website-hacking scenario.
 Additional virtual machines should be connected to the Lab VM by a network. See below for instructions on how to create and manage networks. </p>
@@ -213,26 +221,32 @@ The name of a Virtual Machine is how you access and run commands on the virtual 
 </aside></p>
 
 <h2 id="env-shell-vmname-command-opts">env.shell(vmName,command,opts)</h2>
-<pre class="highlight javascript"><code>
-<span class="o">&gt;</span> <span class="nx">it</span> <span class="nx">is</span> <span class="nx">important</span> <span class="nx">to</span> <span class="nx">check</span> <span class="k">for</span> <span class="nx">the</span> <span class="nx">otput</span>
-<span class="nx">env</span><span class="p">.</span><span class="nx">init</span><span class="p">()</span>
-  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">env</span><span class="p">.</span><span class="nx">shell</span><span class="p">(</span><span class="nx">labVm</span><span class="p">,</span><span class="s2">"echo hello-world"</span><span class="p">))</span>
-  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">sOut</span><span class="p">){</span> <span class="nx">assert</span><span class="p">(</span><span class="nx">sOut</span> <span class="o">===</span> <span class="s2">"hello-world"</span><span class="p">);</span> <span class="p">},</span>
-        <span class="kd">function</span><span class="p">(</span><span class="nx">sOut</span><span class="p">,</span><span class="nx">sErr</span><span class="p">,</span><span class="nx">dErr</span><span class="p">){</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">sOut</span><span class="p">);</span>
-                                  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">sErr</span><span class="p">);</span>
-                                  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">dErr</span><span class="p">);</span>
-         <span class="p">})</span>
-  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">env</span><span class="p">.</span><span class="nx">createVm</span><span class="p">({</span><span class="na">dockerodeCreateOptions</span><span class="p">:{</span><span class="na">name</span><span class="p">:</span> <span class="s2">"jonathan"</span><span class="p">}}));</span>
 
-<span class="c1">//notice how we can continue chaining after handling the output</span>
+<blockquote>
+<p>it is important to check for the output
+&rdquo;`javascript
+env.init()
+  .then(env.shell(labVm,&ldquo;echo hello-world&rdquo;))
+  .then(function(sOut){ assert(sOut === &ldquo;hello-world&rdquo;); },
+        function(sOut,sErr,dErr){ console.log(sOut);
+                                  console.log(sErr);
+                                  console.log(dErr);
+         })
+  .then(env.createVm({dockerodeCreateOptions:{name: &ldquo;jonathan&rdquo;}}));</p>
+</blockquote>
 
-<span class="o">&gt;</span> <span class="nx">it</span> <span class="nx">is</span><span class="p">,</span> <span class="nx">however</span><span class="p">,</span> <span class="nx">possible</span> <span class="nx">to</span> <span class="nx">forego</span> <span class="nx">output</span> <span class="nx">handling</span>
-<span class="nx">env</span><span class="p">.</span><span class="nx">init</span><span class="p">()</span>
-  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">env</span><span class="p">.</span><span class="nx">shell</span><span class="p">(</span><span class="nx">labVm</span><span class="p">,</span><span class="s2">"echo hello-world"</span><span class="p">))</span>
-  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">env</span><span class="p">.</span><span class="nx">createVm</span><span class="p">({</span><span class="na">dockerodeCreateOptions</span><span class="p">:{</span><span class="na">name</span><span class="p">:</span> <span class="s2">"jonathan"</span><span class="p">}}));</span>
-</code></pre>
+<p>//notice how we can continue chaining after handling the output
+&ldquo;`</p>
 
-<p>Runs a given command on the virtual machine with the given name. To fully utilize <code>env.shell</code> a basic understanding of promises is helpful. A documentation and tutorial on promises can be found on <a href="https://this is the link">the promise.js webpage</a></p>
+<blockquote>
+<p>it is, however, possible to forego output handling
+<code class="prettyprint">javascript
+env.init()
+  .then(env.shell(labVm,&quot;echo hello-world&quot;))
+  .then(env.createVm({dockerodeCreateOptions:{name: &quot;jonathan&quot;}}));
+</code>
+Runs a given command on the virtual machine with the given name. To fully utilize <code>env.shell</code> a basic understanding of promises is helpful. A documentation and tutorial on promises can be found on <a href="https://this is the link">the promise.js webpage</a></p>
+</blockquote>
 
 <p>After a command is executed the promise is resolved with the stdout output, <code>resolve(sOut)</code> or rejected with the stdout, stderr and docker error messages, <code>reject(sOut,sErr,dockerErr)</code></p>
 
