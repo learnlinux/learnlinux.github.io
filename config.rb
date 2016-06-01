@@ -10,6 +10,7 @@ set :markdown,
     no_intra_emphasis: true
 
 # Assets
+set :build_dir, 'docs'
 set :css_dir, 'stylesheets'
 set :js_dir, 'javascripts'
 set :images_dir, 'images'
