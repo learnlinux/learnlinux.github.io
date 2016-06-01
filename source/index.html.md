@@ -41,7 +41,6 @@ env.init()
 
 ```
 
-I CHANGED THIS
 The Tuxlab API is based on Promise.js, all API functions return promises as explained below. Therefore, function calls can be chained as promises by the <code>.then</code> function call. Alternatively, you can use the promise-waterfall api and use function calls in a list with lambda functions.
 
 
