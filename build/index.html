@@ -119,156 +119,142 @@
       <div class="content">
         <h1 id="tuxlab">TuxLab</h1>
 
-<p>Welcome to the TuxLab API! You can use our API to create and run linux tasks and lessons on Docker Swarm or container modules.</p>
+<p>Welcome to Tuxlab! You can use our platform and APIs to create linux lessons and tutorials.</p>
 
-<p>We have language bindings in Shell, Ruby, and Python! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.</p>
+<h1 id="tuxlab-api">Tuxlab API</h1>
 
-<p>This example API documentation page was created with <a href="https://github.com/tripit/slate">Slate</a>. Feel free to edit it and use it as a base for your own API&rsquo;s documentation.</p>
+<p>The Tuxlab API is based on Promise.js, all API functions return promises as explained below. Therefore, function calls can be chained as promises by the <code>.then</code> function call. Alternatively, you can use the promise-waterfall api and use function calls in a list with lambda functions.</p>
+<pre class="highlight javascript"><code>
+<span class="o">&gt;</span> <span class="nx">you</span> <span class="nx">can</span> <span class="kr">import</span> <span class="nx">the</span> <span class="nx">Tuxlab</span> <span class="nx">API</span> <span class="nx">as</span> <span class="nx">you</span> <span class="nx">would</span> <span class="nx">any</span> <span class="nx">other</span> <span class="nx">node</span> <span class="nx">module</span>
 
-<h1 id="setting-up-your-environment">Setting up your environment</h1>
+<span class="kd">var</span> <span class="nx">tux</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'tuxlab'</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">env</span> <span class="o">=</span> <span class="nx">tuxlab</span><span class="p">.</span><span class="nx">env</span><span class="p">;</span>
 
-<blockquote>
-<p>To authorize, use this code:</p>
-</blockquote>
-<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">tux</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'tuxlab'</span><span class="p">);</span>
+<span class="c1">//env is defined as part of the tuxlab api,</span>
+<span class="c1">// but is easier and cleaner to use as a separate variable</span>
 
 </code></pre>
-<pre class="highlight shell"><code><span class="c"># With shell, you can just pass the correct header with each request</span>
-curl <span class="s2">"api_endpoint_here"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
+<pre class="highlight javascript"><code>
+<span class="o">&gt;</span> <span class="nx">you</span> <span class="nx">can</span> <span class="nx">chain</span> <span class="kd">function</span> <span class="nx">calls</span> <span class="nx">just</span> <span class="nx">like</span> <span class="nx">promises</span>
+
+<span class="nx">env</span><span class="p">.</span><span class="nx">init</span><span class="p">()</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">env</span><span class="p">.</span><span class="nx">createVm</span><span class="p">(</span><span class="nx">opts1</span><span class="p">))</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">env</span><span class="p">.</span><span class="nx">createVm</span><span class="p">(</span><span class="nx">opts2</span><span class="p">))</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">env</span><span class="p">.</span><span class="nx">shell</span><span class="p">(</span><span class="nx">vm1</span><span class="p">,</span><span class="s2">"echo hello-world"</span><span class="p">,</span><span class="nx">opts3</span><span class="p">))</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">succ</span><span class="p">){</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">succ</span><span class="p">);})</span>
+  <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">errors</span><span class="p">){</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">errors</span><span class="p">);});</span>
+<span class="c1">//promises are chained with .then, errors are handled with .catch</span>
+
+<span class="o">&gt;</span> <span class="nx">or</span> <span class="nx">using</span> <span class="nx">promise</span><span class="o">-</span><span class="nx">waterfall</span>
+
+<span class="kd">var</span> <span class="nx">todo</span> <span class="o">=</span> <span class="p">[</span><span class="nx">env</span><span class="p">.</span><span class="nx">init</span><span class="p">(),</span><span class="nx">env</span><span class="p">.</span><span class="nx">createVm</span><span class="p">(</span><span class="nx">opts1</span><span class="p">),</span><span class="nx">env</span><span class="p">.</span><span class="nx">createVm</span><span class="p">(</span><span class="nx">opts2</span><span class="p">)];</span>
+<span class="nx">waterfall</span><span class="p">(</span><span class="nx">todo</span><span class="p">);</span>
+
 </code></pre>
 
-<blockquote>
-<p>Make sure to replace <code class="prettyprint">meowmeowmeow</code> with your API key.</p>
-</blockquote>
+<h2 id="env-init-opts">env.init(opts)</h2>
 
-<p>Kittn uses API keys to allow access to the API. You can register a new Kittn API key at our <a href="http://example.com/developers">developer portal</a>.</p>
+<p>initializes the environment. This function creates the lab Virtual Machine, the virtual machine students connect to from their interface. All lessons should start with the env.init() call. 
+<aside class="warning">
+Lessons that are not initialized might result in unwanted behavior
+</aside></p>
 
-<p>Kittn expects for the API key to be included in all API requests to the server in a header that looks like the following:</p>
+<p>The parameter opts is optional, the environment defaults to a simple alpine linux virtual machine if not otherwise specified. You can specify additional options as a json file as documented on <a href="https://github.com/learnlinux">our options page</a></p>
 
-<p><code class="prettyprint">Authorization: meowmeowmeow</code></p>
+<h2 id="env-createvm-opts">env.createVm(opts)</h2>
+
+<p>Creates and starts a new virtual machine. This command is ideal for tasks where students are expected to interact with another environment. An example usage might be a simulated website-hacking scenario.
+Additional virtual machines should be connected to the Lab VM by a network. See below for instructions on how to create and manage networks. </p>
+
+<p>The opts parameter should be supplied as a json file of type
+<code>{dockerodeCreateOptions:{},dockerodeStartOptions:{}}</code>
+name must be specified under <code>dockerodeCreateOptions</code> all other options are optional. VMs default to an alpine linux environment. You can find our option specification document on <a href="https://github.com/learnlinux">our options page</a></p>
 
 <aside class="notice">
-You must replace <code>meowmeowmeow</code> with your personal API key.
+The name of a Virtual Machine is how you access and run commands on the virtual machine. Make sure to choose distinct, explanatory names for your VMs.
 </aside>
+<pre class="highlight javascript"><code>
+<span class="o">&gt;</span> <span class="nx">to</span> <span class="nx">create</span> <span class="nx">a</span> <span class="nx">vm</span> <span class="kd">with</span> <span class="nx">as</span> <span class="nx">little</span> <span class="nx">options</span> <span class="nx">as</span> <span class="nx">possible</span>
 
-<h1 id="kittens">Kittens</h1>
+<span class="kd">var</span> <span class="nx">tux</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'tuxlab'</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">env</span> <span class="o">=</span> <span class="nx">tuxlab</span><span class="p">.</span><span class="nx">env</span><span class="p">;</span>
 
-<h2 id="get-all-kittens">Get All Kittens</h2>
-<pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
+<span class="kd">var</span> <span class="nx">vmOpts</span> <span class="o">=</span> <span class="p">{</span><span class="na">dockerodeCreateOptions</span><span class="p">:</span> <span class="p">{</span><span class="na">name</span><span class="p">:</span> <span class="s2">"jonathan"</span><span class="p">}};</span>
+<span class="nx">env</span><span class="p">.</span><span class="nx">init</span><span class="p">()</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">createVm</span><span class="p">(</span><span class="nx">vmOpts</span><span class="p">));</span>
 
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">get</span>
+<span class="cm">/*notice how we initialize the environment before creating and additional virtual machine*/</span>
+
+<span class="o">&gt;</span> <span class="nx">to</span> <span class="nx">create</span> <span class="nx">a</span> <span class="nx">vm</span> <span class="kd">with</span> <span class="nx">more</span> <span class="nx">options</span> <span class="nx">specified</span>
+
+<span class="kd">var</span> <span class="nx">vmOpts</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">dockerodeCreateOptions</span><span class="p">:</span> <span class="p">{</span><span class="na">name</span><span class="p">:</span> <span class="s2">"jonathan, Image: "</span><span class="nx">ubuntu</span><span class="err">"</span><span class="p">},</span>
+  <span class="na">dockerodeStartOptions</span><span class="p">:</span> <span class="p">{}}</span>
+
+<span class="nx">env</span><span class="p">.</span><span class="nx">init</span><span class="p">()</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">createVm</span><span class="p">(</span><span class="nx">vmOpts</span><span class="p">));</span>
 </code></pre>
-<pre class="highlight python"><code><span class="kn">import</span> <span class="nn">kittn</span>
 
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+<h2 id="env-updatevm-vmname-opts">env.updateVm(vmName,opts)</h2>
+
+<p>Updates a virtual machine with the given options. Useful when the instructor wants to change the behavior of a virtual machine after it was created. Example: running the same task on alpine linux, and then ubuntu.
+<aside class="warning">
+<code>vmName</code> should be the name of a virtual machine previously defined in the environment instance running
+</aside></p>
+<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">vmOpts</span> <span class="o">=</span> <span class="p">{</span><span class="na">dockerodeCreateOptions</span><span class="p">:</span> <span class="p">{</span><span class="na">name</span><span class="p">:</span> <span class="s2">"jonathan"</span><span class="p">}};</span>
+<span class="nx">env</span><span class="p">.</span><span class="nx">init</span><span class="p">()</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">createVm</span><span class="p">(</span><span class="nx">vmOpts</span><span class="p">))</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">updateVm</span><span class="p">(</span><span class="s2">"jonathan"</span><span class="p">,{</span><span class="na">Image</span><span class="p">:</span> <span class="s2">"ubuntu"</span><span class="p">}));</span>
+
+<span class="c1">//vm defaults to alpine linux and then is changed to ubuntu</span>
 </code></pre>
-<pre class="highlight shell"><code>curl <span class="s2">"http://example.com/api/kittens"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
+
+<h2 id="env-removevm-vmname-opts">env.removeVm(vmName,opts)</h2>
+
+<p>Removes a virtual machine. It is efficient to remove virtual machines with idle tasks once they are no longer needed as it saves resources -and money-.
+<aside class="warning">
+<code>vmName</code> should be the name of a virtual machine previously defined in the environment instance running
+</aside></p>
+<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">vmOpts</span> <span class="o">=</span> <span class="p">{</span><span class="na">dockerodeCreateOptions</span><span class="p">:</span> <span class="p">{</span><span class="na">name</span><span class="p">:</span> <span class="s2">"jonathan"</span><span class="p">}};</span>
+<span class="nx">env</span><span class="p">.</span><span class="nx">init</span><span class="p">()</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">createVm</span><span class="p">(</span><span class="nx">vmOpts</span><span class="p">))</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">removeVm</span><span class="p">(</span><span class="s2">"jonathan"</span><span class="p">));</span>
+
+<span class="c1">//vm is created then deleted</span>
 </code></pre>
 
-<blockquote>
-<p>The above command returns JSON structured like this:</p>
-</blockquote>
-<pre class="highlight json"><code><span class="p">[</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Fluffums"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"calico"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Max"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unknown"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">]</span><span class="w">
-</span></code></pre>
+<h2 id="env-shell-vmname-command-opts">env.shell(vmName,command,opts)</h2>
 
-<p>This endpoint retrieves all kittens.</p>
+<p>Runs a given command on the virtual machine with the given name. To fully utilize <code>env.shell</code> a basic understanding of promises is helpful. A documentation and tutorial on promises can be found on <a href="https://this is the link">the promise.js webpage</a></p>
 
-<h3 id="http-request">HTTP Request</h3>
+<p>After a command is executed the promise is resolved with the stdout output, <code>resolve(sOut)</code> or rejected with the stdout, stderr and docker error messages, <code>reject(sOut,sErr,dockerErr)</code></p>
 
-<p><code class="prettyprint">GET http://example.com/api/kittens</code></p>
-
-<h3 id="query-parameters">Query Parameters</h3>
-
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Default</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>include_cats</td>
-<td>false</td>
-<td>If set to true, the result will also include cats.</td>
-</tr>
-<tr>
-<td>available</td>
-<td>true</td>
-<td>If set to false, the result will include kittens that have already been adopted.</td>
-</tr>
-</tbody></table>
-
-<aside class="success">
-Remember — a happy kitten is an authenticated kitten!
+<aside class="notice">
+env.shell will run if the output is not handled, but this is necessary to verify the command ran as planned
 </aside>
+<pre class="highlight javascript"><code>
+<span class="o">&gt;</span> <span class="nx">it</span> <span class="nx">is</span> <span class="nx">important</span> <span class="nx">to</span> <span class="nx">check</span> <span class="k">for</span> <span class="nx">the</span> <span class="nx">otput</span>
+<span class="nx">env</span><span class="p">.</span><span class="nx">init</span><span class="p">()</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">env</span><span class="p">.</span><span class="nx">shell</span><span class="p">(</span><span class="nx">labVm</span><span class="p">,</span><span class="s2">"echo hello-world"</span><span class="p">))</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">sOut</span><span class="p">){</span> <span class="nx">assert</span><span class="p">(</span><span class="nx">sOut</span> <span class="o">===</span> <span class="s2">"hello-world"</span><span class="p">);</span> <span class="p">},</span>
+        <span class="kd">function</span><span class="p">(</span><span class="nx">sOut</span><span class="p">,</span><span class="nx">sErr</span><span class="p">,</span><span class="nx">dErr</span><span class="p">){</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">sOut</span><span class="p">);</span>
+                                  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">sErr</span><span class="p">);</span>
+                                  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">dErr</span><span class="p">);</span>
+         <span class="p">})</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">env</span><span class="p">.</span><span class="nx">createVm</span><span class="p">({</span><span class="na">dockerodeCreateOptions</span><span class="p">:{</span><span class="na">name</span><span class="p">:</span> <span class="s2">"jonathan"</span><span class="p">}}));</span>
 
-<h2 id="get-a-specific-kitten">Get a Specific Kitten</h2>
-<pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
+<span class="c1">//notice how we can continue chaining after handling the output</span>
 
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="o">&gt;</span> <span class="nx">it</span> <span class="nx">is</span><span class="p">,</span> <span class="nx">however</span><span class="p">,</span> <span class="nx">possible</span> <span class="nx">to</span> <span class="nx">forego</span> <span class="nx">output</span> <span class="nx">handling</span>
+<span class="nx">env</span><span class="p">.</span><span class="nx">init</span><span class="p">()</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">env</span><span class="p">.</span><span class="nx">shell</span><span class="p">(</span><span class="nx">labVm</span><span class="p">,</span><span class="s2">"echo hello-world"</span><span class="p">))</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">env</span><span class="p">.</span><span class="nx">createVm</span><span class="p">({</span><span class="na">dockerodeCreateOptions</span><span class="p">:{</span><span class="na">name</span><span class="p">:</span> <span class="s2">"jonathan"</span><span class="p">}}));</span>
+
 </code></pre>
-<pre class="highlight python"><code><span class="kn">import</span> <span class="nn">kittn</span>
 
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre>
-<pre class="highlight shell"><code>curl <span class="s2">"http://example.com/api/kittens/2"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre>
+<h2 id="createtask">createTask()</h2>
 
-<blockquote>
-<p>The above command returns JSON structured like this:</p>
-</blockquote>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Max"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unknown"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-
-<p>This endpoint retrieves a specific kitten.</p>
-
-<aside class="warning">Inside HTML code blocks like this one, you can&rsquo;t use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.</aside>
-
-<h3 id="http-request">HTTP Request</h3>
-
-<p><code class="prettyprint">GET http://example.com/kittens/&lt;ID&gt;</code></p>
-
-<h3 id="url-parameters">URL Parameters</h3>
-
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>ID</td>
-<td>The ID of the kitten to retrieve</td>
-</tr>
-</tbody></table>
+<h2 id="nexttask">nextTask()</h2>
 
           <h1 id="errors">Errors</h1>
 
