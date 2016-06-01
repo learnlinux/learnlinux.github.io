@@ -21,8 +21,6 @@ Welcome to Tuxlab! You can use our platform and APIs to create linux lessons and
 
 # Tuxlab API
 
-The Tuxlab API is based on Promise.js, all API functions return promises as explained below. Therefore, function calls can be chained as promises by the <code>.then</code> function call. Alternatively, you can use the promise-waterfall api and use function calls in a list with lambda functions.
-
 ```javascript
 
 > you can import the Tuxlab API as you would any other node module
@@ -33,26 +31,18 @@ var env = tuxlab.env;
 //env is defined as part of the tuxlab api,
 // but is easier and cleaner to use as a separate variable
 
-```
-
-```javascript
-
 > you can chain function calls just like promises
 
 env.init()
   .then(env.createVm(opts1))
   .then(env.createVm(opts2))
-  .then(env.shell(vm1,"echo hello-world",opts3))
-  .then(function(succ){console.log(succ);})
-  .catch(function(errors){console.log(errors);});
-//promises are chained with .then, errors are handled with .catch
-
-> or using promise-waterfall
-
-var todo = [env.init(),env.createVm(opts1),env.createVm(opts2)];
-waterfall(todo);
 
 ```
+
+
+The Tuxlab API is based on Promise.js, all API functions return promises as explained below. Therefore, function calls can be chained as promises by the <code>.then</code> function call. Alternatively, you can use the promise-waterfall api and use function calls in a list with lambda functions.
+
+
 
 ## env.init(opts)
 
@@ -64,18 +54,6 @@ Lessons that are not initialized might result in unwanted behavior
 The parameter opts is optional, the environment defaults to a simple alpine linux virtual machine if not otherwise specified. You can specify additional options as a json file as documented on [our options page] (https://github.com/learnlinux)
 
 ## env.createVm(opts)
-
-Creates and starts a new virtual machine. This command is ideal for tasks where students are expected to interact with another environment. An example usage might be a simulated website-hacking scenario.
-Additional virtual machines should be connected to the Lab VM by a network. See below for instructions on how to create and manage networks. 
-
-The opts parameter should be supplied as a json file of type
-<code>{dockerodeCreateOptions:{},dockerodeStartOptions:{}}</code>
-name must be specified under <code>dockerodeCreateOptions</code> all other options are optional. VMs default to an alpine linux environment. You can find our option specification document on [our options page] (https://github.com/learnlinux)
-
-<aside class="notice">
-The name of a Virtual Machine is how you access and run commands on the virtual machine. Make sure to choose distinct, explanatory names for your VMs.
-</aside>
-
 ```javascript
 
 > to create a vm with as little options as possible
@@ -99,13 +77,19 @@ env.init()
   .then(createVm(vmOpts));
 ```
 
-## env.updateVm(vmName,opts)
+Creates and starts a new virtual machine. This command is ideal for tasks where students are expected to interact with another environment. An example usage might be a simulated website-hacking scenario.
+Additional virtual machines should be connected to the Lab VM by a network. See below for instructions on how to create and manage networks. 
 
-Updates a virtual machine with the given options. Useful when the instructor wants to change the behavior of a virtual machine after it was created. Example: running the same task on alpine linux, and then ubuntu.
-<aside class="warning">
-<code>vmName</code> should be the name of a virtual machine previously defined in the environment instance running
+The opts parameter should be supplied as a json file of type
+<code>{dockerodeCreateOptions:{},dockerodeStartOptions:{}}</code>
+name must be specified under <code>dockerodeCreateOptions</code> all other options are optional. VMs default to an alpine linux environment. You can find our option specification document on [our options page] (https://github.com/learnlinux)
+
+<aside class="notice">
+The name of a Virtual Machine is how you access and run commands on the virtual machine. Make sure to choose distinct, explanatory names for your VMs.
 </aside>
 
+
+## env.updateVm(vmName,opts)
 ```javascript
 var vmOpts = {dockerodeCreateOptions: {name: "jonathan"}};
 env.init()
@@ -114,13 +98,13 @@ env.init()
 
 //vm defaults to alpine linux and then is changed to ubuntu
 ```
-## env.removeVm(vmName,opts)
 
-Removes a virtual machine. It is efficient to remove virtual machines with idle tasks once they are no longer needed as it saves resources -and money-.
+Updates a virtual machine with the given options. Useful when the instructor wants to change the behavior of a virtual machine after it was created. Example: running the same task on alpine linux, and then ubuntu.
 <aside class="warning">
 <code>vmName</code> should be the name of a virtual machine previously defined in the environment instance running
 </aside>
 
+## env.removeVm(vmName,opts)
 ```javascript
 var vmOpts = {dockerodeCreateOptions: {name: "jonathan"}};
 env.init()
@@ -130,16 +114,13 @@ env.init()
 //vm is created then deleted
 ```
 
-## env.shell(vmName,command,opts)
-
-Runs a given command on the virtual machine with the given name. To fully utilize <code>env.shell</code> a basic understanding of promises is helpful. A documentation and tutorial on promises can be found on [the promise.js webpage] (https://this is the link)
-
-After a command is executed the promise is resolved with the stdout output, <code>resolve(sOut)</code> or rejected with the stdout, stderr and docker error messages, <code>reject(sOut,sErr,dockerErr)</code>
-
-<aside class="notice">
-env.shell will run if the output is not handled, but this is necessary to verify the command ran as planned
+Removes a virtual machine. It is efficient to remove virtual machines with idle tasks once they are no longer needed as it saves resources -and money-.
+<aside class="warning">
+<code>vmName</code> should be the name of a virtual machine previously defined in the environment instance running
 </aside>
 
+
+## env.shell(vmName,command,opts)
 ```javascript
 
 > it is important to check for the otput
@@ -158,6 +139,15 @@ env.init()
 env.init()
   .then(env.shell(labVm,"echo hello-world"))
   .then(env.createVm({dockerodeCreateOptions:{name: "jonathan"}}));
+
+Runs a given command on the virtual machine with the given name. To fully utilize <code>env.shell</code> a basic understanding of promises is helpful. A documentation and tutorial on promises can be found on [the promise.js webpage] (https://this is the link)
+
+After a command is executed the promise is resolved with the stdout output, <code>resolve(sOut)</code> or rejected with the stdout, stderr and docker error messages, <code>reject(sOut,sErr,dockerErr)</code>
+
+<aside class="notice">
+env.shell will run if the output is not handled, but this is necessary to verify the command ran as planned
+</aside>
+
 
 ```
 ## createTask()

@@ -122,8 +122,6 @@
 <p>Welcome to Tuxlab! You can use our platform and APIs to create linux lessons and tutorials.</p>
 
 <h1 id="tuxlab-api">Tuxlab API</h1>
-
-<p>The Tuxlab API is based on Promise.js, all API functions return promises as explained below. Therefore, function calls can be chained as promises by the <code>.then</code> function call. Alternatively, you can use the promise-waterfall api and use function calls in a list with lambda functions.</p>
 <pre class="highlight javascript"><code>
 <span class="o">&gt;</span> <span class="nx">you</span> <span class="nx">can</span> <span class="kr">import</span> <span class="nx">the</span> <span class="nx">Tuxlab</span> <span class="nx">API</span> <span class="nx">as</span> <span class="nx">you</span> <span class="nx">would</span> <span class="nx">any</span> <span class="nx">other</span> <span class="nx">node</span> <span class="nx">module</span>
 
@@ -133,24 +131,15 @@
 <span class="c1">//env is defined as part of the tuxlab api,</span>
 <span class="c1">// but is easier and cleaner to use as a separate variable</span>
 
-</code></pre>
-<pre class="highlight javascript"><code>
 <span class="o">&gt;</span> <span class="nx">you</span> <span class="nx">can</span> <span class="nx">chain</span> <span class="kd">function</span> <span class="nx">calls</span> <span class="nx">just</span> <span class="nx">like</span> <span class="nx">promises</span>
 
 <span class="nx">env</span><span class="p">.</span><span class="nx">init</span><span class="p">()</span>
   <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">env</span><span class="p">.</span><span class="nx">createVm</span><span class="p">(</span><span class="nx">opts1</span><span class="p">))</span>
   <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">env</span><span class="p">.</span><span class="nx">createVm</span><span class="p">(</span><span class="nx">opts2</span><span class="p">))</span>
-  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">env</span><span class="p">.</span><span class="nx">shell</span><span class="p">(</span><span class="nx">vm1</span><span class="p">,</span><span class="s2">"echo hello-world"</span><span class="p">,</span><span class="nx">opts3</span><span class="p">))</span>
-  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">succ</span><span class="p">){</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">succ</span><span class="p">);})</span>
-  <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">errors</span><span class="p">){</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">errors</span><span class="p">);});</span>
-<span class="c1">//promises are chained with .then, errors are handled with .catch</span>
-
-<span class="o">&gt;</span> <span class="nx">or</span> <span class="nx">using</span> <span class="nx">promise</span><span class="o">-</span><span class="nx">waterfall</span>
-
-<span class="kd">var</span> <span class="nx">todo</span> <span class="o">=</span> <span class="p">[</span><span class="nx">env</span><span class="p">.</span><span class="nx">init</span><span class="p">(),</span><span class="nx">env</span><span class="p">.</span><span class="nx">createVm</span><span class="p">(</span><span class="nx">opts1</span><span class="p">),</span><span class="nx">env</span><span class="p">.</span><span class="nx">createVm</span><span class="p">(</span><span class="nx">opts2</span><span class="p">)];</span>
-<span class="nx">waterfall</span><span class="p">(</span><span class="nx">todo</span><span class="p">);</span>
 
 </code></pre>
+
+<p>The Tuxlab API is based on Promise.js, all API functions return promises as explained below. Therefore, function calls can be chained as promises by the <code>.then</code> function call. Alternatively, you can use the promise-waterfall api and use function calls in a list with lambda functions.</p>
 
 <h2 id="env-init-opts">env.init(opts)</h2>
 
@@ -162,17 +151,6 @@ Lessons that are not initialized might result in unwanted behavior
 <p>The parameter opts is optional, the environment defaults to a simple alpine linux virtual machine if not otherwise specified. You can specify additional options as a json file as documented on <a href="https://github.com/learnlinux">our options page</a></p>
 
 <h2 id="env-createvm-opts">env.createVm(opts)</h2>
-
-<p>Creates and starts a new virtual machine. This command is ideal for tasks where students are expected to interact with another environment. An example usage might be a simulated website-hacking scenario.
-Additional virtual machines should be connected to the Lab VM by a network. See below for instructions on how to create and manage networks. </p>
-
-<p>The opts parameter should be supplied as a json file of type
-<code>{dockerodeCreateOptions:{},dockerodeStartOptions:{}}</code>
-name must be specified under <code>dockerodeCreateOptions</code> all other options are optional. VMs default to an alpine linux environment. You can find our option specification document on <a href="https://github.com/learnlinux">our options page</a></p>
-
-<aside class="notice">
-The name of a Virtual Machine is how you access and run commands on the virtual machine. Make sure to choose distinct, explanatory names for your VMs.
-</aside>
 <pre class="highlight javascript"><code>
 <span class="o">&gt;</span> <span class="nx">to</span> <span class="nx">create</span> <span class="nx">a</span> <span class="nx">vm</span> <span class="kd">with</span> <span class="nx">as</span> <span class="nx">little</span> <span class="nx">options</span> <span class="nx">as</span> <span class="nx">possible</span>
 
@@ -195,12 +173,18 @@ The name of a Virtual Machine is how you access and run commands on the virtual 
   <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">createVm</span><span class="p">(</span><span class="nx">vmOpts</span><span class="p">));</span>
 </code></pre>
 
-<h2 id="env-updatevm-vmname-opts">env.updateVm(vmName,opts)</h2>
+<p>Creates and starts a new virtual machine. This command is ideal for tasks where students are expected to interact with another environment. An example usage might be a simulated website-hacking scenario.
+Additional virtual machines should be connected to the Lab VM by a network. See below for instructions on how to create and manage networks. </p>
 
-<p>Updates a virtual machine with the given options. Useful when the instructor wants to change the behavior of a virtual machine after it was created. Example: running the same task on alpine linux, and then ubuntu.
-<aside class="warning">
-<code>vmName</code> should be the name of a virtual machine previously defined in the environment instance running
-</aside></p>
+<p>The opts parameter should be supplied as a json file of type
+<code>{dockerodeCreateOptions:{},dockerodeStartOptions:{}}</code>
+name must be specified under <code>dockerodeCreateOptions</code> all other options are optional. VMs default to an alpine linux environment. You can find our option specification document on <a href="https://github.com/learnlinux">our options page</a></p>
+
+<aside class="notice">
+The name of a Virtual Machine is how you access and run commands on the virtual machine. Make sure to choose distinct, explanatory names for your VMs.
+</aside>
+
+<h2 id="env-updatevm-vmname-opts">env.updateVm(vmName,opts)</h2>
 <pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">vmOpts</span> <span class="o">=</span> <span class="p">{</span><span class="na">dockerodeCreateOptions</span><span class="p">:</span> <span class="p">{</span><span class="na">name</span><span class="p">:</span> <span class="s2">"jonathan"</span><span class="p">}};</span>
 <span class="nx">env</span><span class="p">.</span><span class="nx">init</span><span class="p">()</span>
   <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">createVm</span><span class="p">(</span><span class="nx">vmOpts</span><span class="p">))</span>
@@ -209,12 +193,12 @@ The name of a Virtual Machine is how you access and run commands on the virtual 
 <span class="c1">//vm defaults to alpine linux and then is changed to ubuntu</span>
 </code></pre>
 
-<h2 id="env-removevm-vmname-opts">env.removeVm(vmName,opts)</h2>
-
-<p>Removes a virtual machine. It is efficient to remove virtual machines with idle tasks once they are no longer needed as it saves resources -and money-.
+<p>Updates a virtual machine with the given options. Useful when the instructor wants to change the behavior of a virtual machine after it was created. Example: running the same task on alpine linux, and then ubuntu.
 <aside class="warning">
 <code>vmName</code> should be the name of a virtual machine previously defined in the environment instance running
 </aside></p>
+
+<h2 id="env-removevm-vmname-opts">env.removeVm(vmName,opts)</h2>
 <pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">vmOpts</span> <span class="o">=</span> <span class="p">{</span><span class="na">dockerodeCreateOptions</span><span class="p">:</span> <span class="p">{</span><span class="na">name</span><span class="p">:</span> <span class="s2">"jonathan"</span><span class="p">}};</span>
 <span class="nx">env</span><span class="p">.</span><span class="nx">init</span><span class="p">()</span>
   <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">createVm</span><span class="p">(</span><span class="nx">vmOpts</span><span class="p">))</span>
@@ -223,15 +207,12 @@ The name of a Virtual Machine is how you access and run commands on the virtual 
 <span class="c1">//vm is created then deleted</span>
 </code></pre>
 
+<p>Removes a virtual machine. It is efficient to remove virtual machines with idle tasks once they are no longer needed as it saves resources -and money-.
+<aside class="warning">
+<code>vmName</code> should be the name of a virtual machine previously defined in the environment instance running
+</aside></p>
+
 <h2 id="env-shell-vmname-command-opts">env.shell(vmName,command,opts)</h2>
-
-<p>Runs a given command on the virtual machine with the given name. To fully utilize <code>env.shell</code> a basic understanding of promises is helpful. A documentation and tutorial on promises can be found on <a href="https://this is the link">the promise.js webpage</a></p>
-
-<p>After a command is executed the promise is resolved with the stdout output, <code>resolve(sOut)</code> or rejected with the stdout, stderr and docker error messages, <code>reject(sOut,sErr,dockerErr)</code></p>
-
-<aside class="notice">
-env.shell will run if the output is not handled, but this is necessary to verify the command ran as planned
-</aside>
 <pre class="highlight javascript"><code>
 <span class="o">&gt;</span> <span class="nx">it</span> <span class="nx">is</span> <span class="nx">important</span> <span class="nx">to</span> <span class="nx">check</span> <span class="k">for</span> <span class="nx">the</span> <span class="nx">otput</span>
 <span class="nx">env</span><span class="p">.</span><span class="nx">init</span><span class="p">()</span>
@@ -249,6 +230,15 @@ env.shell will run if the output is not handled, but this is necessary to verify
 <span class="nx">env</span><span class="p">.</span><span class="nx">init</span><span class="p">()</span>
   <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">env</span><span class="p">.</span><span class="nx">shell</span><span class="p">(</span><span class="nx">labVm</span><span class="p">,</span><span class="s2">"echo hello-world"</span><span class="p">))</span>
   <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">env</span><span class="p">.</span><span class="nx">createVm</span><span class="p">({</span><span class="na">dockerodeCreateOptions</span><span class="p">:{</span><span class="na">name</span><span class="p">:</span> <span class="s2">"jonathan"</span><span class="p">}}));</span>
+
+<span class="nx">Runs</span> <span class="nx">a</span> <span class="nx">given</span> <span class="nx">command</span> <span class="nx">on</span> <span class="nx">the</span> <span class="nx">virtual</span> <span class="nx">machine</span> <span class="kd">with</span> <span class="nx">the</span> <span class="nx">given</span> <span class="nx">name</span><span class="p">.</span> <span class="nx">To</span> <span class="nx">fully</span> <span class="nx">utilize</span> <span class="o">&lt;</span><span class="nx">code</span><span class="o">&gt;</span><span class="nx">env</span><span class="p">.</span><span class="nx">shell</span><span class="o">&lt;</span><span class="sr">/code&gt; a basic understanding of promises is helpful. A documentation and tutorial on promises can be found on </span><span class="se">[</span><span class="sr">the promise.js webpage</span><span class="se">]</span><span class="sr"> </span><span class="se">(</span><span class="sr">https:/</span><span class="o">/</span><span class="k">this</span> <span class="nx">is</span> <span class="nx">the</span> <span class="nx">link</span><span class="p">)</span>
+
+<span class="nx">After</span> <span class="nx">a</span> <span class="nx">command</span> <span class="nx">is</span> <span class="nx">executed</span> <span class="nx">the</span> <span class="nx">promise</span> <span class="nx">is</span> <span class="nx">resolved</span> <span class="kd">with</span> <span class="nx">the</span> <span class="nx">stdout</span> <span class="nx">output</span><span class="p">,</span> <span class="o">&lt;</span><span class="nx">code</span><span class="o">&gt;</span><span class="nx">resolve</span><span class="p">(</span><span class="nx">sOut</span><span class="p">)</span><span class="o">&lt;</span><span class="sr">/code&gt; or rejected with the stdout, stderr and docker error messages, &lt;code&gt;reject</span><span class="se">(</span><span class="sr">sOut,sErr,dockerErr</span><span class="se">)</span><span class="sr">&lt;/</span><span class="nx">code</span><span class="o">&gt;</span>
+
+<span class="o">&lt;</span><span class="nx">aside</span> <span class="kr">class</span><span class="o">=</span><span class="s2">"notice"</span><span class="o">&gt;</span>
+<span class="nx">env</span><span class="p">.</span><span class="nx">shell</span> <span class="nx">will</span> <span class="nx">run</span> <span class="k">if</span> <span class="nx">the</span> <span class="nx">output</span> <span class="nx">is</span> <span class="nx">not</span> <span class="nx">handled</span><span class="p">,</span> <span class="nx">but</span> <span class="k">this</span> <span class="nx">is</span> <span class="nx">necessary</span> <span class="nx">to</span> <span class="nx">verify</span> <span class="nx">the</span> <span class="nx">command</span> <span class="nx">ran</span> <span class="nx">as</span> <span class="nx">planned</span>
+<span class="o">&lt;</span><span class="sr">/aside</span><span class="err">&gt;
+</span>
 
 </code></pre>
 
