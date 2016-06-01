@@ -68,6 +68,7 @@ env.init()
 /*notice how we initialize the environment before creating and additional virtual machine*/
 ```
 > to create a vm with more options specified
+
 ```javascript
 var vmOpts = {
   dockerodeCreateOptions: {name: "jonathan, Image: "ubuntu"},

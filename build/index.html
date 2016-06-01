@@ -170,16 +170,15 @@ env.init()
 &ldquo;`</p>
 
 <blockquote>
-<p>to create a vm with more options specified
-&rdquo;`javascript
-var vmOpts = {
-  dockerodeCreateOptions: {name: &ldquo;jonathan, Image: &quot;ubuntu&rdquo;},
-  dockerodeStartOptions: {}}</p>
+<p>to create a vm with more options specified</p>
 </blockquote>
+<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">vmOpts</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">dockerodeCreateOptions</span><span class="p">:</span> <span class="p">{</span><span class="na">name</span><span class="p">:</span> <span class="s2">"jonathan, Image: "</span><span class="nx">ubuntu</span><span class="err">"</span><span class="p">},</span>
+  <span class="na">dockerodeStartOptions</span><span class="p">:</span> <span class="p">{}}</span>
 
-<p>env.init()
-  .then(createVm(vmOpts));
-&ldquo;`</p>
+<span class="nx">env</span><span class="p">.</span><span class="nx">init</span><span class="p">()</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">createVm</span><span class="p">(</span><span class="nx">vmOpts</span><span class="p">));</span>
+</code></pre>
 
 <p>Creates and starts a new virtual machine. This command is ideal for tasks where students are expected to interact with another environment. An example usage might be a simulated website-hacking scenario.
 Additional virtual machines should be connected to the Lab VM by a network. See below for instructions on how to create and manage networks. </p>
