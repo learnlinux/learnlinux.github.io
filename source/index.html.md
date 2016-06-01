@@ -21,18 +21,19 @@ Welcome to Tuxlab! You can use our platform and APIs to create linux lessons and
 
 # Tuxlab API
 
-```javascript
+
 
 > you can import the Tuxlab API as you would any other node module
 
+```javascript
 var tux = require('tuxlab');
 var env = tuxlab.env;
 
 //env is defined as part of the tuxlab api,
 // but is easier and cleaner to use as a separate variable
-
+```
 > you can chain function calls just like promises
-
+```javascript
 env.init()
   .then(env.createVm(opts1))
   .then(env.createVm(opts2))
@@ -54,10 +55,9 @@ Lessons that are not initialized might result in unwanted behavior
 The parameter opts is optional, the environment defaults to a simple alpine linux virtual machine if not otherwise specified. You can specify additional options as a json file as documented on [our options page] (https://github.com/learnlinux)
 
 ## env.createVm(opts)
-```javascript
 
 > to create a vm with as little options as possible
-
+```javascript
 var tux = require('tuxlab');
 var env = tuxlab.env;
 
@@ -66,9 +66,9 @@ env.init()
   .then(createVm(vmOpts));
 
 /*notice how we initialize the environment before creating and additional virtual machine*/
-
+```
 > to create a vm with more options specified
-
+```javascript
 var vmOpts = {
   dockerodeCreateOptions: {name: "jonathan, Image: "ubuntu"},
   dockerodeStartOptions: {}}
@@ -121,9 +121,9 @@ Removes a virtual machine. It is efficient to remove virtual machines with idle 
 
 
 ## env.shell(vmName,command,opts)
-```javascript
 
-> it is important to check for the otput
+> it is important to check for the output
+```javascript
 env.init()
   .then(env.shell(labVm,"echo hello-world"))
   .then(function(sOut){ assert(sOut === "hello-world"); },
@@ -134,8 +134,9 @@ env.init()
   .then(env.createVm({dockerodeCreateOptions:{name: "jonathan"}}));
 
 //notice how we can continue chaining after handling the output
-
+```
 > it is, however, possible to forego output handling
+```javascript
 env.init()
   .then(env.shell(labVm,"echo hello-world"))
   .then(env.createVm({dockerodeCreateOptions:{name: "jonathan"}}));
