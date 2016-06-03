@@ -8,8 +8,7 @@ toc_footers:
   - <a href='https://tuxlab.org'>Check out our webpage</a>
   - <a href='https://github.com/learnlinux'>View Our Source Code</a>
 
-includes:
-  - errors
+
 
 search: true
 ---
