@@ -151,5 +151,72 @@ env.shell will run if the output is not handled, but this is necessary to verify
 </aside>
 
 
-## createTask()
-## nextTask()
+## tuxlab.createTask(setupFn, verifyFn, opts)
+
+> an example might be an mkdir task, asking students to create the folder "derek" in the root directory
+```javascript
+var setup = function(env){
+  env.start()  //env.start is required if env.init is not called
+    .then(env.shell("labVm","cd ~./")); //go to root directory
+}
+var verify = function(env){
+  env.start()
+    .then(env.shell("labVm","ls ~./"))
+    .then(function(sOut){ if(sOut.indexOf("derek)>-1) return "success";
+			  else { throw "error: no folder named derek" };},
+	  function(sOut,sErr,SDock){ throw sOut + sErr + sDock; });  
+}
+var mkdirTask = tuxlab.createTask(setup,verify);
+```
+Tasks are what students follow during a lab session. Each task consists of two lambda functions, setup and verify -both implemented using the env api- the setup function runs as soon as a student starts the task to prepare the environment. The verify function runs after the students clicks the "verify" button on the interface. 
+
+##tuxlab.init()
+
+Tuxlab.init is the initializer function of the tuxlab environment. This function MUST be called before task appends since it tells our api which task to start with.
+## task.nextTask(nTask)
+
+> lets say we have three tasks initialized as above, task1,task2,task3
+```javascript
+tuxlab.init().
+  .nextTask(task1)
+  .nextTask(task2)
+  .nextTask(task3);
+```
+nextTask is the function that tells our api to append tasks together. nextTask calls can be chained together much like .then calls. The example to the right shows how to specify that task1 will be run first, then task2 and finally task3.
+
+#The LabFile
+
+> the import
+```javascript
+var myLab = require('tuxlab');
+```
+> the setup function
+```javascript
+myLab.setup = function(env){ //notice how we declare an env parameter
+  env.init()  //you MUST call env.init in the setup
+    .then(env.createVm({cOpts:{name: "jonathan"}}));
+}
+```
+> the tasks function
+```javascript
+myLab.tasks = function(env){ //notice the env parameter
+  //declare tasks here
+  this.init().nextTask(task1).nextTask(task2)
+}
+```
+> the export
+```javascript
+module.exports = myLab;
+```
+The LabFile is a blueprint of a lab that instructors create. It has four basic parts and utilizes the env and tuxlab APIs documented above. The LabFile imports and extends the tuxlab api.
+All LabFiles MUST start with importing the tuxlab api in a variable of your choice. This variable is then extended with two functions: setup and tasks. Both setup and tasks functions take an env object as an input, allowing you to write your code without worrying about the infrastructure connection.
+<aside class="notice">
+If you do not specify an env parameter in both functions, your env modify functions will cause a compile time error
+</aside>
+
+The Setup function runs as soon as a student logs in to an account. It is important to put as much as the setup as possible in the setup function to reduce loading times before and between tasks.
+The tasks function runs just after setup and initializes the tasks the student will go through.
+The export allows us to access the LabFile for each student and create their lab environment.
+<aside class="warning">
+A LabFile without an import, setup-tasks functions and an export will result in a syntax error
+</aside>

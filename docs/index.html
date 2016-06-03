@@ -253,9 +253,82 @@ Runs a given command on the virtual machine with the given name. To fully utiliz
 env.shell will run if the output is not handled, but this is necessary to verify the command ran as planned
 </aside>
 
-<h2 id="createtask">createTask()</h2>
+<h2 id="tuxlab-createtask-setupfn-verifyfn-opts">tuxlab.createTask(setupFn, verifyFn, opts)</h2>
 
-<h2 id="nexttask">nextTask()</h2>
+<blockquote>
+<p>an example might be an mkdir task, asking students to create the folder &quot;derek&rdquo; in the root directory
+<code class="prettyprint">javascript
+var setup = function(env){
+  env.start()  //env.start is required if env.init is not called
+    .then(env.shell(&quot;labVm&quot;,&quot;cd ~./&quot;)); //go to root directory
+}
+var verify = function(env){
+  env.start()
+    .then(env.shell(&quot;labVm&quot;,&quot;ls ~./&quot;))
+    .then(function(sOut){ if(sOut.indexOf(&quot;derek)&gt;-1) return &quot;success&quot;;
+              else { throw &quot;error: no folder named derek&quot; };},
+      function(sOut,sErr,SDock){ throw sOut + sErr + sDock; });  
+}
+var mkdirTask = tuxlab.createTask(setup,verify);
+</code>
+Tasks are what students follow during a lab session. Each task consists of two lambda functions, setup and verify -both implemented using the env api- the setup function runs as soon as a student starts the task to prepare the environment. The verify function runs after the students clicks the &ldquo;verify&rdquo; button on the interface. </p>
+</blockquote>
+
+<h2 id="tuxlab-init">tuxlab.init()</h2>
+
+<p>Tuxlab.init is the initializer function of the tuxlab environment. This function MUST be called before task appends since it tells our api which task to start with.</p>
+
+<h2 id="task-nexttask-ntask">task.nextTask(nTask)</h2>
+
+<blockquote>
+<p>lets say we have three tasks initialized as above, task1,task2,task3
+<code class="prettyprint">javascript
+tuxlab.init().
+  .nextTask(task1)
+  .nextTask(task2)
+  .nextTask(task3);
+</code>
+nextTask is the function that tells our api to append tasks together. nextTask calls can be chained together much like .then calls. The example to the right shows how to specify that task1 will be run first, then task2 and finally task3.</p>
+</blockquote>
+
+<h1 id="the-labfile">The LabFile</h1>
+
+<blockquote>
+<p>the import
+<code class="prettyprint">javascript
+var myLab = require(&#39;tuxlab&#39;);
+</code>
+the setup function
+<code class="prettyprint">javascript
+myLab.setup = function(env){ //notice how we declare an env parameter
+  env.init()  //you MUST call env.init in the setup
+    .then(env.createVm({cOpts:{name: &quot;jonathan&quot;}}));
+}
+</code>
+the tasks function
+<code class="prettyprint">javascript
+myLab.tasks = function(env){ //notice the env parameter
+  //declare tasks here
+  this.init().nextTask(task1).nextTask(task2)
+}
+</code>
+the export
+<code class="prettyprint">javascript
+module.exports = myLab;
+</code>
+The LabFile is a blueprint of a lab that instructors create. It has four basic parts and utilizes the env and tuxlab APIs documented above. The LabFile imports and extends the tuxlab api.
+All LabFiles MUST start with importing the tuxlab api in a variable of your choice. This variable is then extended with two functions: setup and tasks. Both setup and tasks functions take an env object as an input, allowing you to write your code without worrying about the infrastructure connection.
+<aside class="notice">
+If you do not specify an env parameter in both functions, your env modify functions will cause a compile time error
+</aside></p>
+</blockquote>
+
+<p>The Setup function runs as soon as a student logs in to an account. It is important to put as much as the setup as possible in the setup function to reduce loading times before and between tasks.
+The tasks function runs just after setup and initializes the tasks the student will go through.
+The export allows us to access the LabFile for each student and create their lab environment.
+<aside class="warning">
+A LabFile without an import, setup-tasks functions and an export will result in a syntax error
+</aside></p>
 
           <h1 id="errors">Errors</h1>
 
