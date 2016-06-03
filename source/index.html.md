@@ -126,6 +126,7 @@ Removes a virtual machine. It is efficient to remove virtual machines with idle 
 > it is important to check for the output
 
 ```javascript
+
 env.init()
   .then(env.shell(labVm,"echo hello-world"))
   .then(function(sOut){ assert(sOut === "hello-world"); },
@@ -136,13 +137,16 @@ env.init()
   .then(env.createVm({dockerodeCreateOptions:{name: "jonathan"}}));
 
 //notice how we can continue chaining after handling the output
+
 ```
 > it is, however, possible to forego output handling
 
 ```javascript
+
 env.init()
   .then(env.shell(labVm,"echo hello-world"))
   .then(env.createVm({dockerodeCreateOptions:{name: "jonathan"}}));
+
 ```
 
 Runs a given command on the virtual machine with the given name. To fully utilize <code>env.shell</code> a basic understanding of promises is helpful. A documentation and tutorial on promises can be found on [the promise.js webpage] (https://this is the link)

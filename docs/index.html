@@ -224,7 +224,8 @@ The name of a Virtual Machine is how you access and run commands on the virtual 
 <blockquote>
 <p>it is important to check for the output</p>
 </blockquote>
-<pre class="highlight javascript"><code><span class="nx">env</span><span class="p">.</span><span class="nx">init</span><span class="p">()</span>
+<pre class="highlight javascript"><code>
+<span class="nx">env</span><span class="p">.</span><span class="nx">init</span><span class="p">()</span>
   <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">env</span><span class="p">.</span><span class="nx">shell</span><span class="p">(</span><span class="nx">labVm</span><span class="p">,</span><span class="s2">"echo hello-world"</span><span class="p">))</span>
   <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">sOut</span><span class="p">){</span> <span class="nx">assert</span><span class="p">(</span><span class="nx">sOut</span> <span class="o">===</span> <span class="s2">"hello-world"</span><span class="p">);</span> <span class="p">},</span>
         <span class="kd">function</span><span class="p">(</span><span class="nx">sOut</span><span class="p">,</span><span class="nx">sErr</span><span class="p">,</span><span class="nx">dErr</span><span class="p">){</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">sOut</span><span class="p">);</span>
@@ -234,14 +235,17 @@ The name of a Virtual Machine is how you access and run commands on the virtual 
   <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">env</span><span class="p">.</span><span class="nx">createVm</span><span class="p">({</span><span class="na">dockerodeCreateOptions</span><span class="p">:{</span><span class="na">name</span><span class="p">:</span> <span class="s2">"jonathan"</span><span class="p">}}));</span>
 
 <span class="c1">//notice how we can continue chaining after handling the output</span>
+
 </code></pre>
 
 <blockquote>
 <p>it is, however, possible to forego output handling</p>
 </blockquote>
-<pre class="highlight javascript"><code><span class="nx">env</span><span class="p">.</span><span class="nx">init</span><span class="p">()</span>
+<pre class="highlight javascript"><code>
+<span class="nx">env</span><span class="p">.</span><span class="nx">init</span><span class="p">()</span>
   <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">env</span><span class="p">.</span><span class="nx">shell</span><span class="p">(</span><span class="nx">labVm</span><span class="p">,</span><span class="s2">"echo hello-world"</span><span class="p">))</span>
   <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">env</span><span class="p">.</span><span class="nx">createVm</span><span class="p">({</span><span class="na">dockerodeCreateOptions</span><span class="p">:{</span><span class="na">name</span><span class="p">:</span> <span class="s2">"jonathan"</span><span class="p">}}));</span>
+
 </code></pre>
 
 <p>Runs a given command on the virtual machine with the given name. To fully utilize <code>env.shell</code> a basic understanding of promises is helpful. A documentation and tutorial on promises can be found on <a href="https://this is the link">the promise.js webpage</a></p>
