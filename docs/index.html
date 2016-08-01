@@ -117,227 +117,261 @@
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id="tuxlab">TuxLab</h1>
+        
+          <h1 id="lab-file">Lab File</h1>
 
-<p>Welcome to Tuxlab! You can use our platform and APIs to create linux lessons and tutorials.</p>
+<p>Every lab file is a file written in javascript, that outlines the lab a student will go through. A lab file should always have setup and tasks functions, run to setup the lab environment and tasks.</p>
 
-<h1 id="tuxlab-api">Tuxlab API</h1>
-
-<blockquote>
-<p>you can import the Tuxlab API as you would any other node module</p>
-</blockquote>
-<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">tux</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'tuxlab'</span><span class="p">);</span>
-<span class="kd">var</span> <span class="nx">env</span> <span class="o">=</span> <span class="nx">tuxlab</span><span class="p">.</span><span class="nx">env</span><span class="p">;</span>
-
-<span class="c1">//env is defined as part of the tuxlab api,</span>
-<span class="c1">// but is easier and cleaner to use as a separate variable</span>
-</code></pre>
-
-<blockquote>
-<p>you can chain function calls just like promises</p>
-</blockquote>
-<pre class="highlight javascript"><code><span class="nx">env</span><span class="p">.</span><span class="nx">init</span><span class="p">()</span>
-  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">env</span><span class="p">.</span><span class="nx">createVm</span><span class="p">(</span><span class="nx">opts1</span><span class="p">))</span>
-  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">env</span><span class="p">.</span><span class="nx">createVm</span><span class="p">(</span><span class="nx">opts2</span><span class="p">))</span>
-
-</code></pre>
-
-<p>The Tuxlab API is based on Promise.js, all API functions return promises as explained below. Therefore, function calls can be chained as promises by the <code>.then</code> function call. Alternatively, you can use the promise-waterfall api and use function calls in a list with lambda functions.</p>
-
-<h2 id="env-init-opts">env.init(opts)</h2>
-
-<p>initializes the environment. This function creates the lab Virtual Machine, the virtual machine students connect to from their interface. All lessons should start with the env.init() call. 
-<aside class="warning">
-Lessons that are not initialized might result in unwanted behavior
-</aside></p>
-
-<p>The parameter opts is optional, the environment defaults to a simple alpine linux virtual machine if not otherwise specified. You can specify additional options as a json file as documented on <a href="https://github.com/learnlinux">our options page</a></p>
-
-<h2 id="env-createvm-opts">env.createVm(opts)</h2>
-
-<blockquote>
-<p>to create a vm with as little options as possible
-&ldquo;`javascript
-var tux = require(&lsquo;tuxlab&rsquo;);
-var env = tuxlab.env;</p>
-</blockquote>
-
-<p>var vmOpts = {dockerodeCreateOptions: {name: &quot;jonathan&rdquo;}};
-env.init()
-  .then(createVm(vmOpts));</p>
-
-<p>/<em>notice how we initialize the environment before creating and additional virtual machine</em>/
-&ldquo;`</p>
-
-<blockquote>
-<p>to create a vm with more options specified</p>
-</blockquote>
-<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">vmOpts</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="na">dockerodeCreateOptions</span><span class="p">:</span> <span class="p">{</span><span class="na">name</span><span class="p">:</span> <span class="s2">"jonathan"</span><span class="p">,</span> <span class="na">Image</span><span class="p">:</span> <span class="s2">"ubuntu"</span><span class="p">},</span>
-  <span class="na">dockerodeStartOptions</span><span class="p">:</span> <span class="p">{}}</span>
-
-<span class="nx">env</span><span class="p">.</span><span class="nx">init</span><span class="p">()</span>
-  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">createVm</span><span class="p">(</span><span class="nx">vmOpts</span><span class="p">));</span>
-</code></pre>
-
-<p>Creates and starts a new virtual machine. This command is ideal for tasks where students are expected to interact with another environment. An example usage might be a simulated website-hacking scenario.
-Additional virtual machines should be connected to the Lab VM by a network. See below for instructions on how to create and manage networks. </p>
-
-<p>The opts parameter should be supplied as a json file of type
-<code>{dockerodeCreateOptions:{},dockerodeStartOptions:{}}</code>
-name must be specified under <code>dockerodeCreateOptions</code> all other options are optional. VMs default to an alpine linux environment. You can find our option specification document on <a href="https://github.com/learnlinux">our options page</a></p>
-
-<aside class="notice">
-The name of a Virtual Machine is how you access and run commands on the virtual machine. Make sure to choose distinct, explanatory names for your VMs.
-</aside>
-
-<h2 id="env-updatevm-vmname-opts">env.updateVm(vmName,opts)</h2>
-<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">vmOpts</span> <span class="o">=</span> <span class="p">{</span><span class="na">dockerodeCreateOptions</span><span class="p">:</span> <span class="p">{</span><span class="na">name</span><span class="p">:</span> <span class="s2">"jonathan"</span><span class="p">}};</span>
-<span class="nx">env</span><span class="p">.</span><span class="nx">init</span><span class="p">()</span>
-  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">createVm</span><span class="p">(</span><span class="nx">vmOpts</span><span class="p">))</span>
-  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">updateVm</span><span class="p">(</span><span class="s2">"jonathan"</span><span class="p">,{</span><span class="na">Image</span><span class="p">:</span> <span class="s2">"ubuntu"</span><span class="p">}));</span>
-
-<span class="c1">//vm defaults to alpine linux and then is changed to ubuntu</span>
-</code></pre>
-
-<p>Updates a virtual machine with the given options. Useful when the instructor wants to change the behavior of a virtual machine after it was created. Example: running the same task on alpine linux, and then ubuntu.
-<aside class="warning">
-<code>vmName</code> should be the name of a virtual machine previously defined in the environment instance running
-</aside></p>
-
-<h2 id="env-removevm-vmname-opts">env.removeVm(vmName,opts)</h2>
-<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">vmOpts</span> <span class="o">=</span> <span class="p">{</span><span class="na">dockerodeCreateOptions</span><span class="p">:</span> <span class="p">{</span><span class="na">name</span><span class="p">:</span> <span class="s2">"jonathan"</span><span class="p">}};</span>
-<span class="nx">env</span><span class="p">.</span><span class="nx">init</span><span class="p">()</span>
-  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">createVm</span><span class="p">(</span><span class="nx">vmOpts</span><span class="p">))</span>
-  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">removeVm</span><span class="p">(</span><span class="s2">"jonathan"</span><span class="p">));</span>
-
-<span class="c1">//vm is created then deleted</span>
-</code></pre>
-
-<p>Removes a virtual machine. It is efficient to remove virtual machines with idle tasks once they are no longer needed as it saves resources -and money-.
-<aside class="warning">
-<code>vmName</code> should be the name of a virtual machine previously defined in the environment instance running
-</aside></p>
-
-<h2 id="env-shell-vmname-command-opts">env.shell(vmName,command,opts)</h2>
-
-<blockquote>
-<p>it is important to check for the output</p>
-</blockquote>
+<h2 id="creating-the-lab">Creating the Lab</h2>
 <pre class="highlight javascript"><code>
-<span class="nx">env</span><span class="p">.</span><span class="nx">init</span><span class="p">()</span>
-  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">env</span><span class="p">.</span><span class="nx">shell</span><span class="p">(</span><span class="nx">labVm</span><span class="p">,</span><span class="s2">"echo hello-world"</span><span class="p">))</span>
-  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">sOut</span><span class="p">){</span> <span class="nx">assert</span><span class="p">(</span><span class="nx">sOut</span> <span class="o">===</span> <span class="s2">"hello-world"</span><span class="p">);</span> <span class="p">},</span>
-        <span class="kd">function</span><span class="p">(</span><span class="nx">sOut</span><span class="p">,</span><span class="nx">sErr</span><span class="p">,</span><span class="nx">dErr</span><span class="p">){</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">sOut</span><span class="p">);</span>
-                                  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">sErr</span><span class="p">);</span>
-                                  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">dErr</span><span class="p">);</span>
-         <span class="p">})</span>
-  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">env</span><span class="p">.</span><span class="nx">createVm</span><span class="p">({</span><span class="na">dockerodeCreateOptions</span><span class="p">:{</span><span class="na">name</span><span class="p">:</span> <span class="s2">"jonathan"</span><span class="p">}}));</span>
-
-<span class="c1">//notice how we can continue chaining after handling the output</span>
-
+<span class="kd">var</span> <span class="nx">gitLab1</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">lab</span><span class="p">();</span>
 </code></pre>
 
-<blockquote>
-<p>it is, however, possible to forego output handling</p>
-</blockquote>
-<pre class="highlight javascript"><code>
-<span class="nx">env</span><span class="p">.</span><span class="nx">init</span><span class="p">()</span>
-  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">env</span><span class="p">.</span><span class="nx">shell</span><span class="p">(</span><span class="nx">labVm</span><span class="p">,</span><span class="s2">"echo hello-world"</span><span class="p">))</span>
-  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">env</span><span class="p">.</span><span class="nx">createVm</span><span class="p">({</span><span class="na">dockerodeCreateOptions</span><span class="p">:{</span><span class="na">name</span><span class="p">:</span> <span class="s2">"jonathan"</span><span class="p">}}));</span>
+<p>Every lab file is a modification on a lab object, created and initialized on the server side. This gives the tuxlab API the ability to change and adapt to advances in the server side code and other tools being used, without needing to modify any specific lab file.</p>
 
-</code></pre>
+<p>Thus, all labfiles must start with creating a new lab object. By running the command <code>var myLab = new lab();</code></p>
 
-<p>Runs a given command on the virtual machine with the given name. To fully utilize <code>env.shell</code> a basic understanding of promises is helpful. A documentation and tutorial on promises can be found on <a href="https://this is the link">the promise.js webpage</a></p>
-
-<p>After a command is executed the promise is resolved with the stdout output, <code>resolve(sOut)</code> or rejected with the stdout, stderr and docker error messages, <code>reject(sOut,sErr,dockerErr)</code></p>
-
-<aside class="notice">
-env.shell will run if the output is not handled, but this is necessary to verify the command ran as planned
-</aside>
-
-<h2 id="tuxlab-createtask-setupfn-verifyfn-opts">tuxlab.createTask(setupFn, verifyFn, opts)</h2>
-
-<blockquote>
-<p>an example might be an mkdir task, asking students to create the folder &quot;derek&rdquo; in the root directory</p>
-</blockquote>
+<h2 id="setup">Setup</h2>
 <pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">setup</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">env</span><span class="p">){</span>
-  <span class="nx">env</span><span class="p">.</span><span class="nx">start</span><span class="p">()</span>  <span class="c1">//env.start is required if env.init is not called</span>
-    <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">env</span><span class="p">.</span><span class="nx">shell</span><span class="p">(</span><span class="s2">"labVm"</span><span class="p">,</span><span class="s2">"cd ~./"</span><span class="p">));</span> <span class="c1">//go to root directory</span>
+  <span class="nx">env</span><span class="p">.</span><span class="nx">init</span><span class="p">()</span>
 <span class="p">}</span>
-<span class="kd">var</span> <span class="nx">verify</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">env</span><span class="p">){</span>
+</code></pre>
+
+<p>Setup is a function that takes as an input an environment object. The setup function runs for each individual user before the lab is started. Therefore, it is essential that it starts with an e<code>env.init()</code> call which initializes the environment for the user.</p>
+
+<p>Although the setup function can consist on only env.init(), it is important to provide as many of the tools, files and folders a student might use in the setup function to increase efficiency.</p>
+
+<h2 id="tasks">Tasks</h2>
+
+<p>Tasks are the individual steps a student goes through. Instructors can create as many tasks per lab and grade them and give feedback to students directly from the labfile using the student API. 
+Each task is created by a lab.newTask method, taking as input the title, a setup and verifier functions.</p>
+
+<h3 id="task-setup">Task setup</h3>
+<pre class="highlight javascript"><code>
+<span class="kd">var</span> <span class="nx">setup</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">env</span><span class="p">){</span>
   <span class="nx">env</span><span class="p">.</span><span class="nx">start</span><span class="p">()</span>
-    <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">env</span><span class="p">.</span><span class="nx">shell</span><span class="p">(</span><span class="s2">"labVm"</span><span class="p">,</span><span class="s2">"ls ~./"</span><span class="p">))</span>
-    <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">sOut</span><span class="p">){</span> <span class="k">if</span><span class="p">(</span><span class="nx">sOut</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="s2">"derek)&gt;-1) return "</span><span class="nx">success</span><span class="s2">";
-              else { throw "</span><span class="nx">error</span><span class="err">:</span> <span class="nx">no</span> <span class="nx">folder</span> <span class="nx">named</span> <span class="nx">derek</span><span class="err">"</span> <span class="p">};},</span>
-      <span class="kd">function</span><span class="p">(</span><span class="nx">sOut</span><span class="p">,</span><span class="nx">sErr</span><span class="p">,</span><span class="nx">SDock</span><span class="p">){</span> <span class="k">throw</span> <span class="nx">sOut</span> <span class="o">+</span> <span class="nx">sErr</span> <span class="o">+</span> <span class="nx">sDock</span><span class="p">;</span> <span class="p">});</span>  
-<span class="p">}</span>
-<span class="kd">var</span> <span class="nx">mkdirTask</span> <span class="o">=</span> <span class="nx">tuxlab</span><span class="p">.</span><span class="nx">createTask</span><span class="p">(</span><span class="nx">setup</span><span class="p">,</span><span class="nx">verify</span><span class="p">);</span>
-</code></pre>
-
-<p>Tasks are what students follow during a lab session. Each task consists of two lambda functions, setup and verify -both implemented using the env api- the setup function runs as soon as a student starts the task to prepare the environment. The verify function runs after the students clicks the &ldquo;verify&rdquo; button on the interface. </p>
-
-<h2 id="tuxlab-init">tuxlab.init()</h2>
-
-<p>Tuxlab.init is the initializer function of the tuxlab environment. This function MUST be called before task appends since it tells our api which task to start with.</p>
-
-<h2 id="task-nexttask-ntask">task.nextTask(nTask)</h2>
-
-<blockquote>
-<p>lets say we have three tasks initialized as above, task1,task2,task3</p>
-</blockquote>
-<pre class="highlight javascript"><code><span class="nx">tuxlab</span><span class="p">.</span><span class="nx">init</span><span class="p">().</span>
-  <span class="p">.</span><span class="nx">nextTask</span><span class="p">(</span><span class="nx">task1</span><span class="p">)</span>
-  <span class="p">.</span><span class="nx">nextTask</span><span class="p">(</span><span class="nx">task2</span><span class="p">)</span>
-  <span class="p">.</span><span class="nx">nextTask</span><span class="p">(</span><span class="nx">task3</span><span class="p">);</span>
-</code></pre>
-
-<p>nextTask is the function that tells our api to append tasks together. nextTask calls can be chained together much like .then calls. The example to the right shows how to specify that task1 will be run first, then task2 and finally task3.</p>
-
-<h1 id="the-labfile">The LabFile</h1>
-
-<blockquote>
-<p>the import</p>
-</blockquote>
-<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">myLab</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'tuxlab'</span><span class="p">);</span>
-</code></pre>
-
-<blockquote>
-<p>the setup function</p>
-</blockquote>
-<pre class="highlight javascript"><code><span class="nx">myLab</span><span class="p">.</span><span class="nx">setup</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">env</span><span class="p">){</span> <span class="c1">//notice how we declare an env parameter</span>
-  <span class="nx">env</span><span class="p">.</span><span class="nx">init</span><span class="p">()</span>  <span class="c1">//you MUST call env.init in the setup</span>
-    <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">env</span><span class="p">.</span><span class="nx">createVm</span><span class="p">({</span><span class="na">cOpts</span><span class="p">:{</span><span class="na">name</span><span class="p">:</span> <span class="s2">"jonathan"</span><span class="p">}}));</span>
+    <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">env</span><span class="p">.</span><span class="nx">shell</span><span class="p">(</span><span class="s2">"labVm"</span><span class="p">,</span><span class="s2">"git clone https://github.com/cemersoz/gitlab-setup1"</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">env</span><span class="p">.</span><span class="nx">shell</span><span class="p">(</span><span class="s2">"labVm"</span><span class="p">,</span><span class="s2">"./gitlab-setup1/deploy.sh"</span><span class="p">))</span>
+    <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">env</span><span class="p">.</span><span class="nx">shell</span><span class="p">(</span><span class="s2">"labVm"</span><span class="p">,</span><span class="s2">"rm -rf ./gitlab-setup1"</span><span class="p">));</span>
 <span class="p">}</span>
 </code></pre>
 
+<p>Each task setup is a function, taking as paramater an environment object. This function is called for each student environment to setup the tasks for each student. Every setup function MUST start with a <code>return env.start()</code> statement, although other steps can be chained to the end. It is crucial for the API to have the setup function return an environment promise. 
+<aside class = "notice">The setup function is run before the task is attempted.</aside></p>
+
+<p>It is important to note that while cloning git repositories is possible in the setup, it takes individual time and data connection for each user which are crucial and expensive resources. We suggest using regular unix commands and not relying on git as much as possible.</p>
+
+<h3 id="task-verify">Task verify</h3>
+<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">verifier</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">env</span><span class="p">,</span><span class="nx">student</span><span class="p">){</span>
+  <span class="k">return</span> <span class="nx">env</span><span class="p">.</span><span class="nx">start</span><span class="p">()</span>
+    <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">env</span><span class="p">.</span><span class="nx">shell</span><span class="p">(</span><span class="s2">"labVm"</span><span class="p">,</span><span class="s2">"pwd /"</span><span class="p">))</span>
+    <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">sOut</span><span class="p">,</span><span class="nx">sErr</span><span class="p">){</span>
+      <span class="k">if</span><span class="p">(</span><span class="nx">sOut</span><span class="p">.</span><span class="nx">includes</span><span class="p">(</span><span class="s2">"my_dir"</span><span class="p">)){</span>
+        <span class="nx">student</span><span class="p">.</span><span class="nx">setGrade</span><span class="p">(</span><span class="mi">1</span><span class="p">,[</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">]);</span>
+        <span class="k">return</span> <span class="nx">env</span><span class="p">.</span><span class="nx">resolve</span><span class="p">();</span>
+      <span class="p">}</span>
+    <span class="p">},</span><span class="kd">function</span><span class="p">(){</span>
+      <span class="nx">student</span><span class="p">.</span><span class="nx">setGrade</span><span class="p">(</span><span class="mi">1</span><span class="p">,[</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">]);</span>
+      <span class="nx">student</span><span class="p">.</span><span class="nx">feedback</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="s2">"# Task failed\n## you did not create the directory \"my_dir\""</span><span class="p">);</span>
+      <span class="k">return</span> <span class="nx">env</span><span class="p">.</span><span class="nx">reject</span><span class="p">();</span>
+    <span class="p">});</span>
+
+<span class="p">};</span>
+</code></pre>
+
+<p>Each task verify is a function taking as parameter an environment object and a student object. The verifier is run when a student clicks the <code>verify</code> button. A verifier function must result either in an <code>env.resolve()</code> or an <code>env.reject()</code> statement. </p>
+
+<aside class = "notice">All verifiers must either resolve or reject the progress</aside>
+
+<p>For graded tasks, it is important to set the grades of the students in the verifier, depending on their progress. It is also possible to give situation-specific feedback, in markdown format, using the student.feedback function call.</p>
+
+<h3 id="task-description">Task Description</h3>
+<pre class="highlight javascript"><code><span class="cm">/*@Task1
+# This is Task1
+## You can write markdown as a comment!
+### Isn't that cool!
+*/</span>
+</code></pre>
+
+<p>Task descriptions are written in the markdown format, also in the labfile. You can directly write your description, anywhere on the labfile, starting with <code>@task_name</code> in any multi-line comment. All task description are parsed out from labfiles by our regular expression matcher and added to the database! Coming with the beta release, you can add your markdown descriptions in our very own markdown formatter!</p>
+
+<h3 id="creating-and-chaining-tasks">Creating and Chaining Tasks</h3>
+
 <blockquote>
-<p>the tasks function</p>
+<p>Lets create a task with the setup and verifier from above.</p>
 </blockquote>
-<pre class="highlight javascript"><code><span class="nx">myLab</span><span class="p">.</span><span class="nx">tasks</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">env</span><span class="p">){</span> <span class="c1">//notice the env parameter</span>
-  <span class="c1">//declare tasks here</span>
-  <span class="k">this</span><span class="p">.</span><span class="nx">init</span><span class="p">().</span><span class="nx">nextTask</span><span class="p">(</span><span class="nx">task1</span><span class="p">).</span><span class="nx">nextTask</span><span class="p">(</span><span class="nx">task2</span><span class="p">)</span>
-<span class="p">}</span>
+<pre class="highlight javascript"><code>
+<span class="kd">var</span> <span class="nx">task1</span> <span class="o">=</span> <span class="nx">lab</span><span class="p">.</span><span class="nx">newTask</span><span class="p">(</span><span class="s2">"mkdirTask"</span><span class="p">,</span><span class="nx">setup</span><span class="p">,</span><span class="nx">verifier</span><span class="p">);</span>
+</code></pre>
+
+<p>Tasks are created by the lab.newTask call, with paramaters taskName, setup and verifier functions.</p>
+
+<blockquote>
+<p>Lets pretend we have other functions and create more tasks&hellip;</p>
+</blockquote>
+<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">task2</span> <span class="o">=</span> <span class="nx">lab</span><span class="p">.</span><span class="nx">newTask</span><span class="p">(</span><span class="s2">"cpTask"</span><span class="p">,</span><span class="nx">setup2</span><span class="p">,</span><span class="nx">verifier2</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">task3</span> <span class="o">=</span> <span class="nx">lab</span><span class="p">.</span><span class="nx">newTask</span><span class="p">(</span><span class="s2">"mvTask"</span><span class="p">,</span><span class="nx">setup3</span><span class="p">,</span><span class="nx">verifier3</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">task4</span> <span class="o">=</span> <span class="nx">lab</span><span class="p">.</span><span class="nx">newTask</span><span class="p">(</span><span class="s2">"rmTask"</span><span class="p">,</span><span class="nx">setup4</span><span class="p">,</span><span class="nx">verifier4</span><span class="p">);</span>
+
 </code></pre>
 
 <blockquote>
-<p>the export</p>
+<p>Now lets chain our tasks in the tasks() method&hellip;</p>
 </blockquote>
+<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">tasks</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span>
+  <span class="nx">mylab</span><span class="p">.</span><span class="nx">init</span><span class="p">()</span>
+    <span class="p">.</span><span class="nx">nextTask</span><span class="p">(</span><span class="nx">task1</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">nextTask</span><span class="p">(</span><span class="nx">task2</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">nextTask</span><span class="p">(</span><span class="nx">task3</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">nextTask</span><span class="p">(</span><span class="nx">task4</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre>
+
+<p>Tasks are chained using the nextTask method, in a function named tasks. Task chains should start with a lab.init() call.</p>
+
+<h2 id="export">Export</h2>
 <pre class="highlight javascript"><code><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="nx">myLab</span><span class="p">;</span>
 </code></pre>
 
-<p>The LabFile is a blueprint of a lab that instructors create. It has four basic parts and utilizes the env and tuxlab APIs documented above. The LabFile imports and extends the tuxlab api.
-All LabFiles MUST start with importing the tuxlab api in a variable of your choice. This variable is then extended with two functions: setup and tasks. Both setup and tasks functions take an env object as an input, allowing you to write your code without worrying about the infrastructure connection.
-<aside class="notice">
-If you do not specify an env parameter in both functions, your env modify functions will cause a compile time error
-</aside></p>
+<p>At the end of the lab file, You must export the lab object you created and modified, exporting it in the standard npm way with the <code>module.exports</code> command.</p>
 
-<p>The Setup function runs as soon as a student logs in to an account. It is important to put as much as the setup as possible in the setup function to reduce loading times before and between tasks.
-The tasks function runs just after setup and initializes the tasks the student will go through.
-The export allows us to access the LabFile for each student and create their lab environment.
-<aside class="warning">
-A LabFile without an import, setup-tasks functions and an export will result in a syntax error
-</aside></p>
+          <h1 id="environment-api">Environment API</h1>
+
+<blockquote>
+<p>All API calls are easily chainable</p>
+</blockquote>
+<pre class="highlight javascript"><code>
+<span class="nx">env</span><span class="p">.</span><span class="nx">init</span><span class="p">()</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">env</span><span class="p">.</span><span class="nx">shell</span><span class="p">(</span><span class="s2">"labVm"</span><span class="p">,</span><span class="s2">"echo hello world"</span><span class="p">));</span>
+
+</code></pre>
+
+<p>The Environment API consists of functions that allow users to create, modify and run commands on docker containers, reliant on the docker remote API. All functions are promise.js based and can be chained very easily with <code>.then</code> commands.</p>
+<pre class="highlight javascript"><code>
+<span class="nx">env</span><span class="p">.</span><span class="nx">init</span><span class="p">()</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">env</span><span class="p">.</span><span class="nx">shell</span><span class="p">(</span><span class="s2">"labVm"</span><span class="p">,</span><span class="s2">"echo hello world"</span><span class="p">),</span>
+  <span class="cm">/*failure case*/</span>
+  <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">){</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
+  <span class="p">})</span>
+  <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="cm">/*general failure case*/</span><span class="p">);</span>
+</code></pre>
+
+<p>Similarly, errors can be thrown and caught either at individual steps or after full execution -or both-, using the promise.js standard of either providing a failure case in the <code>Promise.then</code> case, or using a <code>.catch</code> statement</p>
+
+<h2 id="env-init">Env.init()</h2>
+
+<p>Initializes the environment for a unique student, creating a lab Virtual Machine for each student and allowing them to connect to it remotely, via their own terminal or our browser interface</p>
+
+<h2 id="env-start">Env.start()</h2>
+
+<p>Is a placeholder for chaining. </p>
+
+<h2 id="env-shell">Env.shell()</h2>
+<pre class="highlight javascript"><code><span class="nx">env</span><span class="p">.</span><span class="nx">start</span><span class="p">()</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">env</span><span class="p">.</span><span class="nx">shell</span><span class="p">(</span><span class="s2">"labVm"</span><span class="p">,</span><span class="s2">"echo hello world"</span><span class="p">))</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">sOut</span><span class="p">,</span> <span class="nx">sErr</span><span class="p">){</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">sOut</span><span class="p">,</span><span class="nx">sErr</span><span class="p">);});</span>
+
+</code></pre>
+
+<blockquote>
+<p>Don&rsquo;t forget, you can just clone git repositories.</p>
+</blockquote>
+<pre class="highlight javascript"><code><span class="nx">env</span><span class="p">.</span><span class="nx">start</span><span class="p">()</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">env</span><span class="p">.</span><span class="nx">shell</span><span class="p">(</span><span class="s2">"labVm"</span><span class="p">,</span><span class="s2">"cd /"</span><span class="p">))</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">env</span><span class="p">.</span><span class="nx">shell</span><span class="p">(</span><span class="s2">"labVm"</span><span class="p">,</span><span class="s2">"git clone https://github.com/learnlinux/tuxlab-app"</span><span class="p">))</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">env</span><span class="p">.</span><span class="nx">shell</span><span class="p">(</span><span class="s2">"labVm"</span><span class="p">,</span><span class="s2">"./deploy.sh"</span><span class="p">));</span>
+</code></pre>
+
+<p>Env.shell allows running classic shell commands in any Virtual Machine created using the Env API. The call Env.shell(vmName, command) results in a promise, resolved with standard out, standard error or rejects with null and an error. 
+Every command in the student environment, aside from creating, updating, removing or networking virtual machines are meant to be implemented through env.shell().
+<aside class = "success">Remember, you can always clone your files from github and run them</aside></p>
+
+<p>Keep in mind that env.shell can easily be used to clone a git repository of your choice and run any executable you would like to put there since env.shell is capable of running any unix command. Including git clone and many others!</p>
+
+<h2 id="env-createvm">Env.createVm()</h2>
+<pre class="highlight javascript"><code><span class="nx">env</span><span class="p">.</span><span class="nx">start</span><span class="p">()</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">env</span><span class="p">.</span><span class="nx">createVm</span><span class="p">({</span><span class="na">createOptions</span><span class="p">:</span> <span class="p">{</span><span class="na">name</span><span class="p">:</span> <span class="s2">"Jonathan"</span><span class="p">}});</span>
+</code></pre>
+
+<p>Env.createVm creates a virtual machine in addition to the labVm. Although not necessary for many labs, creating multiple virtual machines may allow the creation of more versatile labs. Using Env.network -to be implemented in beta- you can network together any number of Virtual Machines in whatever way you wish to create many different labs such as SSH-connection, server-hacking &hellip;</p>
+
+<h2 id="env-updatevm">Env.updateVm()</h2>
+<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">opts</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">attachStdErr</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="na">name</span><span class="p">:</span> <span class="s2">"Jeff"</span><span class="p">,</span>
+  <span class="na">CMD</span><span class="p">:</span> <span class="p">[</span><span class="s2">"/bin/sh"</span><span class="p">]</span>
+<span class="p">}</span>
+
+<span class="nx">env</span><span class="p">.</span><span class="nx">start</span><span class="p">()</span>
+ <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">env</span><span class="p">.</span><span class="nx">updateVm</span><span class="p">(</span><span class="s2">"vm1"</span><span class="p">,</span><span class="nx">opts</span><span class="p">));</span>
+</code></pre>
+
+<p>Env.update vm, updates a virtual machine with the given options. Although it can work with the labVm and all other Vms, we highly suggest not using it to update labVm as this may affectthe student connection</p>
+
+<aside class = "warning">Using updateVm on the labVm may result in unexpected behavior!</aside>
+
+<h2 id="env-removevm">Env.removeVm()</h2>
+<pre class="highlight javascript"><code><span class="nx">env</span><span class="p">.</span><span class="nx">start</span><span class="p">()</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">env</span><span class="p">.</span><span class="nx">removeVm</span><span class="p">(</span><span class="s2">"Jeff"</span><span class="p">));</span>
+</code></pre>
+
+<p>Removes any virtual machine except the labVm. It is suggested that you use the removeVm call to remove virtual machines after they&rsquo;ll no longer be used to save resources. All virtual machines are terminated after a pre-determined countdown or when the student completes the lab.</p>
+
+          <h1 id="student-api">Student API</h1>
+
+<p>The Student API allows you to set task grades and get/set data for each students&rsquo; labs and tasks and give feedback to students in real time, after they submit their progress</p>
+
+<h2 id="student-feedback">Student.feedback()</h2>
+<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">md</span> <span class="o">=</span> <span class="err">`</span>
+  <span class="err">#</span> <span class="nx">This</span> <span class="nx">is</span> <span class="nx">an</span> <span class="nx">example</span> <span class="nx">feedback</span> <span class="nx">MD</span>
+  <span class="err">##</span> <span class="nx">It</span> <span class="nx">works</span> <span class="k">in</span> <span class="nx">full</span> <span class="nx">markdown</span>
+  <span class="nx">You</span> <span class="nx">can</span> <span class="k">do</span> <span class="nx">most</span> <span class="nx">things</span> <span class="kd">with</span> <span class="nx">it</span>
+  <span class="err">`</span><span class="p">;</span>
+
+<span class="nx">student</span><span class="p">.</span><span class="nx">feedback</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="nx">md</span><span class="p">);</span>
+</code></pre>
+
+<p>Shows the feedback markdown provided to the student below the original task markdown once the verifier function runs. It is recommended that this is only called in the verifier function.</p>
+
+<h2 id="student-setgrade">Student.setGrade()</h2>
+<pre class="highlight javascript"><code><span class="nx">student</span><span class="p">.</span><span class="nx">setGrade</span><span class="p">(</span><span class="mi">3</span><span class="p">,[</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">])</span>
+</code></pre>
+
+<p>Sets the grade of the student for a specific task to the given tuple. Takes two parameters, taskNo, gradeTuple. Grade is set to tuple[0] out of tuple[1]</p>
+
+<h2 id="student-incrementgrade">Student.incrementGrade()</h2>
+<pre class="highlight javascript"><code><span class="nx">student</span><span class="p">.</span><span class="nx">incrementGrade</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">);</span>
+</code></pre>
+
+<p>increments the grade of the student for a specific task by the given number of points</p>
+
+<h2 id="student-gettaskdata">Student.getTaskData()</h2>
+<pre class="highlight javascript"><code><span class="nx">env</span><span class="p">.</span><span class="nx">start</span><span class="p">()</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">student</span><span class="p">.</span><span class="nx">getTaskData</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">){</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">data</span><span class="p">)});</span>
+</code></pre>
+
+<p>Like env functions, student.getTaskData can only be called as part of a chain starting with an env.init() or env.start() call. It is a promise based function that returns a promise that either resolves with the data or rejects. For non-corrupt databases, rejecting should not be an issue. The call takes as a parameter the index -from 1- for which the data is asked.</p>
+
+<h2 id="student-settaskdata">Student.setTaskData()</h2>
+<pre class="highlight javascript"><code><span class="nx">student</span><span class="p">.</span><span class="nx">setTaskData</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="nx">data</span><span class="p">);</span>
+</code></pre>
+
+<p>asynchronously sets the task data to the data provided. The first argument provided in the call is the task number -starting from 1- for the task to modify. </p>
+
+<h2 id="student-getlabdata">Student.getLabData()</h2>
+<pre class="highlight javascript"><code><span class="nx">env</span><span class="p">.</span><span class="nx">start</span><span class="p">()</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">student</span><span class="p">.</span><span class="nx">getLabData</span><span class="p">())</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">){</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">});</span>
+</code></pre>
+
+<p>Like env functions, student.getLabData can only be called as part of a chain starting with an env.init() or env.start() call. It is a promise based function that returns a promise which either resolves with the lab data or rejects. For non-corrupt databases, rejecting should not be an issue.</p>
+
+<h2 id="student-setlabdata">Student.setLabData()</h2>
+<pre class="highlight javascript"><code><span class="nx">student</span><span class="p">.</span><span class="nx">setLabData</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+</code></pre>
+
+<p>Asynchronously sets the lab data to the data provided.</p>
 
       </div>
       <div class="dark-box">
