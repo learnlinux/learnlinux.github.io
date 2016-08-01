@@ -1,16 +1,17 @@
 /**
   TuxLab Splash Page Stylesheet
 **/
-.abel, h2, h4 {
+.abel, h2, h4, section.step .step_title label, section.step .step_title ul li:last-child {
   font-family: 'Abel', sans-serif; }
 
-.opensans, html, body, h1, h3 {
+.opensans, html, body, h1, h3, section.step .step_title ul li:first-child {
   font-family: 'Open Sans', sans-serif; }
 
 html, body {
   margin: 0 auto;
   padding: 0;
-  font-size: 12pt; }
+  font-size: 12pt;
+  background-color: #efefef; }
 
 .page_wrap {
   margin: 0 auto;
@@ -22,37 +23,41 @@ h1 {
   font-weight: 700; }
 
 h2 {
-  font-size: 20pt; }
+  font-size: 40pt; }
 
 h3 {
-  font-size: 36pt;
+  font-size: 20pt;
   font-weight: 700; }
 
 h4 {
-  font-size: 14pt; }
+  font-size: 20pt; }
 
-section#logo_splash {
+/**
+  SECTION: SPLASH
+**/
+section#splash {
   width: 100%;
-  background-color: #3d85c6; }
-  section#logo_splash .logo {
+  background-color: #3d85c6;
+  margin-bottom: 50px; }
+  section#splash .logo {
     width: 600px;
     height: 200px;
     margin: 0 auto;
     padding-top: 100px; }
-    section#logo_splash .logo .head {
+    section#splash .logo .head {
       float: left;
       height: 150px;
       width: 150px; }
-    section#logo_splash .logo .text {
+    section#splash .logo .text {
       float: left;
       margin-top: 30px;
       margin-left: 15px;
       text-align: center; }
-      section#logo_splash .logo .text h1, section#logo_splash .logo .text h2 {
+      section#splash .logo .text h1, section#splash .logo .text h4 {
         color: #fff !important; }
-  section#logo_splash .sponsors {
+  section#splash .sponsors {
     position: relative; }
-    section#logo_splash .sponsors .logos {
+    section#splash .sponsors .logos {
       position: absolute;
       margin: 0 auto;
       top: 40px;
@@ -62,22 +67,65 @@ section#logo_splash {
       width: 460px;
       height: 100px;
       text-align: center; }
-      section#logo_splash .sponsors .logos .redhat {
+      section#splash .sponsors .logos .redhat {
         float: left;
         height: 50px; }
-      section#logo_splash .sponsors .logos label {
+      section#splash .sponsors .logos label {
         display: block;
         float: left;
         height: 50px;
         margin: 0 10px;
         border-left: 1px solid #333; }
-      section#logo_splash .sponsors .logos .scs {
+      section#splash .sponsors .logos .scs {
         float: left;
         height: 50px; }
-    section#logo_splash .sponsors .snow_hill {
+    section#splash .sponsors .snow_hill {
       width: 100%;
       height: 60px;
       min-height: 150px;
       fill: #efefef; }
+
+/**
+  SECTION: STEPS
+**/
+#steps_descrip {
+  line-height: 60px;
+  margin-bottom: 50px; }
+
+section.step {
+  display: block;
+  min-height: 100px; }
+  section.step .step_title {
+    height: 80px; }
+    section.step .step_title label {
+      float: left;
+      display: inline-block;
+      height: 80px;
+      line-height: 76px;
+      font-size: 110px;
+      font-weight: 700;
+      text-align: center; }
+    section.step .step_title ul {
+      float: left; }
+      section.step .step_title ul li {
+        margin: 0;
+        list-style-type: none; }
+        section.step .step_title ul li:first-child {
+          font-size: 36px;
+          line-height: 30px; }
+        section.step .step_title ul li:last-child {
+          font-size: 18px;
+          line-height: 22px;
+          margin-left: 5px;
+          text-transform: uppercase; }
+  section.step .step_details ul li {
+    margin: 0;
+    list-style-type: none; }
+    section.step .step_details ul li label {
+      height: 35px;
+      width: 35px;
+      border-radius: 50%;
+      background-color: #3d85c6;
+      color: #fff; }
 
 /*# sourceMappingURL=tuxlab.css.map */
