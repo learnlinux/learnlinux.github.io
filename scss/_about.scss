@@ -3,4 +3,13 @@
 **/
 section#about{
   min-height:400px;
+
+  & > div{
+    padding-top:30px;
+
+  }
+
+  .uk-button-primary{
+    background-color:#3d85c6 !important;
+  }
 }

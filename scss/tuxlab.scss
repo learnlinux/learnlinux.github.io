@@ -15,18 +15,18 @@
   margin:0;
 }
 html, body{
-    height:100%;
+  height:100%;
 
-    @extend .opensans;
-    font-size:12pt;
+  @extend .opensans;
+  font-size:12pt;
 
-    background-color:#efefef;
+  background-color:#efefef;
 }
 
 // FOOTER
 .body_wrap{
   min-height:100%;
-  margin-bottom:-50px;
+  margin-bottom:-40px;
 }
 
 .body_wrap:after{
@@ -35,10 +35,11 @@ html, body{
 }
 
 footer, .body_wrap:after{
-  height:50px;
+  height:40px;
 }
 
 footer{
+  background-color:#333;
 }
 
 // MAX PAGE WIDTH
@@ -65,6 +66,12 @@ h2{
   font-size:40pt;
 }
 
+h3{
+  @extend .abel;
+  font-size:32px;
+  text-transform: uppercase;
+}
+
 h4{
   @extend .abel;
   font-size:20pt;
@@ -81,6 +88,9 @@ h4{
 
 // SECTION: INSTALL
 @import 'install';
+
+// SECTION: PRESS
+@import 'press';
 
 // SECTION: ABOUT
 @import 'about';

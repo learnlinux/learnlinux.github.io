@@ -1,6 +1,7 @@
 ---
 title: API Reference
 includes:
+  - install
   - labfile
   - env
   - student  
@@ -15,4 +16,3 @@ toc_footers:
 
 search: true
 ---
-
