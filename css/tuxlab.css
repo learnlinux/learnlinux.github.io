@@ -1,22 +1,39 @@
 /**
   TuxLab Splash Page Stylesheet
 **/
-.abel, h2, h4, section.step .step_title label, section.step .step_title ul li:last-child {
+.abel, h2, h4, section.step .step_title ul li:last-child {
   font-family: 'Abel', sans-serif; }
 
-.opensans, html, body, h1, h3, section.step .step_title ul li:first-child {
+.opensans, html, body, h1, section.step .step_title label, section.step .step_title ul li:first-child, section#install .try_text {
   font-family: 'Open Sans', sans-serif; }
 
+* {
+  margin: 0; }
+
 html, body {
-  margin: 0 auto;
-  padding: 0;
+  height: 100%;
   font-size: 12pt;
   background-color: #efefef; }
+
+.body_wrap {
+  min-height: 100%;
+  margin-bottom: -50px; }
+
+.body_wrap:after {
+  content: "";
+  display: block; }
+
+footer, .body_wrap:after {
+  height: 50px; }
 
 .page_wrap {
   margin: 0 auto;
   width: 100%;
   max-width: 1200px; }
+
+.color_wrap {
+  width: 100%;
+  background-color: #3d85c6; }
 
 h1 {
   font-size: 60pt;
@@ -24,10 +41,6 @@ h1 {
 
 h2 {
   font-size: 40pt; }
-
-h3 {
-  font-size: 20pt;
-  font-weight: 700; }
 
 h4 {
   font-size: 20pt; }
@@ -40,7 +53,8 @@ section#splash {
   background-color: #3d85c6;
   margin-bottom: 50px; }
   section#splash .logo {
-    width: 600px;
+    width: 100%;
+    max-width: 600px;
     height: 200px;
     margin: 0 auto;
     padding-top: 100px; }
@@ -55,6 +69,9 @@ section#splash {
       text-align: center; }
       section#splash .logo .text h1, section#splash .logo .text h4 {
         color: #fff !important; }
+      @media (max-width: 768px) {
+        section#splash .logo .text {
+          width: 100%; } }
   section#splash .sponsors {
     position: relative; }
     section#splash .sponsors .logos {
@@ -69,21 +86,33 @@ section#splash {
       text-align: center; }
       section#splash .sponsors .logos .redhat {
         float: left;
-        height: 50px; }
+        max-height: 50px; }
       section#splash .sponsors .logos label {
         display: block;
         float: left;
         height: 50px;
         margin: 0 10px;
-        border-left: 1px solid #333; }
+        border-left: 1px solid #ccc; }
       section#splash .sponsors .logos .scs {
         float: left;
-        height: 50px; }
+        max-height: 50px; }
     section#splash .sponsors .snow_hill {
       width: 100%;
       height: 60px;
       min-height: 150px;
       fill: #efefef; }
+
+/**
+  SECTION: VIDEO
+**/
+section#video {
+  width: 100%; }
+  section#video center {
+    margin-bottom: 50px; }
+    section#video center #embed {
+      width: 100%;
+      max-width: 864px;
+      min-height: 486px; }
 
 /**
   SECTION: STEPS
@@ -94,16 +123,22 @@ section#splash {
 
 section.step {
   display: block;
-  min-height: 100px; }
+  min-height: 300px;
+  padding: 30px 0px; }
   section.step .step_title {
-    height: 80px; }
+    display: block;
+    height: 80px;
+    margin-bottom: 10px; }
     section.step .step_title label {
       float: left;
       display: inline-block;
       height: 80px;
-      line-height: 76px;
-      font-size: 110px;
-      font-weight: 700;
+      width: 80px;
+      background-color: #3d85c6;
+      border-radius: 50%;
+      color: #fff;
+      line-height: 80px;
+      font-size: 60px;
       text-align: center; }
     section.step .step_title ul {
       float: left; }
@@ -118,14 +153,57 @@ section.step {
           line-height: 22px;
           margin-left: 5px;
           text-transform: uppercase; }
-  section.step .step_details ul li {
-    margin: 0;
-    list-style-type: none; }
-    section.step .step_details ul li label {
-      height: 35px;
-      width: 35px;
-      border-radius: 50%;
-      background-color: #3d85c6;
+  section.step div.step_details {
+    width: 50%; }
+  section.step ul.step_details {
+    width: 50%; }
+    section.step ul.step_details li {
+      height: 70px;
+      margin: 0;
+      list-style-type: none; }
+      section.step ul.step_details li label {
+        display: block;
+        height: 50px;
+        width: 50px;
+        border-radius: 50%;
+        background-color: #3d85c6; }
+
+.color_wrap section.step {
+  color: #fff; }
+  .color_wrap section.step .step_title label {
+    color: #3d85c6;
+    background-color: #fff; }
+
+section#one {
+  padding-bottom: 200px; }
+  section#one .file {
+    height: 400px; }
+    section#one .file h4 {
       color: #fff; }
+
+/**
+  SECTION: INSTALL
+**/
+section#install {
+  padding: 50px 0;
+  text-align: center; }
+  section#install .try_text {
+    font-size: 40px;
+    line-height: 60px;
+    font-weight: 300;
+    color: #fff; }
+  section#install .try_logos {
+    margin: 20px 0; }
+    section#install .try_logos img {
+      height: 80px; }
+  section#install .try_button {
+    margin: 30px 0px;
+    background-color: #3d85c6; }
+
+/**
+  SECTION: ABOUT
+**/
+section#about {
+  min-height: 400px; }
 
 /*# sourceMappingURL=tuxlab.css.map */

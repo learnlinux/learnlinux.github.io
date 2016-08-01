@@ -3,11 +3,12 @@
   <head>
         <!-- META -->
         <meta charset="UTF-8">
-        <title>LearnLinux Project | Carnegie Mellon</title>
+        <title>TuxLab Project | Carnegie Mellon</title>
         <meta name="description" content="Free Web tutorials">
         <meta name="keywords" content="HTML,CSS,XML,JavaScript">
         <meta name="author" content="Hege Refsnes">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="icon" href="assets/favicon/favicon.ico" type="image/x-icon" />
 
         <!-- FACEBOOK META -->
         <meta property="og:url"                content="http://tuxlab.org" />
@@ -29,72 +30,139 @@
 
   </head>
   <body>
+    <div class="body_wrap">
 
-  <!-- Logo Screen Splash -->
-      <section id="splash">
-        <div class="logo">
-          <div class="head">
-              <img src="assets/logo/v1.head.png" />
-          </div>
-          <div class="text">
-            <h1> TUXLAB </h1>
-            <h4> LEARN LINUX INTERACTIVELY </h4>
-          </div>
-        </div>
-        <div class="sponsors">
-            <div class="logos">
-              <h4>SPONSORED BY</h4>
-              <img class="redhat" src="img/redhat.png" />
-              <label class="verticalLine"></label>
-              <img class="scs" src="img/scs.png" />
+    <!-- Logo Screen Splash -->
+        <section id="splash">
+
+          <div class="logo">
+            <div class="head uk-hidden-small">
+                <img src="assets/logo/v1.head.png" />
             </div>
-            <svg class="snow_hill" xmlns="http://www.w3.org/2000/svg" width="100%" height="300" viewBox="0 0 350 235" preserveAspectRatio="none">
-              <path d="M0 235h350V59.024C116.373 75.394 224.07-53.64 0 26.404z"/>
-            </svg>
-        </div>
+            <div class="text">
+              <h1> TUXLAB </h1>
+              <h4> LEARN LINUX INTERACTIVELY </h4>
+            </div>
+          </div>
+
+          <div class="sponsors">
+              <div class="logos">
+                <h4>SPONSORED BY</h4>
+                <img class="redhat" src="img/redhat.png" />
+                <label class="verticalLine"></label>
+                <img class="scs" src="img/scs.png" />
+              </div>
+              <svg class="snow_hill" xmlns="http://www.w3.org/2000/svg" width="100%" height="300" viewBox="0 0 350 235" preserveAspectRatio="none">
+                <path d="M0 235h350V59.024C116.373 75.394 224.07-53.64 0 26.404z"/>
+              </svg>
+          </div>
+
+        </section>
+
+    <!-- Explainer -->
+      <section id="video">
+        <center>
+          <iframe id="embed" src="https://www.youtube.com/embed/Nj3dGK3c4nY" frameborder="0" allowfullscreen></iframe>
+        </center>
       </section>
 
-<!-- Steps -->
-  <center>
-    <h2 id="steps_descrip" class="page_wrap">CREATE INTERACTIVE LINUX COURSES:</h2>
-  </center>
+    <!-- Steps -->
+      <center>
+        <h2 id="steps_descrip" class="page_wrap">CREATE INTERACTIVE LINUX COURSES</h2>
+      </center>
 
-<!-- Step One -->
-      <section id="one" class="step page_wrap">
-          <span class="step_title">
-            <label>1</label>
-            <ul>
-              <li>Create Lab File</li>
-              <li>simple javascript api</li>
-            </ul>
-          </span>
-      </section>
+    <!-- Step One -->
+      <div class="color_wrap">
+        <section id="one" class="step uk-grid page_wrap">
+            <div class="step_title uk-width-1-1">
+              <label>1</label>
+              <ul>
+                <li>Create Lab File</li>
+                <li>simple javascript api</li>
+              </ul>
+            </div>
 
-<!-- Step Two -->
-  <section id="two" class="step page_wrap">
-      <span class="step_title">
-        <label>2</label>
-        <ul>
-          <li>Upload to TuxLab</li>
-          <li>automatically provision docker containers</li>
-        </ul>
-      </span>
-  </section>
-
-<!-- Step Three -->
-  <section id="three" class="step page_wrap">
-      <span class="step_title">
-        <label>3</label>
-        <ul>
-          <li>Enroll Users</li>
-          <li>SIMPLE JAVASCRIPT API</li>
-        </ul>
-      </span>
-
-      <div>
-
+            <div class="uk-width-large-1-2 step_details">
+              TEST
+            </div>
+            <div class="file uk-width-large-1-2 uk-hidden-small">
+              <h4>Example Lab</h4>
+              <script src="https://gist.github.com/cemersoz/3c708904d6eeed4c76acd1c6efa1d668.js"></script>
+            </div>
+        </section>
       </div>
-  </section>
 
+    <!-- Step Two -->
+      <section id="two" class="step uk-grid page_wrap">
+
+          <div class="step_title uk-width-1-1">
+            <label>2</label>
+            <ul>
+              <li>Upload to TuxLab</li>
+              <li>automatically provision docker containers</li>
+            </ul>
+          </div>
+
+          <div class="uk-width-large-1-2 step_details">
+              TEST
+          </div>
+          <ul class="uk-width-large-1-2 step_details">
+            <li>
+              <label></label>
+            </li>
+            <li>
+              <label></label>
+            </li>
+            <li>
+              <label></label>
+            </li>
+          </ul>
+      </section>
+
+    <!-- Step Three -->
+    <div class="color_wrap">
+      <section id="three" class="step uk-grid page_wrap">
+          <div class="step_title uk-width-1-1">
+            <label>3</label>
+            <ul>
+              <li>Enroll Users</li>
+              <li>SIMPLE JAVASCRIPT API</li>
+            </ul>
+          </div>
+      </section>
+    </div>
+
+    <!-- Installation -->
+    <div class="color_wrap" style="background-color:#444;">
+      <section id="install" class="page_wrap">
+          <span class="try_text">Ready to give TuxLab a try?</span></br>
+          <div class="try_logos uk-grid uk-hidden-small">
+            <div class="uk-width-medium-1-3">
+              <img src="img/aws.png" style="float:right; margin-top:30px;"/>
+            </div>
+            <div class="uk-width-medium-1-3">
+              <img src="img/ansible.png" style="height:140px;" />
+            </div>
+            <div class="uk-width-medium-1-3">
+              <img src="img/vagrant.png" style="float:left; margin-top:30px;"/>
+            </div>
+          </div>
+          <a class="try_button uk-button uk-button-primary uk-button-large" href="">Installation Guide</a>
+      </section>
+    </div>
+
+    <!-- The Project -->
+      <section id="about" class="uk-grid page_wrap">
+
+      </section>
+
+    </div>
+
+
+    <!-- Footer -->
+      <footer class="uk-subnav uk-subnav-line uk-flex-center">
+        <li><a href="">Terms</a></li>
+        <li><a href="">Contact</a></li>
+      </footer>
   </body>
 </html>

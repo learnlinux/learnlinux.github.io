@@ -1,0 +1,114 @@
+/**
+  SECTION: STEPS
+**/
+
+  #steps_descrip{
+    line-height:60px;
+    margin-bottom:50px;
+  }
+
+  section.step{
+    display:block;
+    min-height:300px;
+    padding:30px 0px;
+
+    .step_title{
+      display:block;
+      height:80px;
+      margin-bottom:10px;
+
+      // Number
+      label{
+          float:left;
+          display:inline-block;
+          height:80px;
+          width:80px;
+
+          background-color:#3d85c6;
+          border-radius:50%;
+
+          @extend .opensans;
+          color:#fff;
+          line-height:80px;
+          font-size:60px;
+          text-align:center;
+      }
+
+      // Title and Subtitle
+      ul{
+        float:left;
+        li{
+          margin:0;
+          list-style-type: none;
+
+          &:first-child{
+            @extend .opensans;
+            font-size:36px;
+            line-height:30px;
+          }
+
+          &:last-child{
+            @extend .abel;
+            font-size:18px;
+            line-height:22px;
+            margin-left:5px;
+            text-transform: uppercase;
+          }
+        }
+      }
+    }
+
+    div.step_details{
+      width:50%;
+    }
+
+    ul.step_details {
+      width:50%;
+
+      li{
+        height:70px;
+        margin:0;
+        list-style-type: none;
+
+        label{
+          display:block;
+          height:50px;
+          width:50px;
+          border-radius:50%;
+          background-color:#3d85c6;
+        }
+      }
+    }
+  }
+
+  // INVERTED COLORS
+  .color_wrap section.step{
+    color:#fff;
+    .step_title label{
+      color:#3d85c6;
+      background-color:#fff;
+    }
+  }
+
+// STEP ONE
+  section#one{
+    padding-bottom:200px;
+    .file{
+      height:400px;
+
+      h4{
+        color:#fff;
+      }
+
+    }
+  }
+
+// STEP TWO
+  section#two{
+
+  }
+
+// STEP THREE
+  section#three{
+
+  }

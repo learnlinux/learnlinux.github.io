@@ -11,9 +11,11 @@
 }
 
 // BODY
+*{
+  margin:0;
+}
 html, body{
-    margin: 0 auto;
-    padding:0;
+    height:100%;
 
     @extend .opensans;
     font-size:12pt;
@@ -21,10 +23,34 @@ html, body{
     background-color:#efefef;
 }
 
+// FOOTER
+.body_wrap{
+  min-height:100%;
+  margin-bottom:-50px;
+}
+
+.body_wrap:after{
+  content: "";
+  display: block;
+}
+
+footer, .body_wrap:after{
+  height:50px;
+}
+
+footer{
+}
+
+// MAX PAGE WIDTH
 .page_wrap{
     margin:0 auto;
     width:100%;
     max-width:1200px;
+}
+
+.color_wrap{
+  width:100%;
+  background-color:#3d85c6;
 }
 
 // HEADERS
@@ -39,12 +65,6 @@ h2{
   font-size:40pt;
 }
 
-h3{
-  @extend .opensans;
-  font-size:20pt;
-  font-weight:700;
-}
-
 h4{
   @extend .abel;
   font-size:20pt;
@@ -53,5 +73,14 @@ h4{
 // SECTION: LOGO SPLASH
 @import 'splash';
 
+// SECTION: EXPLAINER
+@import 'video';
+
 // SECTION: STEPS
 @import 'steps';
+
+// SECTION: INSTALL
+@import 'install';
+
+// SECTION: ABOUT
+@import 'about';

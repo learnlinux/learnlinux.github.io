@@ -1,0 +1,16 @@
+/**
+  SECTION: VIDEO
+**/
+
+section#video{
+  width:100%;
+  center{
+    margin-bottom:50px;
+
+    #embed{
+      width:100%;
+      max-width:864px;
+      min-height:486px;
+    }
+  }
+}
