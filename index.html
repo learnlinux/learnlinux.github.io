@@ -68,8 +68,9 @@
       </section>
 
     <!-- Steps -->
-      <center>
-        <h2 id="steps_descrip" class="page_wrap">CREATE INTERACTIVE LINUX COURSES</h2>
+      <center id="steps_descrip" class="page_wrap">
+        <h2>CREATE INTERACTIVE LINUX COURSES</h2>
+        <h4>three simple steps from chalkboard to the cloud:</h4>
       </center>
 
     <!-- Step One -->
@@ -79,12 +80,17 @@
               <label>1</label>
               <ul>
                 <li>Create Lab File</li>
-                <li>simple javascript api</li>
+                <li>It's just Javascript...</li>
               </ul>
             </div>
 
             <div class="uk-width-large-1-2 step_details">
-              TEST
+              <p style="max-width:400px; margin:50px auto 0px auto;">
+                The TuxLab API makes it easy to create custom Linux environments for your students. Define a setup function which defines the infrastructure and program requirements, and any number of lab steps for your students to perform.  Our code executes opaquely- verifying and grading the users performance securely.
+              </p>
+              <center>
+                <a class="uk-button" style="margin-top:40px;" href="docs"><i class="uk-icon-book"></i>&nbsp;API Docs</a>
+              </center>
             </div>
             <div class="file uk-width-large-1-2 uk-hidden-small">
               <h4>Example Lab</h4>
@@ -99,24 +105,43 @@
           <div class="step_title uk-width-1-1">
             <label>2</label>
             <ul>
-              <li>Upload to TuxLab</li>
-              <li>automatically provision docker containers</li>
+              <li>Upload to TuxLab Cloud</li>
+              <li>Infrastructure on Auto Pilot...</li>
             </ul>
           </div>
 
           <div class="uk-width-large-1-2 step_details">
-              TEST
+              <img src="https://docs.google.com/drawings/d/1jLnkbWYxgBlfEEc6eldGdA_ONhBRTjJ6KmwGvpoFXkY/pub?w=960&h=720" />
           </div>
           <ul class="uk-width-large-1-2 step_details">
             <li>
-              <label></label>
+              <span>
+                <label><i class="uk-icon-justify uk-icon-hdd-o"></i></label>
+                OPEN SOURCE INFRASTRUCTURE
+              </span></br>
+              <p>
+                All of TuxLab's dependencies are Open Source- from major projects like Ansible, MongoDB and Docker, to our custom Proxy server container.
+              </p>
             </li>
             <li>
-              <label></label>
+              <span>
+                <label><i class="uk-icon-cog"></i></label>
+                AUTOMATIC SCALING
+              </span>
+              <p>
+                TuxLab's infrastructure is automatically provisioned and monitored using Ansible Tower. No need to worry about large classes crashing your services- the infrastructure is designed to scale with demand.
+              </p>
             </li>
             <li>
-              <label></label>
+              <span>
+                <label><i class="uk-icon-check-square-o"></i></label>
+                HEALTH MONITORING AND LOGGING
+              </span>
+              <p>
+                Once your infrastructure is running, our Health Monitoring and Logging components insure that server failure is automatically fixed and reported.
+              </p>
             </li>
+
           </ul>
       </section>
 
@@ -127,8 +152,28 @@
             <label>3</label>
             <ul>
               <li>Enroll Users</li>
-              <li>SIMPLE JAVASCRIPT API</li>
+              <li>A real Linux environment in any browser...</li>
             </ul>
+          </div>
+          <div class="uk-width-1-2">
+            <p style="max-width:400px; margin 50px auto 0px 50px;">
+              Students can easily seee assignments, and connect to Lab Enviornments through our browser-based terminal emulator.  Take a closer look:
+              <center>
+                <a class="uk-button" style="margin:20px;" href="docs"><i class="uk-icon-user"></i>&nbsp;Student Overview</a>
+              </center>
+              </br>
+              Enroll users, manage grades and assignments from the instructor dashboard in TuxLab, making it easy to administer large courses. See TuxLab in action:
+              <center>
+                <a class="uk-button" style="margin:20px;" href="docs"><i class="uk-icon-group"></i>&nbsp;Instructor Overview</a>
+              </center>
+
+              <ul>
+
+              </ul>
+            </p>
+          </div>
+          <div class="uk-width-1-2 browser">
+            <img src="img/browser.png" />
           </div>
       </section>
     </div>
@@ -192,14 +237,14 @@
         <div class="uk-width-medium-2-6">
           <h3>Contribute</h3>
           The TuxLab project is currently under active development. If you are interested in contributing to the project, visit the tuxlab-app github page to read more about becoming a developer.
-          <center><a class="uk-button uk-button-primary" style="margin-top:40px;" href="http://zdnet.com/"><i class="uk-icon-github"></i>&nbsp;tuxlab-app</a></center>
+          <center><a class="uk-button uk-button-primary" style="margin-top:40px;" href="https://github.com/learnlinux/tuxlab-app"><i class="uk-icon-github"></i>&nbsp;tuxlab-app</a></center>
         </div>
         <div class="uk-width-medium-2-6">
           <h3>Contact</h3>
           This project is managed entirely by undergraduate students at Carnegie Mellon University School of Computer Science. We would love to help you setup an installation of your own- and are accessible via Gitter or Email.
 
           <center>
-            <a class="uk-button uk-button-primary" style="margin-top:40px;" href="http://zdnet.com/"><i class="uk-icon-comments-o"></i>&nbsp;Gitter</a>
+            <a class="uk-button uk-button-primary" style="margin-top:40px;" href="https://gitter.im/learnlinux/tuxlab-app"><i class="uk-icon-comments-o"></i>&nbsp;Gitter</a>
             <a class="uk-button uk-button-primary" style="margin-top:40px; margin-left:20px;" href="mailto:contact@tuxlab.org"><i class="uk-icon-envelope"></i>&nbsp;E-Mail</a>
           </center>
         </div>
@@ -212,8 +257,7 @@
     <!-- Footer -->
       <footer class="uk-subnav uk-subnav-line uk-contrast uk-flex-center">
         <li>LEGAL CLAIMS HERE</li>
-        <li><a href="">Terms</a></li>
-        <li><a href="">Contact</a></li>
+        <li><a href="mailto:contact@tuxlab.org">Contact</a></li>
       </footer>
   </body>
 </html>

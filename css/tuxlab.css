@@ -1,10 +1,10 @@
 /**
   TuxLab Splash Page Stylesheet
 **/
-.abel, h2, h3, h4, section.step .step_title ul li:last-child {
+.abel, h2, h3, h4, section.step .step_title ul li:first-child, section.step ul.step_details li span {
   font-family: 'Abel', sans-serif; }
 
-.opensans, html, body, h1, section.step .step_title label, section.step .step_title ul li:first-child, section#install .try_text {
+.opensans, html, body, h1, section.step .step_title label, section.step .step_title ul li:last-child, section#install .try_text {
   font-family: 'Open Sans', sans-serif; }
 
 * {
@@ -125,8 +125,12 @@ section#video {
   SECTION: STEPS
 **/
 #steps_descrip {
-  line-height: 60px;
   margin-bottom: 50px; }
+  #steps_descrip h2 {
+    line-height: 60px;
+    margin-bottom: 0px; }
+  #steps_descrip h4 {
+    margin-top: 0px; }
 
 section.step {
   display: block;
@@ -154,26 +158,40 @@ section.step {
         list-style-type: none; }
         section.step .step_title ul li:first-child {
           font-size: 36px;
-          line-height: 30px; }
+          line-height: 30px;
+          text-transform: uppercase; }
         section.step .step_title ul li:last-child {
           font-size: 18px;
           line-height: 22px;
-          margin-left: 5px;
-          text-transform: uppercase; }
+          margin-left: 5px; }
   section.step div.step_details {
     width: 50%; }
   section.step ul.step_details {
     width: 50%; }
     section.step ul.step_details li {
-      height: 70px;
-      margin: 0;
+      min-height: 70px;
+      margin: 10px 0px;
       list-style-type: none; }
-      section.step ul.step_details li label {
-        display: block;
-        height: 50px;
-        width: 50px;
-        border-radius: 50%;
-        background-color: #3d85c6; }
+      section.step ul.step_details li span {
+        vertical-align: middle;
+        font-size: 30px;
+        text-transform: uppercase; }
+        section.step ul.step_details li span label {
+          display: inline-block;
+          height: 60px;
+          width: 60px;
+          margin-right: 10px;
+          border-radius: 50%;
+          background-color: #3d85c6;
+          text-align: center; }
+          section.step ul.step_details li span label i {
+            font-size: 40px;
+            line-height: 60px;
+            text-align: center;
+            color: #fff; }
+      section.step ul.step_details li p {
+        margin-left: 80px;
+        margin-top: -10px; }
 
 .color_wrap section.step {
   color: #fff; }
@@ -187,6 +205,9 @@ section#one {
     height: 400px; }
     section#one .file h4 {
       color: #fff; }
+
+section#three .browser img {
+  min-height: 400px; }
 
 /**
   SECTION: INSTALL
