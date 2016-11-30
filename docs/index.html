@@ -118,6 +118,34 @@
       <div class="dark-box"></div>
       <div class="content">
         
+          <h1 id="getting-started">Getting Started</h1>
+
+<p>TuxLab is a complex web application, relying on several discrete servers to provide end service.  We will outline these services briefly, to make the operation of TuxLab more clear:</p>
+
+<p><img alt="TuxLab Infrastructure Diagram" src="https://docs.google.com/drawings/d/1jLnkbWYxgBlfEEc6eldGdA_ONhBRTjJ6KmwGvpoFXkY/pub?w=960&amp;h=720" /></p>
+
+<h3 id="ansible-tower">Ansible Tower</h3>
+
+<p>Ansible Tower is a popular platform for automating server provisioning and management.  The TuxLab AWS installer automatically provisions an Ansible Tower AMI Instance from AWS; so there is little to worry about from the management or operations perspective. However, Ansible Tower can be an invaluable resource in maintaining your TuxLab installation. We highly recommend you take a look at the Ansible and Ansible Tower documentation:</p>
+
+<p>http://docs.ansible.com/ansible/tower.html  </p>
+
+<h3 id="mongodb">MongoDB</h3>
+
+<p>TuxLab relies on an external MongoDB Database to store user data, labs, and grades. This is not automatically setup by the TuxLab installer, because there are simply too many possible configurations to consider.  If you are looking for a test installation, we have found MongoLabs’ free hosted option to be a solid choice, however, it is not redundant, nor speedy enough to handle the requests for the application as a whole.  Instead, you should create your own MongoDB instance within AWS, using CloudForms to automate the scaling process.</p>
+
+<p>In considering the size of your MongoDB cluster, it is important to consider that TuxLab relies on the Meteor Framework, which relies heavily on direct database reads from MongoDB, which we will discuss further in the next sub-section.</p>
+
+<h3 id="meteor">Meteor</h3>
+
+<p>Meteor is a full-stack Javascript environment, hopefully simplifying development and operations by combining client and server-side operations.  When users first request the TuxLab site, they are given a large (&gt;2MB) HTML and JS file built using Angular2, which contains all of the application assets.  This massively speeds up the processing of subsequent requests, as the only data that is communicated between client and server are the updates to a given page.</p>
+
+<h3 id="docker-swarm">Docker Swarm</h3>
+
+<p>To create virtual environments, TuxLab utilizes the popular Docker container framework.  A single instance, known as the Docker Master, runs the Docker warm Daemon, which connects to a number of other instances known as Docker Nodes.  At the command of the master, the nodes can create lab environments.</p>
+
+<p>Users connect to these environments through a two-step process.  First, their computer requests DNS information for the host node, which is served by a Docker-based DNS Server on the Docker Master. The request response contains the IP address of one of the Docker Nodes, which your local machine uses to connect to a separate proxy container on the node.  The proxy forwards traffic from the public IP to the internal IP of the users’ container based on SSH username, allowing people to connect to their container from both the web and the command line.</p>
+
           <h1 id="development-installation">Development Installation</h1>
 
 <p>To make development and testing easier, we’ve developed a tool to simulate TuxLab’s infrastructure on your local machine.  To do this, we use the Vagrant framework, a programmatic wrapper to the popular VirtualBox Virtual Machine. This provides one platform that can be used across all machines, allowing TuxLab’s architecture to work the same way regardless of your operating system or environment.</p>
@@ -242,6 +270,24 @@ Alternatively, If you are using Amazon Route 53, you can use <a href="http://doc
 <p>Once the command has run to completion, you will see a number of instances active on your AWS account:</p>
 
 <p>Locate the one labeled “Ansible_Tower,” and note its public DNS Address.  If you enter this into your browser, prefixed by https://, you will pull up the Ansible Tower dashboard, which you can use to check the status of your TuxLab installation.</p>
+
+          <h1 id="configuration-settings">Configuration Settings</h1>
+
+<p>TuxLab has two different sets of settings; server, and application.  Server settings define the overall behavior of the set of applications (like domain, email and mongodb server settings, etc).  Application settings define the function of the web application.  Both can be edited through a series of configuration files in the tuxlab-infra and tuxlab-app repositories respectively.</p>
+
+<h2 id="server-configuration">Server Configuration</h2>
+
+<p>All of the server settings are defined in config.yml in the root of the tuxlab-infra repository. As Ansible sets up each server, it downloads a copy of this file from the GIT_URL (defined below), so if you want these variable changes to propogate across servers (Required for AWS Installation, but not Development Enviornments), it is imperative that you fork the original tuxlab-infra repository (https://github.com/learnlinux/tuxlab-infra), and include this link as the GIT_URL.</p>
+
+<p>Because the server configuration variables are critical to operation, you will likely need to change the majority of them before proceeding.  A guide to the various settings and options is printed below:</p>
+
+<iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vRR4mCglkjOeJ_enHmKDxy3OgKvKqUYf91fJyflmM5NUys27f7HsTlVpaHH83u7oYsRyOF75djv3qNn/pubhtml?gid=0&amp;single=true&amp;widget=true&amp;headers=false" style="width:48%; height:1200px; margin-left:10px;"></iframe>
+
+<h2 id="application-configuration">Application Configuration</h2>
+
+<p>The application-specific settings are defined in a number of .json files in the tuxlab-app/private folder.  Unlike the server settings, in order for these to take effect, you need to create a forked repository for both Development and Production environments.  Be sure that in doing this, you update the APP_REPO_GIT or APP_REPO_BIN options in the server settings.</p>
+
+<iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vRFna9Fy_ZXhZS0ZqJb3CM7zy17KBQvszEFFgC2vufTvb2F97DHFzQ1VnOEdzdQHe7UsXPPmdWujuYo/pubhtml?gid=0&amp;single=true&amp;widget=true&amp;headers=false" style="width:48%; height:500px; margin-left:10px;"></iframe>
 
           <h1 id="administration">Administration</h1>
 
@@ -500,6 +546,10 @@ Every command in the student environment, aside from creating, updating, removin
 </code></pre>
 
 <p>Asynchronously sets the lab data to the data provided.</p>
+
+<h2 id="examples">Examples</h2>
+
+<p>To make this more clear, we provide a number of examples:</p>
 
           <h1 id="troubleshooting">Troubleshooting</h1>
 

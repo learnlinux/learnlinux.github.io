@@ -1,6 +1,7 @@
 ---
 title: TuxLab Docs
 includes:
+  - infra
   - devenv
   - prodenv
   - config
