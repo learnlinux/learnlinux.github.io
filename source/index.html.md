@@ -1,18 +1,19 @@
 ---
-title: API Reference
+title: TuxLab Docs
 includes:
-  - install
-  - labfile
-  - env
-  - student  
+  - devenv
+  - prodenv
+  - config
+  - admin
+  - api
+  - trouble
+
 language_tabs:
   - javascript
 
 toc_footers:
-  - <a href='https://tuxlab.org'>Check out our webpage</a>
-  - <a href='https://github.com/learnlinux'>View Our Source Code</a>
-
-
+  - <a href='https://tuxlab.org'>TuxLab Project</a>
+  - <a href='https://github.com/learnlinux'>GitHub Source</a>
 
 search: true
 ---

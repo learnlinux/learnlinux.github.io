@@ -22,7 +22,6 @@ env.init()
   .catch(/*general failure case*/);
 ```
 
-
 Similarly, errors can be thrown and caught either at individual steps or after full execution -or both-, using the promise.js standard of either providing a failure case in the <code>Promise.then</code> case, or using a <code>.catch</code> statement
 
 ## Env.init()
@@ -31,7 +30,7 @@ Initializes the environment for a unique student, creating a lab Virtual Machine
 
 ## Env.start()
 
-Is a placeholder for chaining. 
+Is a placeholder for chaining.
 
 ## Env.shell()
 
@@ -53,7 +52,7 @@ env.start()
   .then(env.shell("labVm","./deploy.sh"));
 ```
 
-Env.shell allows running classic shell commands in any Virtual Machine created using the Env API. The call Env.shell(vmName, command) results in a promise, resolved with standard out, standard error or rejects with null and an error. 
+Env.shell allows running classic shell commands in any Virtual Machine created using the Env API. The call Env.shell(vmName, command) results in a promise, resolved with standard out, standard error or rejects with null and an error.
 Every command in the student environment, aside from creating, updating, removing or networking virtual machines are meant to be implemented through env.shell().
 <aside class = "success">Remember, you can always clone your files from github and run them</aside>
 
@@ -93,5 +92,3 @@ env.start()
   .then(env.removeVm("Jeff"));
 ```
 Removes any virtual machine except the labVm. It is suggested that you use the removeVm call to remove virtual machines after they'll no longer be used to save resources. All virtual machines are terminated after a pre-determined countdown or when the student completes the lab.
-
-

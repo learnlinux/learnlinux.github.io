@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>API Reference</title>
+    <title>TuxLab Docs</title>
 
     <style>
       .highlight table td { padding: 5px; }
@@ -110,17 +110,144 @@
       <div id="toc">
       </div>
         <ul class="toc-footer">
-            <li><a href='https://tuxlab.org'>Check out our webpage</a></li>
-            <li><a href='https://github.com/learnlinux'>View Our Source Code</a></li>
+            <li><a href='https://tuxlab.org'>TuxLab Project</a></li>
+            <li><a href='https://github.com/learnlinux'>GitHub Source</a></li>
         </ul>
     </div>
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
         
-          <h1 id="lab-file">Lab File</h1>
+          <h1 id="development-installation">Development Installation</h1>
 
-<p>Every lab file is a file written in javascript, that outlines the lab a student will go through. A lab file should always have setup and tasks functions, run to setup the lab environment and tasks.</p>
+<p>To make development and testing easier, we’ve developed a tool to simulate TuxLab’s infrastructure on your local machine.  To do this, we use the Vagrant framework, a programmatic wrapper to the popular VirtualBox Virtual Machine. This provides one platform that can be used across all machines, allowing TuxLab’s architecture to work the same way regardless of your operating system or environment.</p>
+
+<p>In order to set up TuxLab using vagrant, you must first install several frameworks and libraries on your local machine. These are:</p>
+
+<ul>
+<li>VirtualBox (netadp, netflt, guest-iso)</li>
+<li>Vagrant</li>
+<li>Vagrant Guests Plugin</li>
+<li>Ansible (Version 2.3 or above)</li>
+<li>SSHPass</li>
+</ul>
+
+<p>The following set of instructions will walk you through installation on our currently supported platforms.</p>
+
+<h2 id="red-hat-centos">Red Hat / CentOS</h2>
+
+<h2 id="fedora">Fedora</h2>
+
+<h2 id="ubuntu-debian">Ubuntu / Debian</h2>
+
+<h3 id="before-you-begin">Before you Begin</h3>
+
+<p>In order to ensure the installation process for your prerequisite programs goes smoothly, you should first make sure your package lists and installed programs are all up-to-date.  Run the following in Bash:</p>
+
+<p><code class="prettyprint">sudo apt-get update</code><br>
+<code class="prettyprint">sudo apt-get upgrade</code></p>
+
+<aside class="notice">
+    Note: running this second command will update all packages on your machine. This may include things like web browsers, so just keep in mind that running this second command may update more programs than are absolutely necessary. If you want to avoid this, it should be okay to omit the command.
+</aside>
+
+<h3 id="installing-virtualbox">Installing VirtualBox</h3>
+
+<p>Luckily, you can install virtualbox via Ubuntu’s package manager with the command:
+<code class="prettyprint">sudo apt-get install virtualbox</code></p>
+
+<h3 id="installing-vagrant">Installing Vagrant</h3>
+
+<h2 id="arch-linux-manjaro">Arch Linux / Manjaro</h2>
+
+          <h1 id="production-installation">Production Installation</h1>
+
+<p>TuxLab uses Ansible to automate the installation process, which makes TuxLab completely infrastructure-agnostic.  However, setting up the application using your own infrastructure is an advanced procedure.  To simplify this, we have created a local Ansible script which automates the process of installing TuxLab on Amazon Web Services, and includes features like auto-scaling and provisioning.</p>
+
+<h2 id="aws">AWS</h2>
+
+<h3 id="create-an-aws-account">Create an AWS Account</h3>
+
+<p>In order to provision instances on AWS, you will need to create an AWS Account.  Students and instructors are eligible to receive free credits for AWS via their University, if you are looking to try out TuxLab without an initial cost.  To register, simply complete the form on AWS’ website:
+<img alt="Signup for AWS" src="images/aws/aws_signup.png" /></p>
+
+<aside class="notice">
+Academic users (Students, Faculty, Administrators) are eligible to receive credit from Amazon Web Services.  The easiest way to do this is using the [GitHub Student Pack](https://education.github.com/pack).
+</aside>
+
+<h3 id="obtain-api-key">Obtain API Key</h3>
+
+<p>You will then need to obtain an API Key, allowing the TuxLab installer to provision infrastructure on your account.  In order to do this, navigate to the “My Security Credentials” dropdown:</p>
+
+<p><img alt="AWS Security Credentials" src="images/aws/aws_sec.png" /></p>
+
+<p>Then choose “create new access key”:</p>
+
+<p><img alt="AWS Keys" src="images/aws/aws_keys.png" /></p>
+
+<p>And finally, choose to download the key file.  We will use this later in running the install script.</p>
+
+<p><img alt="AWS Download Key" src="images/aws/aws_down.png" /></p>
+
+<h2 id="ansible-tower">Ansible Tower</h2>
+
+<h3 id="obtain-license-key">Obtain License Key</h3>
+
+<p>In addition to the TuxLab server applications, the installer will install Ansible Tower, a tool used to automatically scale, provision and check the health of the TuxLab service.  Ansible Tower is an open source product, however it requires a license for updating, support, and ease of operation.  All users are entitled to a free Ansible Tower license for up to ten nodes (which is substantially larger than what is needed of most TuxLab installations). First, complete the registration online:</p>
+
+<p><img alt="Ansible Tower Keys" src="images/aws/tower_signup.png" /></p>
+
+<h3 id="accept-eula">Accept EULA</h3>
+
+<p>You will then be emailed a license key, which is simply a JSON file.  You need to add a property; <code class="prettyprint">&quot;eula_accepted&quot; : true</code>, to this file, confirming that you have read the End User License Agreement.  Save this file for later use.</p>
+
+<h2 id="setup-ansible">Setup Ansible</h2>
+
+<p>Install Ansible and the prerequisites as explained earlier in the Development Installation section.</p>
+
+<p>In addition, you need to install the boto package, which is used for interfacing with AWS.  The easiest way to install this is using PIP, which should work on all platforms:
+<code class="prettyprint">pip install boto</code>.</p>
+
+<h2 id="setup-mongodb">Setup MongoDB</h2>
+
+<p>TuxLab relies on an external installation of MongoDB to store application data.  There are a number of ways to setup MongoDB, some of which are outlined in our later section on the Mongo component of TuxLab.  Prior to proceeding, it is important to make note of your MongoDB URL and authentication details, and insert them into the appropriate variable in the next step.</p>
+
+<h2 id="configuring-tuxlab">Configuring TuxLab</h2>
+
+<p>Prior to running the installation script, it is important that you review and edit the configuration settings.  These settings are outlined in detail in the configuration section of the documentation.</p>
+
+<aside class="warning">
+In setting up each server, Ansible automatically pulls the configuration details from the Git repository of each project (tuxlab-app, tuxlab-infra).  It is therefor essential that you fork these repositories, and edit the Git URL variables to use these repositories instead of the defaults.  This process is described in more depth in the Configuration documentation.
+</aside>
+
+<h2 id="installing-tuxlab">Installing TuxLab</h2>
+
+<p>Run the following command, substituting the AWS_ACCESS_KEY_ID and the AWS_SECRET_ACCESS_KEY with the values you downloaded previously in the AWS keyfile:</p>
+
+<p><code class="prettyprint">export AWS_ACCESS_KEY_ID=XXXXXXXXXXXXXX</code><br>
+<code class="prettyprint">export AWS_SECRET_ACCESS_KEY=XXXXXXXXXXXXXXXXXXXX</code><br>
+<code class="prettyprint">ansible-playbook site.yml</code></p>
+
+<p>You will be prompted to enter an Ansible password, which you should take note of.  You will use it later to connect to the internet Ansible dashboard.</p>
+
+<h2 id="setup-dns">Setup DNS</h2>
+
+<p>Finally, create DNS records to route your domain to the TuxLab instance. If you wanted for the tuxlab app to be displayed at domain.com, you would set the following records:
+<code class="prettyprint">NS   *.domain.com     &lt;SWARM_NODE_IP&gt;</code><br>
+<code class="prettyprint">A      domain.com     &lt;LOAD_BALANCER_DNS_NAME&gt;</code><br>
+Alternatively, If you are using Amazon Route 53, you can use <a href="http://docs.aws.amazon.com/ElasticLoadBalancing/latest/DeveloperGuide/using-domain-names-with-elb.html#dns-associate-custom-elb">Aliases</a> to more easily configure these IP addresses.</p>
+
+<h2 id="viewing-status-of-tuxlab-installation">Viewing Status of TuxLab Installation</h2>
+
+<p>Once the command has run to completion, you will see a number of instances active on your AWS account:</p>
+
+<p>Locate the one labeled “Ansible_Tower,” and note its public DNS Address.  If you enter this into your browser, prefixed by https://, you will pull up the Ansible Tower dashboard, which you can use to check the status of your TuxLab installation.</p>
+
+          <h1 id="administration">Administration</h1>
+
+          <h1 id="lab-api">Lab API</h1>
+
+<p>TuxLab is centered around the concept of a &ldquo;Lab&rdquo;- which consists of 1) a series of instructions presented to the user 2) a Linux Environment setup to complete these tasks and 3) a set of tests to verify the students&rsquo; completion of a task, as well as access student data.  All of these things are defined in a single Javascript file- called a LabFile.  A LabFile follows a particular format, described below.</p>
 
 <h2 id="creating-the-lab">Creating the Lab</h2>
 <pre class="highlight javascript"><code>
@@ -131,7 +258,7 @@
 
 <p>Thus, all labfiles must start with creating a new lab object. By running the command <code>var myLab = new lab();</code></p>
 
-<h2 id="setup">Setup</h2>
+<h3 id="setup">Setup</h3>
 <pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">setup</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">env</span><span class="p">){</span>
   <span class="nx">env</span><span class="p">.</span><span class="nx">init</span><span class="p">()</span>
 <span class="p">}</span>
@@ -141,14 +268,13 @@
 
 <p>Although the setup function can consist on only env.init(), it is important to provide as many of the tools, files and folders a student might use in the setup function to increase efficiency.</p>
 
-<h2 id="tasks">Tasks</h2>
+<h3 id="tasks">Tasks</h3>
 
-<p>Tasks are the individual steps a student goes through. Instructors can create as many tasks per lab and grade them and give feedback to students directly from the labfile using the student API. 
+<p>Tasks are the individual steps a student goes through. Instructors can create as many tasks per lab and grade them and give feedback to students directly from the labfile using the student API.
 Each task is created by a lab.newTask method, taking as input the title, a setup and verifier functions.</p>
 
-<h3 id="task-setup">Task setup</h3>
-<pre class="highlight javascript"><code>
-<span class="kd">var</span> <span class="nx">setup</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">env</span><span class="p">){</span>
+<h4 id="task-setup">Task setup</h4>
+<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">setup</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">env</span><span class="p">){</span>
   <span class="nx">env</span><span class="p">.</span><span class="nx">start</span><span class="p">()</span>
     <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">env</span><span class="p">.</span><span class="nx">shell</span><span class="p">(</span><span class="s2">"labVm"</span><span class="p">,</span><span class="s2">"git clone https://github.com/cemersoz/gitlab-setup1"</span><span class="p">)</span>
     <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">env</span><span class="p">.</span><span class="nx">shell</span><span class="p">(</span><span class="s2">"labVm"</span><span class="p">,</span><span class="s2">"./gitlab-setup1/deploy.sh"</span><span class="p">))</span>
@@ -156,7 +282,7 @@ Each task is created by a lab.newTask method, taking as input the title, a setup
 <span class="p">}</span>
 </code></pre>
 
-<p>Each task setup is a function, taking as paramater an environment object. This function is called for each student environment to setup the tasks for each student. Every setup function MUST start with a <code>return env.start()</code> statement, although other steps can be chained to the end. It is crucial for the API to have the setup function return an environment promise. 
+<p>Each task setup is a function, taking as paramater an environment object. This function is called for each student environment to setup the tasks for each student. Every setup function MUST start with a <code>return env.start()</code> statement, although other steps can be chained to the end. It is crucial for the API to have the setup function return an environment promise.
 <aside class = "notice">The setup function is run before the task is attempted.</aside></p>
 
 <p>It is important to note that while cloning git repositories is possible in the setup, it takes individual time and data connection for each user which are crucial and expensive resources. We suggest using regular unix commands and not relying on git as much as possible.</p>
@@ -179,13 +305,13 @@ Each task is created by a lab.newTask method, taking as input the title, a setup
 <span class="p">};</span>
 </code></pre>
 
-<p>Each task verify is a function taking as parameter an environment object and a student object. The verifier is run when a student clicks the <code>verify</code> button. A verifier function must result either in an <code>env.resolve()</code> or an <code>env.reject()</code> statement. </p>
+<p>Each task verify is a function taking as parameter an environment object and a student object. The verifier is run when a student clicks the <code>verify</code> button. A verifier function must result either in an <code>env.resolve()</code> or an <code>env.reject()</code> statement.</p>
 
 <aside class = "notice">All verifiers must either resolve or reject the progress</aside>
 
 <p>For graded tasks, it is important to set the grades of the students in the verifier, depending on their progress. It is also possible to give situation-specific feedback, in markdown format, using the student.feedback function call.</p>
 
-<h3 id="task-description">Task Description</h3>
+<h4 id="task-description">Task Description</h4>
 <pre class="highlight javascript"><code><span class="cm">/*@Task1
 # This is Task1
 ## You can write markdown as a comment!
@@ -229,13 +355,15 @@ Each task is created by a lab.newTask method, taking as input the title, a setup
 
 <p>Tasks are chained using the nextTask method, in a function named tasks. Task chains should start with a lab.init() call.</p>
 
-<h2 id="export">Export</h2>
+<h3 id="export">Export</h3>
 <pre class="highlight javascript"><code><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="nx">myLab</span><span class="p">;</span>
 </code></pre>
 
 <p>At the end of the lab file, You must export the lab object you created and modified, exporting it in the standard npm way with the <code>module.exports</code> command.</p>
 
-          <h1 id="environment-api">Environment API</h1>
+<h2 id="manipulating-the-vm">Manipulating the VM</h2>
+
+<p>In order to setup, and control the VM, TuxLab provides access to the <code class="prettyprint">env</code> object, which allows you to control the VM, and even create other VMs:</p>
 
 <blockquote>
 <p>All API calls are easily chainable</p>
@@ -258,15 +386,15 @@ Each task is created by a lab.newTask method, taking as input the title, a setup
 
 <p>Similarly, errors can be thrown and caught either at individual steps or after full execution -or both-, using the promise.js standard of either providing a failure case in the <code>Promise.then</code> case, or using a <code>.catch</code> statement</p>
 
-<h2 id="env-init">Env.init()</h2>
+<h3 id="env-init">Env.init()</h3>
 
 <p>Initializes the environment for a unique student, creating a lab Virtual Machine for each student and allowing them to connect to it remotely, via their own terminal or our browser interface</p>
 
-<h2 id="env-start">Env.start()</h2>
+<h3 id="env-start">Env.start()</h3>
 
-<p>Is a placeholder for chaining. </p>
+<p>Is a placeholder for chaining.</p>
 
-<h2 id="env-shell">Env.shell()</h2>
+<h3 id="env-shell">Env.shell()</h3>
 <pre class="highlight javascript"><code><span class="nx">env</span><span class="p">.</span><span class="nx">start</span><span class="p">()</span>
   <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">env</span><span class="p">.</span><span class="nx">shell</span><span class="p">(</span><span class="s2">"labVm"</span><span class="p">,</span><span class="s2">"echo hello world"</span><span class="p">))</span>
   <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">sOut</span><span class="p">,</span> <span class="nx">sErr</span><span class="p">){</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">sOut</span><span class="p">,</span><span class="nx">sErr</span><span class="p">);});</span>
@@ -282,20 +410,20 @@ Each task is created by a lab.newTask method, taking as input the title, a setup
   <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">env</span><span class="p">.</span><span class="nx">shell</span><span class="p">(</span><span class="s2">"labVm"</span><span class="p">,</span><span class="s2">"./deploy.sh"</span><span class="p">));</span>
 </code></pre>
 
-<p>Env.shell allows running classic shell commands in any Virtual Machine created using the Env API. The call Env.shell(vmName, command) results in a promise, resolved with standard out, standard error or rejects with null and an error. 
+<p>Env.shell allows running classic shell commands in any Virtual Machine created using the Env API. The call Env.shell(vmName, command) results in a promise, resolved with standard out, standard error or rejects with null and an error.
 Every command in the student environment, aside from creating, updating, removing or networking virtual machines are meant to be implemented through env.shell().
 <aside class = "success">Remember, you can always clone your files from github and run them</aside></p>
 
 <p>Keep in mind that env.shell can easily be used to clone a git repository of your choice and run any executable you would like to put there since env.shell is capable of running any unix command. Including git clone and many others!</p>
 
-<h2 id="env-createvm">Env.createVm()</h2>
+<h3 id="env-createvm">Env.createVm()</h3>
 <pre class="highlight javascript"><code><span class="nx">env</span><span class="p">.</span><span class="nx">start</span><span class="p">()</span>
   <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">env</span><span class="p">.</span><span class="nx">createVm</span><span class="p">({</span><span class="na">createOptions</span><span class="p">:</span> <span class="p">{</span><span class="na">name</span><span class="p">:</span> <span class="s2">"Jonathan"</span><span class="p">}});</span>
 </code></pre>
 
 <p>Env.createVm creates a virtual machine in addition to the labVm. Although not necessary for many labs, creating multiple virtual machines may allow the creation of more versatile labs. Using Env.network -to be implemented in beta- you can network together any number of Virtual Machines in whatever way you wish to create many different labs such as SSH-connection, server-hacking &hellip;</p>
 
-<h2 id="env-updatevm">Env.updateVm()</h2>
+<h3 id="env-updatevm">Env.updateVm()</h3>
 <pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">opts</span> <span class="o">=</span> <span class="p">{</span>
   <span class="na">attachStdErr</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
   <span class="na">name</span><span class="p">:</span> <span class="s2">"Jeff"</span><span class="p">,</span>
@@ -310,18 +438,18 @@ Every command in the student environment, aside from creating, updating, removin
 
 <aside class = "warning">Using updateVm on the labVm may result in unexpected behavior!</aside>
 
-<h2 id="env-removevm">Env.removeVm()</h2>
+<h3 id="env-removevm">Env.removeVm()</h3>
 <pre class="highlight javascript"><code><span class="nx">env</span><span class="p">.</span><span class="nx">start</span><span class="p">()</span>
   <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">env</span><span class="p">.</span><span class="nx">removeVm</span><span class="p">(</span><span class="s2">"Jeff"</span><span class="p">));</span>
 </code></pre>
 
 <p>Removes any virtual machine except the labVm. It is suggested that you use the removeVm call to remove virtual machines after they&rsquo;ll no longer be used to save resources. All virtual machines are terminated after a pre-determined countdown or when the student completes the lab.</p>
 
-          <h1 id="student-api">Student API</h1>
+<h2 id="accessing-student-data">Accessing Student Data</h2>
 
-<p>The Student API allows you to set task grades and get/set data for each students&rsquo; labs and tasks and give feedback to students in real time, after they submit their progress</p>
+<p>Inside of the functions described in the LabFile, you are given access to a Student object, which allows you to save data to the Users&rsquo; account, provide the user feedback, and save grades for the user.</p>
 
-<h2 id="student-feedback">Student.feedback()</h2>
+<h3 id="student-feedback">Student.feedback()</h3>
 <pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">md</span> <span class="o">=</span> <span class="err">`</span>
   <span class="err">#</span> <span class="nx">This</span> <span class="nx">is</span> <span class="nx">an</span> <span class="nx">example</span> <span class="nx">feedback</span> <span class="nx">MD</span>
   <span class="err">##</span> <span class="nx">It</span> <span class="nx">works</span> <span class="k">in</span> <span class="nx">full</span> <span class="nx">markdown</span>
@@ -333,19 +461,19 @@ Every command in the student environment, aside from creating, updating, removin
 
 <p>Shows the feedback markdown provided to the student below the original task markdown once the verifier function runs. It is recommended that this is only called in the verifier function.</p>
 
-<h2 id="student-setgrade">Student.setGrade()</h2>
+<h3 id="student-setgrade">Student.setGrade()</h3>
 <pre class="highlight javascript"><code><span class="nx">student</span><span class="p">.</span><span class="nx">setGrade</span><span class="p">(</span><span class="mi">3</span><span class="p">,[</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">])</span>
 </code></pre>
 
 <p>Sets the grade of the student for a specific task to the given tuple. Takes two parameters, taskNo, gradeTuple. Grade is set to tuple[0] out of tuple[1]</p>
 
-<h2 id="student-incrementgrade">Student.incrementGrade()</h2>
+<h3 id="student-incrementgrade">Student.incrementGrade()</h3>
 <pre class="highlight javascript"><code><span class="nx">student</span><span class="p">.</span><span class="nx">incrementGrade</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">);</span>
 </code></pre>
 
 <p>increments the grade of the student for a specific task by the given number of points</p>
 
-<h2 id="student-gettaskdata">Student.getTaskData()</h2>
+<h3 id="student-gettaskdata">Student.getTaskData()</h3>
 <pre class="highlight javascript"><code><span class="nx">env</span><span class="p">.</span><span class="nx">start</span><span class="p">()</span>
   <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">student</span><span class="p">.</span><span class="nx">getTaskData</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
   <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">){</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">data</span><span class="p">)});</span>
@@ -353,13 +481,13 @@ Every command in the student environment, aside from creating, updating, removin
 
 <p>Like env functions, student.getTaskData can only be called as part of a chain starting with an env.init() or env.start() call. It is a promise based function that returns a promise that either resolves with the data or rejects. For non-corrupt databases, rejecting should not be an issue. The call takes as a parameter the index -from 1- for which the data is asked.</p>
 
-<h2 id="student-settaskdata">Student.setTaskData()</h2>
+<h3 id="student-settaskdata">Student.setTaskData()</h3>
 <pre class="highlight javascript"><code><span class="nx">student</span><span class="p">.</span><span class="nx">setTaskData</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="nx">data</span><span class="p">);</span>
 </code></pre>
 
-<p>asynchronously sets the task data to the data provided. The first argument provided in the call is the task number -starting from 1- for the task to modify. </p>
+<p>asynchronously sets the task data to the data provided. The first argument provided in the call is the task number -starting from 1- for the task to modify.</p>
 
-<h2 id="student-getlabdata">Student.getLabData()</h2>
+<h3 id="student-getlabdata">Student.getLabData()</h3>
 <pre class="highlight javascript"><code><span class="nx">env</span><span class="p">.</span><span class="nx">start</span><span class="p">()</span>
   <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">student</span><span class="p">.</span><span class="nx">getLabData</span><span class="p">())</span>
   <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">){</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">});</span>
@@ -367,11 +495,13 @@ Every command in the student environment, aside from creating, updating, removin
 
 <p>Like env functions, student.getLabData can only be called as part of a chain starting with an env.init() or env.start() call. It is a promise based function that returns a promise which either resolves with the lab data or rejects. For non-corrupt databases, rejecting should not be an issue.</p>
 
-<h2 id="student-setlabdata">Student.setLabData()</h2>
+<h3 id="student-setlabdata">Student.setLabData()</h3>
 <pre class="highlight javascript"><code><span class="nx">student</span><span class="p">.</span><span class="nx">setLabData</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
 </code></pre>
 
 <p>Asynchronously sets the lab data to the data provided.</p>
+
+          <h1 id="troubleshooting">Troubleshooting</h1>
 
       </div>
       <div class="dark-box">
