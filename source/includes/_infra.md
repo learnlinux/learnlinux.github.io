@@ -9,7 +9,7 @@ Ansible Tower is a popular platform for automating server provisioning and manag
 http://docs.ansible.com/ansible/tower.html  
 
 ### MongoDB
-TuxLab relies on an external MongoDB Database to store user data, labs, and grades. This is not automatically setup by the TuxLab installer, because there are simply too many possible configurations to consider.  If you are looking for a test installation, we have found MongoLabs’ free hosted option to be a solid choice, however, it is not redundant, nor speedy enough to handle the requests for the application as a whole.  Instead, you should create your own MongoDB instance within AWS, using CloudForms to automate the scaling process.
+TuxLab relies on an external MongoDB Database to store user data, labs, and grades. This is not automatically setup by the TuxLab installer, because there are simply too many possible configurations to consider.  If you are looking for a test installation, we have found [MongoLabs’ free hosted option](https://mlab.com/) to be a solid choice, however, it is not redundant, nor speedy enough to handle the requests for the application as a whole.  Instead, you should create your own [MongoDB instance within AWS](http://docs.aws.amazon.com/quickstart/latest/mongodb/welcome.html), using CloudForms to automate the scaling process.
 
 In considering the size of your MongoDB cluster, it is important to consider that TuxLab relies on the Meteor Framework, which relies heavily on direct database reads from MongoDB, which we will discuss further in the next sub-section.
 

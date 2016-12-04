@@ -3,7 +3,7 @@ TuxLab uses Ansible to automate the installation process, which makes TuxLab com
 
 ## AWS
 ### Create an AWS Account
-In order to provision instances on AWS, you will need to create an AWS Account.  Students and instructors are eligible to receive free credits for AWS via their University, if you are looking to try out TuxLab without an initial cost.  To register, simply complete the form on AWS’ website:
+In order to provision instances on AWS, you will need to create an AWS Account.  Students and instructors are eligible to receive free credits for AWS via their University, if you are looking to try out TuxLab without an initial cost.  To register, simply [complete the form](https://aws.amazon.com/) on AWS’ website:
 ![Signup for AWS](images/aws/aws_signup.png)
 
 <aside class="notice">
@@ -25,12 +25,12 @@ And finally, choose to download the key file.  We will use this later in running
 
 ## Ansible Tower
 ### Obtain License Key
-In addition to the TuxLab server applications, the installer will install Ansible Tower, a tool used to automatically scale, provision and check the health of the TuxLab service.  Ansible Tower is an open source product, however it requires a license for updating, support, and ease of operation.  All users are entitled to a free Ansible Tower license for up to ten nodes (which is substantially larger than what is needed of most TuxLab installations). First, complete the registration online:
+In addition to the TuxLab server applications, the installer will install Ansible Tower, a tool used to automatically scale, provision and check the health of the TuxLab service.  Ansible Tower is an open source product, however it requires a license for updating, support, and ease of operation.  All users are entitled to a free Ansible Tower license for up to ten nodes (which is substantially larger than what is needed of most TuxLab installations). First, [complete the registration](https://www.ansible.com/license) online:
 
 ![Ansible Tower Keys](images/aws/tower_signup.png)
 
 ### Accept EULA
-You will then be emailed a license key, which is simply a JSON file.  You need to add a property; `"eula_accepted" : true`, to this file, confirming that you have read the End User License Agreement.  Save this file for later use.
+You will then be emailed a license key, which is simply a JSON string (you will also recieve an email containing a tarball.  Ignore this.).  You need to add a property; `"eula_accepted" : true`, to this file, confirming that you have read the End User License Agreement.  Save this file for later use.
 
 ## Setup Ansible
 Install Ansible and the prerequisites as explained earlier in the Development Installation section.
@@ -39,7 +39,7 @@ In addition, you need to install the boto package, which is used for interfacing
 `pip install boto`.
 
 ## Setup MongoDB
-TuxLab relies on an external installation of MongoDB to store application data.  There are a number of ways to setup MongoDB, some of which are outlined in our later section on the Mongo component of TuxLab.  Prior to proceeding, it is important to make note of your MongoDB URL and authentication details, and insert them into the appropriate variable in the next step.
+TuxLab relies on an external installation of MongoDB to store application data.  There are a number of ways to setup MongoDB, some of which are outlined in our prior section on the Mongo component of TuxLab.  Before proceeding, it is important to make note of your MongoDB URL and authentication details, and insert them into the appropriate variable in the next step.
 
 ## Configuring TuxLab
 Prior to running the installation script, it is important that you review and edit the configuration settings.  These settings are outlined in detail in the configuration section of the documentation.
@@ -49,7 +49,7 @@ In setting up each server, Ansible automatically pulls the configuration details
 </aside>
 
 ## Installing TuxLab
-Run the following command, substituting the AWS_ACCESS_KEY_ID and the AWS_SECRET_ACCESS_KEY with the values you downloaded previously in the AWS keyfile:
+Run the following command in the `tuxlab-infra` repository, substituting the AWS_ACCESS_KEY_ID and the AWS_SECRET_ACCESS_KEY with the values you downloaded previously in the AWS keyfile:
 
 `export AWS_ACCESS_KEY_ID=XXXXXXXXXXXXXX`<br>
 `export AWS_SECRET_ACCESS_KEY=XXXXXXXXXXXXXXXXXXXX`<br>

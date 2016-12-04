@@ -132,7 +132,7 @@
 
 <h3 id="mongodb">MongoDB</h3>
 
-<p>TuxLab relies on an external MongoDB Database to store user data, labs, and grades. This is not automatically setup by the TuxLab installer, because there are simply too many possible configurations to consider.  If you are looking for a test installation, we have found MongoLabs’ free hosted option to be a solid choice, however, it is not redundant, nor speedy enough to handle the requests for the application as a whole.  Instead, you should create your own MongoDB instance within AWS, using CloudForms to automate the scaling process.</p>
+<p>TuxLab relies on an external MongoDB Database to store user data, labs, and grades. This is not automatically setup by the TuxLab installer, because there are simply too many possible configurations to consider.  If you are looking for a test installation, we have found <a href="https://mlab.com/">MongoLabs’ free hosted option</a> to be a solid choice, however, it is not redundant, nor speedy enough to handle the requests for the application as a whole.  Instead, you should create your own <a href="http://docs.aws.amazon.com/quickstart/latest/mongodb/welcome.html">MongoDB instance within AWS</a>, using CloudForms to automate the scaling process.</p>
 
 <p>In considering the size of your MongoDB cluster, it is important to consider that TuxLab relies on the Meteor Framework, which relies heavily on direct database reads from MongoDB, which we will discuss further in the next sub-section.</p>
 
@@ -196,7 +196,7 @@
 
 <h3 id="create-an-aws-account">Create an AWS Account</h3>
 
-<p>In order to provision instances on AWS, you will need to create an AWS Account.  Students and instructors are eligible to receive free credits for AWS via their University, if you are looking to try out TuxLab without an initial cost.  To register, simply complete the form on AWS’ website:
+<p>In order to provision instances on AWS, you will need to create an AWS Account.  Students and instructors are eligible to receive free credits for AWS via their University, if you are looking to try out TuxLab without an initial cost.  To register, simply <a href="https://aws.amazon.com/">complete the form</a> on AWS’ website:
 <img alt="Signup for AWS" src="images/aws/aws_signup.png" /></p>
 
 <aside class="notice">
@@ -221,13 +221,13 @@ Academic users (Students, Faculty, Administrators) are eligible to receive credi
 
 <h3 id="obtain-license-key">Obtain License Key</h3>
 
-<p>In addition to the TuxLab server applications, the installer will install Ansible Tower, a tool used to automatically scale, provision and check the health of the TuxLab service.  Ansible Tower is an open source product, however it requires a license for updating, support, and ease of operation.  All users are entitled to a free Ansible Tower license for up to ten nodes (which is substantially larger than what is needed of most TuxLab installations). First, complete the registration online:</p>
+<p>In addition to the TuxLab server applications, the installer will install Ansible Tower, a tool used to automatically scale, provision and check the health of the TuxLab service.  Ansible Tower is an open source product, however it requires a license for updating, support, and ease of operation.  All users are entitled to a free Ansible Tower license for up to ten nodes (which is substantially larger than what is needed of most TuxLab installations). First, <a href="https://www.ansible.com/license">complete the registration</a> online:</p>
 
 <p><img alt="Ansible Tower Keys" src="images/aws/tower_signup.png" /></p>
 
 <h3 id="accept-eula">Accept EULA</h3>
 
-<p>You will then be emailed a license key, which is simply a JSON file.  You need to add a property; <code class="prettyprint">&quot;eula_accepted&quot; : true</code>, to this file, confirming that you have read the End User License Agreement.  Save this file for later use.</p>
+<p>You will then be emailed a license key, which is simply a JSON string (you will also recieve an email containing a tarball.  Ignore this.).  You need to add a property; <code class="prettyprint">&quot;eula_accepted&quot; : true</code>, to this file, confirming that you have read the End User License Agreement.  Save this file for later use.</p>
 
 <h2 id="setup-ansible">Setup Ansible</h2>
 
@@ -238,7 +238,7 @@ Academic users (Students, Faculty, Administrators) are eligible to receive credi
 
 <h2 id="setup-mongodb">Setup MongoDB</h2>
 
-<p>TuxLab relies on an external installation of MongoDB to store application data.  There are a number of ways to setup MongoDB, some of which are outlined in our later section on the Mongo component of TuxLab.  Prior to proceeding, it is important to make note of your MongoDB URL and authentication details, and insert them into the appropriate variable in the next step.</p>
+<p>TuxLab relies on an external installation of MongoDB to store application data.  There are a number of ways to setup MongoDB, some of which are outlined in our prior section on the Mongo component of TuxLab.  Before proceeding, it is important to make note of your MongoDB URL and authentication details, and insert them into the appropriate variable in the next step.</p>
 
 <h2 id="configuring-tuxlab">Configuring TuxLab</h2>
 
@@ -250,7 +250,7 @@ In setting up each server, Ansible automatically pulls the configuration details
 
 <h2 id="installing-tuxlab">Installing TuxLab</h2>
 
-<p>Run the following command, substituting the AWS_ACCESS_KEY_ID and the AWS_SECRET_ACCESS_KEY with the values you downloaded previously in the AWS keyfile:</p>
+<p>Run the following command in the <code class="prettyprint">tuxlab-infra</code> repository, substituting the AWS_ACCESS_KEY_ID and the AWS_SECRET_ACCESS_KEY with the values you downloaded previously in the AWS keyfile:</p>
 
 <p><code class="prettyprint">export AWS_ACCESS_KEY_ID=XXXXXXXXXXXXXX</code><br>
 <code class="prettyprint">export AWS_SECRET_ACCESS_KEY=XXXXXXXXXXXXXXXXXXXX</code><br>
@@ -277,7 +277,7 @@ Alternatively, If you are using Amazon Route 53, you can use <a href="http://doc
 
 <h2 id="server-configuration">Server Configuration</h2>
 
-<p>All of the server settings are defined in config.yml in the root of the tuxlab-infra repository. As Ansible sets up each server, it downloads a copy of this file from the GIT_URL (defined below), so if you want these variable changes to propogate across servers (Required for AWS Installation, but not Development Enviornments), it is imperative that you fork the original tuxlab-infra repository (https://github.com/learnlinux/tuxlab-infra), and include this link as the GIT_URL.</p>
+<p>All of the server settings are defined in <code class="prettyprint">config.yml</code> in the root of the <code class="prettyprint">tuxlab-infra</code> repository. As Ansible sets up each server, it downloads a copy of this file from the GIT_URL (defined below), so if you want these variable changes to propogate across servers (Required for AWS Installation, but not Development Enviornments), it is imperative that you fork the original tuxlab-infra repository (https://github.com/learnlinux/tuxlab-infra), and include this link as the GIT_URL.</p>
 
 <p>Because the server configuration variables are critical to operation, you will likely need to change the majority of them before proceeding.  A guide to the various settings and options is printed below:</p>
 
@@ -285,7 +285,7 @@ Alternatively, If you are using Amazon Route 53, you can use <a href="http://doc
 
 <h2 id="application-configuration">Application Configuration</h2>
 
-<p>The application-specific settings are defined in a number of .json files in the tuxlab-app/private folder.  Unlike the server settings, in order for these to take effect, you need to create a forked repository for both Development and Production environments.  Be sure that in doing this, you update the APP_REPO_GIT or APP_REPO_BIN options in the server settings.</p>
+<p>The application-specific settings are defined in a number of .json files in the <code class="prettyprint">tuxlab-app/private</code> folder.  Unlike the server settings, in order for these to take effect, you need to create a forked repository for both Development and Production environments.  Be sure that in doing this, you update the APP_REPO_GIT or APP_REPO_BIN options in the server settings.</p>
 
 <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vRFna9Fy_ZXhZS0ZqJb3CM7zy17KBQvszEFFgC2vufTvb2F97DHFzQ1VnOEdzdQHe7UsXPPmdWujuYo/pubhtml?gid=0&amp;single=true&amp;widget=true&amp;headers=false" style="width:48%; height:500px; margin-left:10px;"></iframe>
 
