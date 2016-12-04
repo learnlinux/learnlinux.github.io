@@ -35,7 +35,8 @@ Finally, you should update your package list with the command `yum update`.
 ### Installing VirtualBox
 Before installing virtualBox, you need to pull the virtualBox repository for RHEL and CentOS, by going into your yum repos directory and downloading it:
 
-```cd /etc/yum.repos.d/
+```
+cd /etc/yum.repos.d/
 wget http://download.virtualbox.org/virtualbox/rpm/rhel/virtualbox.repo
 ```
 
@@ -56,6 +57,7 @@ And for version 5, run
 It does not appear that versions 4 or older are supported, so if you have an earlier version, you might have to work through a few things on your own. 
 
 To finish installing dependencies, run
+
 `yum install binutils gcc make patch libgomp glibc-headers glibc-devel kernel-headers kernel-devel dkms`
 
 <aside class="notice">
@@ -73,6 +75,7 @@ You should be able to download and install vagrant itself rather easily, by runn
 wget https://releases.hashicorp.com/vagrant/1.8.1/vagrant_1.8.1_x86_64.rpm
 sudo yum install vagrant_1.8.1_x86_64.rpm
 ```
+
 Once this is done, try running the command `vagrant`. If vagrant is properly installed, you should see information about how to use vagrant and available subcommands. You will need to use those subcommands to add plugins in order to proceed. To do this, run the command
 
 `vagrant plugin install vagrant-vbguest`
