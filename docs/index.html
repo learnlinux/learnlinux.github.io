@@ -203,7 +203,7 @@ BEFORE YOU PROCEED: You may enconter problems with ansible if you have a newer v
 
 <p><code class="prettyprint">rpm -Uvh http://dl.fedoraproject.org/pub/epel/5/i386/epel-release-5-4.noarch.rpm</code></p>
 
-<p>It does not appear that versions 4 or older are supported, so if you have an earlier version, you might have to work through a few things on your own. </p>
+<p>It does not appear that versions 4 or older are supported, so if you have an earlier version, you might have to work through a few things on your own.</p>
 
 <p>To finish installing dependencies, run</p>
 
@@ -249,7 +249,7 @@ Note: If you are using the PAE kernel, replace kernel-devel with kernel-PAE-deve
 
 <h3 id="setting-up-tuxlab">Setting Up TuxLab</h3>
 
-<p>Tuxlab’s infrastructure code is stored in a github repository. You don’t need to be very familiar with git to get the source, however. Just open a terminal, go to the directory you want to put the code in, and type </p>
+<p>Tuxlab’s infrastructure code is stored in a github repository. You don’t need to be very familiar with git to get the source, however. Just open a terminal, go to the directory you want to put the code in, and type</p>
 
 <p><code class="prettyprint">git clone https://github.com/learnlinux/tuxlab-infra.git</code></p>
 
@@ -257,7 +257,7 @@ Note: If you are using the PAE kernel, replace kernel-devel with kernel-PAE-deve
 
 <p><code class="prettyprint">vagrant up</code></p>
 
-<p>If you’ve installed all the prerequisite programs properly, this should automatically run tuxlab’s infrastructure. The process may take any amount of time from 15 minutes or so to over an hour, so it is recommended you have a power source and a strong internet connection when you run this. </p>
+<p>If you’ve installed all the prerequisite programs properly, this should automatically run tuxlab’s infrastructure. The process may take any amount of time from 15 minutes or so to over an hour, so it is recommended you have a power source and a strong internet connection when you run this.</p>
 
 <p>Congratulations! You are now running tuxlab’s infrastructure in a development environment!</p>
 
@@ -295,7 +295,7 @@ Findally, update your package repository using</p>
 
 <p><code class="prettyprint">dnf install binutils gcc make patch libgomp glibc-headers glibc-devel kernel-headers kernel-devel dkms</code></p>
 
-<p>for versions 22 or later, or </p>
+<p>for versions 22 or later, or</p>
 
 <p><code class="prettyprint">yum install binutils gcc make patch libgomp glibc-headers glibc-devel kernel-headers kernel-devel dkms</code></p>
 
@@ -303,68 +303,68 @@ Findally, update your package repository using</p>
 
 <aside class="notice">
 Note: If you are using the PAE kernel, replace kernel-devel with kernel-PAE-devel.
-<\aside>
+</aside>
 
-Now, you’re ready to install virtualBox via
+<p>Now, you’re ready to install virtualBox via</p>
 
-`yum install VirtualBox-5.1`
+<p><code class="prettyprint">yum install VirtualBox-5.1</code></p>
 
-### Installing Vagrant
+<h3 id="installing-vagrant">Installing Vagrant</h3>
 
-For versions 22 or later, vagrant can be installed via
+<p>For versions 22 or later, vagrant can be installed via</p>
 
-`dnf install vagrant`
+<p><code class="prettyprint">dnf install vagrant</code></p>
 
-If you’re using an earlier version of fedora, use
+<p>If you’re using an earlier version of fedora, use</p>
 
-`yum install vagrant`
+<p><code class="prettyprint">yum install vagrant</code></p>
 
-Once this is done, try running the command `vagrant`. If vagrant is properly installed, you should see information about how to use vagrant and available subcommands. You will need to use those subcommands to add plugins in order to proceed. To do this, run the command
+<p>Once this is done, try running the command <code class="prettyprint">vagrant</code>. If vagrant is properly installed, you should see information about how to use vagrant and available subcommands. You will need to use those subcommands to add plugins in order to proceed. To do this, run the command</p>
 
-`vagrant plugin install vagrant-vbguest`
+<p><code class="prettyprint">vagrant plugin install vagrant-vbguest</code></p>
 
-If this installs correctly you should see a message similar to
+<p>If this installs correctly you should see a message similar to</p>
 
-`Installed the plugin &lsquo;vagrant-vbguest (X.X.X)&rsquo;!`
+<p><code class="prettyprint">Installed the plugin &#39;vagrant-vbguest (X.X.X)&#39;!</code></p>
 
-### Installing Ansible
+<h3 id="installing-ansible">Installing Ansible</h3>
 
-Ansible can be installed with your package manager with 
+<p>Ansible can be installed with your package manager with</p>
 
-`dnf install ansible`
+<p><code class="prettyprint">dnf install ansible</code></p>
 
-Or if you’re using version 21 or older, with
+<p>Or if you’re using version 21 or older, with</p>
 
-`yum install ansible`
+<p><code class="prettyprint">yum install ansible</code></p>
 
-### Installing SSHPass
+<h3 id="installing-sshpass">Installing SSHPass</h3>
 
-To install SSHPass, you will need to download and build from the source code. The source can be found <a href="https://sourceforge.net/projects/sshpass/">here</a>. Once you download the source from this site, extract the files and cd into the newly extracted directory. Then run
+<p>To install SSHPass, you will need to download and build from the source code. The source can be found <a href="https://sourceforge.net/projects/sshpass/">here</a>. Once you download the source from this site, extract the files and cd into the newly extracted directory. Then run</p>
 
-`./configure`<br>
-`sudo make install`
+<p><code class="prettyprint">./configure</code><br>
+<code class="prettyprint">sudo make install</code></p>
 
-You’re now ready to clone our repo and get started.
+<p>You’re now ready to clone our repo and get started.</p>
 
-### Setting Up TuxLab
+<h3 id="setting-up-tuxlab">Setting Up TuxLab</h3>
 
-Tuxlab’s infrastructure code is stored in a github repository. You don’t need to be very familiar with git to get the source, however. Just open a terminal, go to the directory you want to put the code in, and type 
+<p>Tuxlab’s infrastructure code is stored in a github repository. You don’t need to be very familiar with git to get the source, however. Just open a terminal, go to the directory you want to put the code in, and type</p>
 
-`git clone https://github.com/learnlinux/tuxlab-infra.git`
+<p><code class="prettyprint">git clone https://github.com/learnlinux/tuxlab-infra.git</code></p>
 
-Once this is done, cd into the newly created `tuxlab-infra` directory. Then, enter the command
+<p>Once this is done, cd into the newly created <code class="prettyprint">tuxlab-infra</code> directory. Then, enter the command</p>
 
-`vagrant up`
+<p><code class="prettyprint">vagrant up</code></p>
 
-If you’ve installed all the prerequisite programs properly, this should automatically run tuxlab’s infrastructure. The process may take any amount of time from 15 minutes or so to over an hour, so it is recommended you have a power source and a strong internet connection when you run this. 
+<p>If you’ve installed all the prerequisite programs properly, this should automatically run tuxlab’s infrastructure. The process may take any amount of time from 15 minutes or so to over an hour, so it is recommended you have a power source and a strong internet connection when you run this.</p>
 
-Congratulations! You are now running tuxlab’s infrastructure in a development environment!
+<p>Congratulations! You are now running tuxlab’s infrastructure in a development environment!</p>
 
-## Ubuntu / Debian
+<h2 id="ubuntu-debian">Ubuntu / Debian</h2>
 
-### Before you Begin
+<h3 id="before-you-begin">Before you Begin</h3>
 
-In order to ensure the installation process for your prerequisite programs goes smoothly, you should first make sure your package lists and installed programs are all up-to-date.  Run the following in Bash:
+<p>In order to ensure the installation process for your prerequisite programs goes smoothly, you should first make sure your package lists and installed programs are all up-to-date.  Run the following in Bash:</p>
 
 <aside class="notice">
     Note: running this second command will update all packages on your machine. This may include things like web browsers, so just keep in mind that running this second command may update more programs than are absolutely necessary. If you want to avoid this, it should be okay to omit the command.
@@ -412,7 +412,7 @@ In order to ensure the installation process for your prerequisite programs goes 
 
 <h3 id="setting-up-tuxlab">Setting Up TuxLab</h3>
 
-<p>Tuxlab’s infrastructure code is stored in a github repository. You don’t need to be very familiar with git to get the source, however. Just open a terminal, go to the directory you want to put the code in, and type </p>
+<p>Tuxlab’s infrastructure code is stored in a github repository. You don’t need to be very familiar with git to get the source, however. Just open a terminal, go to the directory you want to put the code in, and type</p>
 
 <p><code class="prettyprint">git clone https://github.com/learnlinux/tuxlab-infra.git</code></p>
 
@@ -420,7 +420,7 @@ In order to ensure the installation process for your prerequisite programs goes 
 
 <p><code class="prettyprint">vagrant up</code></p>
 
-<p>If you’ve installed all the prerequisite programs properly, this should automatically run tuxlab’s infrastructure. The process may take any amount of time from 15 minutes or so to over an hour, so it is recommended you have a power source and a strong internet connection when you run this. </p>
+<p>If you’ve installed all the prerequisite programs properly, this should automatically run tuxlab’s infrastructure. The process may take any amount of time from 15 minutes or so to over an hour, so it is recommended you have a power source and a strong internet connection when you run this.</p>
 
 <p>Congratulations! You are now running tuxlab’s infrastructure in a development environment!</p>
 
@@ -453,7 +453,7 @@ In order to ensure the installation process for your prerequisite programs goes 
 
 <h3 id="setting-up-tuxlab">Setting Up TuxLab</h3>
 
-<p>Tuxlab’s infrastructure code is stored in a github repository. You don’t need to be very familiar with git to get the source, however. Just open a terminal, go to the directory you want to put the code in, and type </p>
+<p>Tuxlab’s infrastructure code is stored in a github repository. You don’t need to be very familiar with git to get the source, however. Just open a terminal, go to the directory you want to put the code in, and type</p>
 
 <p><code class="prettyprint">git clone https://github.com/learnlinux/tuxlab-infra.git</code></p>
 
@@ -461,7 +461,7 @@ In order to ensure the installation process for your prerequisite programs goes 
 
 <p><code class="prettyprint">vagrant up</code></p>
 
-<p>If you’ve installed all the prerequisite programs properly, this should automatically run tuxlab’s infrastructure. The process may take any amount of time from 15 minutes or so to over an hour, so it is recommended you have a power source and a strong internet connection when you run this. </p>
+<p>If you’ve installed all the prerequisite programs properly, this should automatically run tuxlab’s infrastructure. The process may take any amount of time from 15 minutes or so to over an hour, so it is recommended you have a power source and a strong internet connection when you run this.</p>
 
 <p>Congratulations! You are now running tuxlab’s infrastructure in a development environment!</p>
 
@@ -516,7 +516,7 @@ WARNING: Many different libraries TuxLab uses do not support OS X. It is therefo
 
 <h3 id="setting-up-tuxlab">Setting Up TuxLab</h3>
 
-<p>Tuxlab’s infrastructure code is stored in a github repository. You don’t need to be very familiar with git to get the source, however. Just open a terminal, go to the directory you want to put the code in, and type </p>
+<p>Tuxlab’s infrastructure code is stored in a github repository. You don’t need to be very familiar with git to get the source, however. Just open a terminal, go to the directory you want to put the code in, and type</p>
 
 <p><code class="prettyprint">git clone https://github.com/learnlinux/tuxlab-infra.git</code></p>
 
@@ -524,7 +524,7 @@ WARNING: Many different libraries TuxLab uses do not support OS X. It is therefo
 
 <p><code class="prettyprint">vagrant up</code></p>
 
-<p>If you’ve installed all the prerequisite programs properly, this should automatically run tuxlab’s infrastructure. The process may take any amount of time from 15 minutes or so to over an hour, so it is recommended you have a power source and a strong internet connection when you run this. </p>
+<p>If you’ve installed all the prerequisite programs properly, this should automatically run tuxlab’s infrastructure. The process may take any amount of time from 15 minutes or so to over an hour, so it is recommended you have a power source and a strong internet connection when you run this.</p>
 
 <p>Congratulations! You are now running tuxlab’s infrastructure in a development environment!</p>
 
