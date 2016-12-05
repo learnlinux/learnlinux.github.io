@@ -185,9 +185,9 @@ BEFORE YOU PROCEED: You may enconter problems with ansible if you have a newer v
 <h3 id="installing-virtualbox">Installing VirtualBox</h3>
 
 <p>Before installing virtualBox, you need to pull the virtualBox repository for RHEL and CentOS, by going into your yum repos directory and downloading it:</p>
-<pre class="highlight plaintext"><code>cd /etc/yum.repos.d/
-wget http://download.virtualbox.org/virtualbox/rpm/rhel/virtualbox.repo
-</code></pre>
+
+<p><code class="prettyprint">cd /etc/yum.repos.d/</code><br>
+<code class="prettyprint">wget http://download.virtualbox.org/virtualbox/rpm/rhel/virtualbox.repo</code></p>
 
 <p>Once this is done, you need to install the right dependency packages for virtualbox. The dependencies are bundled together for convenience. However, the bundle you need to use depends on the OS version you are running.</p>
 
@@ -220,10 +220,9 @@ Note: If you are using the PAE kernel, replace kernel-devel with kernel-PAE-deve
 
 <p>You should be able to download and install vagrant itself rather easily, by running</p>
 
-<p><code class="prettyprint">cd ~
-wget https://releases.hashicorp.com/vagrant/1.8.1/vagrant_1.8.1_x86_64.rpm
-sudo yum install vagrant_1.8.1_x86_64.rpm
-</code></p>
+<p><code class="prettyprint">cd ~</code><br>
+<code class="prettyprint">wget https://releases.hashicorp.com/vagrant/1.8.1/vagrant_1.8.1_x86_64.rpm</code><br>
+<code class="prettyprint">sudo yum install vagrant_1.8.1_x86_64.rpm</code><br></p>
 
 <p>Once this is done, try running the command <code class="prettyprint">vagrant</code>. If vagrant is properly installed, you should see information about how to use vagrant and available subcommands. You will need to use those subcommands to add plugins in order to proceed. To do this, run the command</p>
 
@@ -233,17 +232,18 @@ sudo yum install vagrant_1.8.1_x86_64.rpm
 
 <p><code class="prettyprint">Installed the plugin &#39;vagrant-vbguest (X.X.X)&#39;!</code></p>
 
-<h3 id="ansible">Ansible</h3>
+<h3 id="installing-ansible">Installing Ansible</h3>
 
 <p>Ansible can be downloaded using your package manager without downloading any additional package lists. Just run</p>
 
 <p><code class="prettyprint">sudo yum install ansible</code></p>
 
-<h3 id="sshpass">SSHPass</h3>
+<h3 id="installing-sshpass">Installing SSHPass</h3>
 
 <p>To install SSHPass, you will need to download and build from the source code. The source can be found <a href="https://sourceforge.net/projects/sshpass/">here</a>. Once you download the source from this site, extract the files and cd into the newly extracted directory. Then run</p>
-<pre class="highlight plaintext"><code>sudo make install
-</code></pre>
+
+<p><code class="prettyprint">./configure</code><br>
+<code class="prettyprint">sudo make install</code></p>
 
 <p>You’re now ready to clone our repo and get started.</p>
 
@@ -263,19 +263,115 @@ sudo yum install vagrant_1.8.1_x86_64.rpm
 
 <h2 id="fedora">Fedora</h2>
 
-<h2 id="ubuntu-debian">Ubuntu / Debian</h2>
+<h3 id="before-you-begin">Before You Begin</h3>
 
-<h3 id="before-you-begin">Before you Begin</h3>
+<aside class="notice">
+Note: It is recommended that you Fedora version 22 or later. It should be possible with earlier versions, but you may encounter some unexpected problems with vagrant.
+</aside>
 
-<p>In order to ensure the installation process for your prerequisite programs goes smoothly, you should first make sure your package lists and installed programs are all up-to-date.  Run the following in Bash:</p>
+<p>It is recommended that you ensure you are running the latest kernel version of your OS. To check your kernel version, you should run</p>
+
+<p><code class="prettyprint">uname -r</code></p>
+
+<p>To make sure this is the latest version, you can check it against the list of updated kernel versions found <a href="https://en.wikipedia.org/wiki/Fedora_version_history#Version_history">here</a>. You should also make sure you are the sudo user with the command <code class="prettyprint">sudo -i</code>.
+Findally, update your package repository using</p>
+
+<p><code class="prettyprint">dnf update</code></p>
+
+<p>For versions 22 and above, or</p>
+
+<p><code class="prettyprint">yum update</code></p>
+
+<p>For versions 21 and earlier.</p>
+
+<h3 id="installing-virtualbox">Installing VirtualBox</h3>
+
+<p>Before installing virtualBox, you need to pull the virtualBox repository for RHEL and CentOS, by going into your yum repos directory and downloading it:</p>
+
+<p><code class="prettyprint">cd /etc/yum.repos.d/</code><br>
+<code class="prettyprint">wget http://download.virtualbox.org/virtualbox/rpm/fedora/virtualbox.repo</code></p>
+
+<p>Once this is done, you need to install the right dependency packages for virtualbox. You can do this using</p>
+
+<p><code class="prettyprint">dnf install binutils gcc make patch libgomp glibc-headers glibc-devel kernel-headers kernel-devel dkms</code></p>
+
+<p>for versions 22 or later, or </p>
+
+<p><code class="prettyprint">yum install binutils gcc make patch libgomp glibc-headers glibc-devel kernel-headers kernel-devel dkms</code></p>
+
+<p>for versions 21 or earlier.</p>
+
+<aside class="notice">
+Note: If you are using the PAE kernel, replace kernel-devel with kernel-PAE-devel.
+<\aside>
+
+Now, you’re ready to install virtualBox via
+
+`yum install VirtualBox-5.1`
+
+### Installing Vagrant
+
+For versions 22 or later, vagrant can be installed via
+
+`dnf install vagrant`
+
+If you’re using an earlier version of fedora, use
+
+`yum install vagrant`
+
+Once this is done, try running the command `vagrant`. If vagrant is properly installed, you should see information about how to use vagrant and available subcommands. You will need to use those subcommands to add plugins in order to proceed. To do this, run the command
+
+`vagrant plugin install vagrant-vbguest`
+
+If this installs correctly you should see a message similar to
+
+`Installed the plugin &lsquo;vagrant-vbguest (X.X.X)&rsquo;!`
+
+### Installing Ansible
+
+Ansible can be installed with your package manager with 
+
+`dnf install ansible`
+
+Or if you’re using version 21 or older, with
+
+`yum install ansible`
+
+### Installing SSHPass
+
+To install SSHPass, you will need to download and build from the source code. The source can be found <a href="https://sourceforge.net/projects/sshpass/">here</a>. Once you download the source from this site, extract the files and cd into the newly extracted directory. Then run
+
+`./configure`<br>
+`sudo make install`
+
+You’re now ready to clone our repo and get started.
+
+### Setting Up TuxLab
+
+Tuxlab’s infrastructure code is stored in a github repository. You don’t need to be very familiar with git to get the source, however. Just open a terminal, go to the directory you want to put the code in, and type 
+
+`git clone https://github.com/learnlinux/tuxlab-infra.git`
+
+Once this is done, cd into the newly created `tuxlab-infra` directory. Then, enter the command
+
+`vagrant up`
+
+If you’ve installed all the prerequisite programs properly, this should automatically run tuxlab’s infrastructure. The process may take any amount of time from 15 minutes or so to over an hour, so it is recommended you have a power source and a strong internet connection when you run this. 
+
+Congratulations! You are now running tuxlab’s infrastructure in a development environment!
+
+## Ubuntu / Debian
+
+### Before you Begin
+
+In order to ensure the installation process for your prerequisite programs goes smoothly, you should first make sure your package lists and installed programs are all up-to-date.  Run the following in Bash:
 
 <aside class="notice">
     Note: running this second command will update all packages on your machine. This may include things like web browsers, so just keep in mind that running this second command may update more programs than are absolutely necessary. If you want to avoid this, it should be okay to omit the command.
 </aside>
 
-<p><code class="prettyprint">sudo apt-get update
-sudo apt-get upgrade
-</code></p>
+<p><code class="prettyprint">sudo apt-get update</code><br>
+<code class="prettyprint">sudo apt-get upgrade</code></p>
 
 <h3 id="installing-virtualbox">Installing VirtualBox</h3>
 
@@ -301,13 +397,12 @@ sudo apt-get upgrade
 
 <p>Though ansible may not be available right away via <code class="prettyprint">apt-get</code>, ansible maintains a ppa which you can add in order to be able to install ansible using your package manager. The code to add the ppa and install ansible is as follows:</p>
 
-<p><code class="prettyprint">sudo apt-get install software-properties-common
-sudo apt-add-repository ppa:ansible/ansible
-sudo apt-get update
-sudo apt-get install ansible
-</code></p>
+<p><code class="prettyprint">sudo apt-get install software-properties-common</code><br>
+<code class="prettyprint">sudo apt-add-repository ppa:ansible/ansible</code><br>
+<code class="prettyprint">sudo apt-get update</code><br>
+<code class="prettyprint">sudo apt-get install ansible</code></p>
 
-<h3 id="sshpass">SSHPass</h3>
+<h3 id="installing-sshpass">Installing SSHPass</h3>
 
 <p>SSHPass, like vagrant and virtualbox, can be installed by ubuntu’s package manager. Just run the command</p>
 
@@ -339,11 +434,10 @@ sudo apt-get install ansible
 
 <p>Virtualbox, Vagrant, Ansible, and SSHPass can all be installed using pacman. Just run</p>
 
-<p><code class="prettyprint">sudo pacman -S virtualbox
-sudo pacman -S vagrant
-sudo pacman -S ansible
-sudo pacman -S sshpass
-</code></p>
+<p><code class="prettyprint">sudo pacman -S virtualbox</code><br>
+<code class="prettyprint">sudo pacman -S vagrant</code><br>
+<code class="prettyprint">sudo pacman -S ansible</code><br>
+<code class="prettyprint">sudo pacman -S sshpass</code></p>
 
 <h3 id="installing-vagrant-plugins">Installing Vagrant Plugins</h3>
 
@@ -372,6 +466,67 @@ sudo pacman -S sshpass
 <p>Congratulations! You are now running tuxlab’s infrastructure in a development environment!</p>
 
 <h2 id="os-x">OS X</h2>
+
+<h3 id="before-you-begin">Before You Begin</h3>
+
+<aside class="notice">
+WARNING: Many different libraries TuxLab uses do not support OS X. It is therefore not recommended that you use it.
+</aside>
+
+<p>Make sure you have xcode installed by running</p>
+
+<p><code class="prettyprint">sudo xcode-select --install</code></p>
+
+<h3 id="installing-virtualbox">Installing VirtualBox</h3>
+
+<p>VirtualBox for OS X ships in a dmg file, which can be found <a href="https://www.virtualbox.org/wiki/Downloads">here</a>. To mount this, locate the .dmg file, then run the command</p>
+
+<p><code class="prettyprint">hdiutil attach /path/to/VirtualBox-xyz.dmg</code></p>
+
+<p>Once the file is mounted, open a terminal and run</p>
+
+<p><code class="prettyprint">sudo installer -pkg /Volumes/VirtualBox/VirtualBox.pkg -target /Volumes/Macintosh\ HD</code></p>
+
+<p>This should install virtualBox on your machine.</p>
+
+<h3 id="installing-vagrant">Installing Vagrant</h3>
+
+<p>Vagrant for OS X ships in a dmg file, which can be found <a href="https://www.vagrantup.com/downloads.html">here</a>. Select the appropriate file to download. Once downloaded, you can install it simply by locating the file, and dragging it to your applications folder.</p>
+
+<h3 id="installing-ansible">Installing Ansible</h3>
+
+<p>Installing ansible on OS X can be a bit tricky. We reccomend using <a href="http://binarynature.blogspot.com/2016/01/install-ansible-on-os-x-el-capitan_30.html">this installation guide</a>.</p>
+
+<p>Once this is done, try running the command <code class="prettyprint">vagrant</code>. If vagrant is properly installed, you should see information about how to use vagrant and available subcommands. You will need to use those subcommands to add plugins to vagrant in order to proceed. To do this, run the command</p>
+
+<p><code class="prettyprint">vagrant plugin install vagrant-vbguest</code></p>
+
+<p>If this installs correctly you should see a message similar to</p>
+
+<p><code class="prettyprint">Installed the plugin &#39;vagrant-vbguest (X.X.X)&#39;!</code></p>
+
+<h3 id="sshpass">SSHPass</h3>
+
+<p>To install SSHPass, you will need to download and build from the source code. The source can be found <a href="https://sourceforge.net/projects/sshpass/">here</a>. Once you download the source from this site, extract the files and cd into the newly extracted directory. Then run</p>
+
+<p><code class="prettyprint">./configure</code><br>
+<code class="prettyprint">sudo make install</code></p>
+
+<p>You’re now ready to clone our repo and get started.</p>
+
+<h3 id="setting-up-tuxlab">Setting Up TuxLab</h3>
+
+<p>Tuxlab’s infrastructure code is stored in a github repository. You don’t need to be very familiar with git to get the source, however. Just open a terminal, go to the directory you want to put the code in, and type </p>
+
+<p><code class="prettyprint">git clone https://github.com/learnlinux/tuxlab-infra.git</code></p>
+
+<p>Once this is done, cd into the newly created <code class="prettyprint">tuxlab-infra</code> directory. Then, enter the command</p>
+
+<p><code class="prettyprint">vagrant up</code></p>
+
+<p>If you’ve installed all the prerequisite programs properly, this should automatically run tuxlab’s infrastructure. The process may take any amount of time from 15 minutes or so to over an hour, so it is recommended you have a power source and a strong internet connection when you run this. </p>
+
+<p>Congratulations! You are now running tuxlab’s infrastructure in a development environment!</p>
 
           <h1 id="production-installation">Production Installation</h1>
 
