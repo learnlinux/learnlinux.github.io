@@ -10,7 +10,7 @@ In order to set up TuxLab using vagrant, you must first install several framewor
  * Vagrant Guests Plugin
  * Ansible (Version 2.3 or above)
  * SSHPass
- 
+
 <aside class="notice">
 BEFORE YOU PROCEED: You may enconter problems with ansible if you have a newer version of ruby installed on your machine. Version 2.2.4 should work best well. If you have ruby installed, you should roll back (or update) to this version using `sudo gem update --system 2.2.4`
 </aside>
@@ -53,7 +53,7 @@ And for version 5, run
 
 `rpm -Uvh http://dl.fedoraproject.org/pub/epel/5/i386/epel-release-5-4.noarch.rpm`
 
-It does not appear that versions 4 or older are supported, so if you have an earlier version, you might have to work through a few things on your own. 
+It does not appear that versions 4 or older are supported, so if you have an earlier version, you might have to work through a few things on your own.
 
 To finish installing dependencies, run
 
@@ -82,7 +82,7 @@ Once this is done, try running the command `vagrant`. If vagrant is properly ins
 If this installs correctly you should see a message similar to
 
 `Installed the plugin 'vagrant-vbguest (X.X.X)'!`
-		
+
 ### Installing Ansible
 
 Ansible can be downloaded using your package manager without downloading any additional package lists. Just run
@@ -99,7 +99,7 @@ To install SSHPass, you will need to download and build from the source code. Th
 You’re now ready to clone our repo and get started.
 
 ### Setting Up TuxLab
-Tuxlab’s infrastructure code is stored in a github repository. You don’t need to be very familiar with git to get the source, however. Just open a terminal, go to the directory you want to put the code in, and type 
+Tuxlab’s infrastructure code is stored in a github repository. You don’t need to be very familiar with git to get the source, however. Just open a terminal, go to the directory you want to put the code in, and type
 
 `git clone https://github.com/learnlinux/tuxlab-infra.git`
 
@@ -107,7 +107,7 @@ Once this is done, cd into the newly created `tuxlab-infra` directory. Then run 
 
 `vagrant up`
 
-If you’ve installed all the prerequisite programs properly, this should automatically run tuxlab’s infrastructure. The process may take any amount of time from 15 minutes or so to over an hour, so it is recommended you have a power source and a strong internet connection when you run this. 
+If you’ve installed all the prerequisite programs properly, this should automatically run tuxlab’s infrastructure. The process may take any amount of time from 15 minutes or so to over an hour, so it is recommended you have a power source and a strong internet connection when you run this.
 
 Congratulations! You are now running tuxlab’s infrastructure in a development environment!
 
@@ -145,7 +145,7 @@ Once this is done, you need to install the right dependency packages for virtual
 
 `dnf install binutils gcc make patch libgomp glibc-headers glibc-devel kernel-headers kernel-devel dkms`
 
-for versions 22 or later, or 
+for versions 22 or later, or
 
 `yum install binutils gcc make patch libgomp glibc-headers glibc-devel kernel-headers kernel-devel dkms`
 
@@ -153,7 +153,7 @@ for versions 21 or earlier.
 
 <aside class="notice">
 Note: If you are using the PAE kernel, replace kernel-devel with kernel-PAE-devel.
-<\aside>
+</aside>
 
 Now, you’re ready to install virtualBox via
 
@@ -179,7 +179,7 @@ If this installs correctly you should see a message similar to
 
 ### Installing Ansible
 
-Ansible can be installed with your package manager with 
+Ansible can be installed with your package manager with
 
 `dnf install ansible`
 
@@ -198,7 +198,7 @@ You’re now ready to clone our repo and get started.
 
 ### Setting Up TuxLab
 
-Tuxlab’s infrastructure code is stored in a github repository. You don’t need to be very familiar with git to get the source, however. Just open a terminal, go to the directory you want to put the code in, and type 
+Tuxlab’s infrastructure code is stored in a github repository. You don’t need to be very familiar with git to get the source, however. Just open a terminal, go to the directory you want to put the code in, and type
 
 `git clone https://github.com/learnlinux/tuxlab-infra.git`
 
@@ -206,7 +206,7 @@ Once this is done, cd into the newly created `tuxlab-infra` directory. Then, ent
 
 `vagrant up`
 
-If you’ve installed all the prerequisite programs properly, this should automatically run tuxlab’s infrastructure. The process may take any amount of time from 15 minutes or so to over an hour, so it is recommended you have a power source and a strong internet connection when you run this. 
+If you’ve installed all the prerequisite programs properly, this should automatically run tuxlab’s infrastructure. The process may take any amount of time from 15 minutes or so to over an hour, so it is recommended you have a power source and a strong internet connection when you run this.
 
 Congratulations! You are now running tuxlab’s infrastructure in a development environment!
 
@@ -262,7 +262,7 @@ SSHPass, like vagrant and virtualbox, can be installed by ubuntu’s package man
 You’re now ready to clone our repo and get started.
 
 ### Setting Up TuxLab
-Tuxlab’s infrastructure code is stored in a github repository. You don’t need to be very familiar with git to get the source, however. Just open a terminal, go to the directory you want to put the code in, and type 
+Tuxlab’s infrastructure code is stored in a github repository. You don’t need to be very familiar with git to get the source, however. Just open a terminal, go to the directory you want to put the code in, and type
 
 `git clone https://github.com/learnlinux/tuxlab-infra.git`
 
@@ -270,7 +270,7 @@ Once this is done, cd into the newly created `tuxlab-infra` directory. Then run 
 
 `vagrant up`
 
-If you’ve installed all the prerequisite programs properly, this should automatically run tuxlab’s infrastructure. The process may take any amount of time from 15 minutes or so to over an hour, so it is recommended you have a power source and a strong internet connection when you run this. 
+If you’ve installed all the prerequisite programs properly, this should automatically run tuxlab’s infrastructure. The process may take any amount of time from 15 minutes or so to over an hour, so it is recommended you have a power source and a strong internet connection when you run this.
 
 Congratulations! You are now running tuxlab’s infrastructure in a development environment!
 
@@ -304,7 +304,7 @@ You’re now ready to clone our repo and get started.
 
 ### Setting Up TuxLab
 
-Tuxlab’s infrastructure code is stored in a github repository. You don’t need to be very familiar with git to get the source, however. Just open a terminal, go to the directory you want to put the code in, and type 
+Tuxlab’s infrastructure code is stored in a github repository. You don’t need to be very familiar with git to get the source, however. Just open a terminal, go to the directory you want to put the code in, and type
 
 `git clone https://github.com/learnlinux/tuxlab-infra.git`
 
@@ -312,7 +312,7 @@ Once this is done, cd into the newly created `tuxlab-infra` directory. Then run 
 
 `vagrant up`
 
-If you’ve installed all the prerequisite programs properly, this should automatically run tuxlab’s infrastructure. The process may take any amount of time from 15 minutes or so to over an hour, so it is recommended you have a power source and a strong internet connection when you run this. 
+If you’ve installed all the prerequisite programs properly, this should automatically run tuxlab’s infrastructure. The process may take any amount of time from 15 minutes or so to over an hour, so it is recommended you have a power source and a strong internet connection when you run this.
 
 Congratulations! You are now running tuxlab’s infrastructure in a development environment!
 
@@ -346,7 +346,7 @@ Vagrant for OS X ships in a dmg file, which can be found <a href="https://www.va
 
 ### Installing Ansible
 	Installing ansible on OS X can be a bit tricky. We reccomend using <a href="http://binarynature.blogspot.com/2016/01/install-ansible-on-os-x-el-capitan_30.html">this installation guide</a>.
-	
+
 Once this is done, try running the command `vagrant`. If vagrant is properly installed, you should see information about how to use vagrant and available subcommands. You will need to use those subcommands to add plugins to vagrant in order to proceed. To do this, run the command
 
 `vagrant plugin install vagrant-vbguest`
@@ -366,7 +366,7 @@ You’re now ready to clone our repo and get started.
 
 ### Setting Up TuxLab
 
-Tuxlab’s infrastructure code is stored in a github repository. You don’t need to be very familiar with git to get the source, however. Just open a terminal, go to the directory you want to put the code in, and type 
+Tuxlab’s infrastructure code is stored in a github repository. You don’t need to be very familiar with git to get the source, however. Just open a terminal, go to the directory you want to put the code in, and type
 
 `git clone https://github.com/learnlinux/tuxlab-infra.git`
 
@@ -374,6 +374,6 @@ Once this is done, cd into the newly created `tuxlab-infra` directory. Then, ent
 
 `vagrant up`
 
-If you’ve installed all the prerequisite programs properly, this should automatically run tuxlab’s infrastructure. The process may take any amount of time from 15 minutes or so to over an hour, so it is recommended you have a power source and a strong internet connection when you run this. 
+If you’ve installed all the prerequisite programs properly, this should automatically run tuxlab’s infrastructure. The process may take any amount of time from 15 minutes or so to over an hour, so it is recommended you have a power source and a strong internet connection when you run this.
 
 Congratulations! You are now running tuxlab’s infrastructure in a development environment!
