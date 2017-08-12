@@ -1,0 +1,14 @@
+
+- [Home](/)
+- Installation
+  - [Local Installation](install_local.md)
+  - [Production Installation](install_prod.md)
+- Administration
+  - Users, Courses and Grading
+  - Authentication
+  - Cluster Health
+- Developing Courses
+  - VM Images
+  - Lab API
+  - [Course Repository](https://github.com/learnlinux/courses-community)
+- Contributing

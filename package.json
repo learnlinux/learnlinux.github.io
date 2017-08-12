@@ -1,0 +1,22 @@
+{
+  "name": "learnlinux.github.io",
+  "version": "0.2.0",
+  "description": "Documentation Pages for TuxLab Project",
+  "main": "index.html",
+  "scripts": {
+    "build": "$(npm bin)/docsify"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/learnlinux/learnlinux.github.io.git"
+  },
+  "author": "Derek Brown",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/learnlinux/learnlinux.github.io/issues"
+  },
+  "homepage": "https://github.com/learnlinux/learnlinux.github.io#readme",
+  "devDependencies": {
+    "docsify-cli": "^4.1.9"
+  }
+}
