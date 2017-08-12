@@ -1,3 +1,7 @@
 [submodule "assets"]
 	path = assets
 	url = https://github.com/learnlinux/tuxlab-assets.git
+[submodule "tuxlab-assets"]
+	path = tuxlab-assets
+	url = https://github.com/learnlinux/tuxlab-assets.git
+	branch = master
