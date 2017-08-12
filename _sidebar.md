@@ -1,8 +1,8 @@
 
 - [Home](/)
 - Installation
-  - [Local Installation](install_local.md)
-  - [Production Installation](install_prod.md)
+  - [Local Installation](install/install_local.md)
+  - [Production Installation](install/install_prod.md)
 - Administration
   - Users, Courses and Grading
   - Authentication
