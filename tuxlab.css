@@ -58,10 +58,21 @@ div.sponsors div.logos img{
 
 /* ELEMENTS */
 div.note {
-  padding: 8px;
+  padding: 12px;
 
   color: #071832;
   background-color: #ebf7fd;
   border: 1px solid rgba(45,112,145,.3);
+  border-radius: 4px;
+}
+
+div.note h3 {
+  margin-top: 5px 0px !important;
+}
+
+button.material-button{
+  padding: 4px 8px;
+
+  box-shadow:0 4px 8px 0 rgba(0,0,0,.4);
   border-radius: 4px;
 }
