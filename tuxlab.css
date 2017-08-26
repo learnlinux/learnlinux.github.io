@@ -1,4 +1,11 @@
-div.cover-main {
+/*
+ *  TuxLab Documentation Page Styles
+ *  @author Derek Brown
+ */
+
+/* COVER PAGE */
+
+ div.cover-main {
   margin: -20px 0 !important;
   align-self: flex-end !important;
 }
@@ -47,4 +54,13 @@ div.sponsors div.logos{
 
 div.sponsors div.logos img{
   height: 80px;
+}
+
+/* ELEMENTS */
+div.note {
+  padding: 8px;
+
+  color: #071832;
+  background-color: #46a5dd;
+  border: 1px solid #071832;
 }

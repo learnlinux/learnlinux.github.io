@@ -11,7 +11,7 @@
   <h2 class="mesg"> Made Possible By: </h2>
   <div class="logos">
     <img src="tuxlab-assets/partners/cmu_scs.png" alt="Carnegie Mellon SCS" />
-    <img src="tuxlab-assets/partnets/redhat.png" alt="Red Hat" />
+    <img src="tuxlab-assets/partners/redhat.png" alt="Red Hat" />
   </div>
 </div>
 
