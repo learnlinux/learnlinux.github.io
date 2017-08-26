@@ -71,8 +71,12 @@ div.note h3 {
 }
 
 a.material-button{
-  padding: 4px 8px;
+  display: inline-block;
+  padding: 12px;
 
+  background-color: #fff;
   box-shadow:0 4px 8px 0 rgba(0,0,0,.4);
   border-radius: 6px;
+
+  text-decoration: none;
 }
