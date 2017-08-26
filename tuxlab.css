@@ -73,10 +73,16 @@ div.note h3 {
 a.material-button{
   display: inline-block;
   padding: 12px;
+  margin-top: 10px;
 
   background-color: #fff;
   box-shadow:0 4px 8px 0 rgba(0,0,0,.4);
   border-radius: 6px;
 
+  color: #333;
   text-decoration: none;
+}
+
+a.material-button:hover{
+  background-color: #ccc;
 }
