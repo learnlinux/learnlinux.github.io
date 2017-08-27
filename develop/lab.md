@@ -1,4 +1,4 @@
-# Lab API
+# Labfiles
 
 ---
 ### What is a Labfile?
@@ -102,9 +102,21 @@ You can read about options for other contexts in the API below.
 While a Labfile is just ordinary Javascript, we have a few tips and tricks to
 help get you started:
 
-1.
+1. Use [Promises](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)
+Much of the Labfile API is build around Promises, as they are stylistically
+preferable to callbacks.  Be careful to use them appropriately.
+
+2. Try using [Typescript](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html)
+Typescript is a language which extends the features of Javascript to include
+Typings, as well as polyfills for the older Node.JS version used by Meteor.  We use
+Typescript to create the courses in the [Course Repository](https://github.com/learnlinux/tuxlab-courses).
+
+3. Debug using the Console
+Any errors at compilation (when you drag the file into the course) and at execution
+(as you run the lab) will be forwarded to your browser's console:
+
+* [Chrome](https://developers.google.com/web/tools/chrome-devtools/console/)
+* [Firefox](https://developer.mozilla.org/en-US/docs/Tools/Browser_Console)
 
 ---
-### Labfile API
-
-<script src="https://gist-it.appspot.com/github/learnlinux/tuxlab-app/blob/beta/imports/api/tuxlab-api.d.ts"></script>
+### [Labfile API](https://github.com/learnlinux/tuxlab-app/blob/beta/imports/api/tuxlab-api.d.ts)

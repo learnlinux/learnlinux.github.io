@@ -8,6 +8,6 @@
   - [Users and Permissions](admin/users.md)
 - Developing Courses
   - [Lab API](develop/lab.md)
-  - [VM Images](develop/vm.md)
+  - [LabVM Images](develop/vm.md)
   - [Labs on GitHub](https://github.com/learnlinux/tuxlab-courses)
 - [Contributing](develop/contribute.md)
