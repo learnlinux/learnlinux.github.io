@@ -45,7 +45,8 @@ TuxLab uses [Docker Swarm](https://docs.docker.com/swarm/) for scaling the Docke
 across servers.  The Docker Swarm Manager is the cluster manager for these systems,
 as well as running several services including DNS.  It is automatically configured
 by the TuxLab Ansible Playbook, so all that is needed is a CentOS Atomic host.
-The version requirements for this system are specific (due to ETCD versioning), so
+
+!> **Images **The version requirements for this system are specific (due to ETCD versioning), so
 be sure to use the following images:
 
 * [ISO](https://seven.centos.org/2016/10/new-centos-atomic-host-with-optional-docker-1-12/)
@@ -57,7 +58,9 @@ TuxLab uses [Docker Swarm](https://docs.docker.com/swarm/) for scaling the Docke
 across servers.  The Docker Swarm hosts are members of the Docker cluster, running the
 lab runtime as well as proxy containers for providing access to labs.  It is automatically configured
 by the TuxLab Ansible Playbook, so all that is needed is a CentOS Atomic host.
-The version requirements for this system are specific (due to ETCD versioning), so
+
+
+!> **Images **The version requirements for this system are specific (due to ETCD versioning), so
 be sure to use the following images:
 
 * [ISO](https://seven.centos.org/2016/10/new-centos-atomic-host-with-optional-docker-1-12/)
@@ -79,6 +82,7 @@ Edit the `config.yml` configuration file found in the repository root.
 The options are outlined here:
 
 __Domain Configuration__
+
 | Option          | Value                                                 |
 |-----------------|-------------------------------------------------------|
 | TUX_DOMAIN      | Domain name used for TuxLab                           |
@@ -87,6 +91,7 @@ __Domain Configuration__
 | TUX_HOMEPAGE    | Root URL.  Mut be suffixed by `/`                   	|
 
 __SSL Configuration__
+
 | Option          | Value                                                 |
 |-----------------|-------------------------------------------------------|
 | SSL_COUNTRY     | Organization country, used in SSL CA.                 |
@@ -96,12 +101,14 @@ __SSL Configuration__
 | SSL_ORG_UNIT    | Organization unit name, used in SSL CA.               |
 
 __LabEnv Configuration__
+
 | Option          | Value                                                                     |
 |-----------------|---------------------------------------------------------------------------|
 | LAB_IMAGES      | A list of Lab Images to be downloaded from the Docker Hub.  [Read more]() |
 
 __Auth Configuration__
 ###### Google Authentication
+
 | Option                     | Value                                                |
 |----------------------------|------------------------------------------------------|
 | AUTH_GOOGLE                | Whether to use Google Authentication                 |
