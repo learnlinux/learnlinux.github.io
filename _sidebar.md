@@ -4,11 +4,11 @@
   - [Local Installation](install/install_local.md)
   - [Production Installation](install/install_prod.md)
 - Administration
-  - Users, Courses and Grading
-  - Authentication
-  - Cluster Health
+  - [Users and Authentication](admin/auth.md)
+  - [Courses and Grading](admin/course.md)
+  - [Cluster Health](admin/cluster.md)
 - Developing Courses
-  - VM Images
-  - Lab API
-  - [Course Repository](https://github.com/learnlinux/courses-community)
-- Contributing
+  - [Lab API](develop/lab.md)
+  - [VM Images](develop/vm.md)
+  - [Labs on GitHub](https://github.com/learnlinux/tuxlab-courses)
+- [Contributing](develop/contribute.md)
