@@ -15,7 +15,7 @@ Determines who can enroll in the course:
 * "Authorized User" - Only logged in users can join the course.
 * "No One" - No one can join the course.
 
-NOTE: If you wish to manually add students to your course, choose the
+!> NOTE: If you wish to manually add students to your course, choose the
 "No One" option, and add users in the Course Admin View.
 
 #### Content Permissions
@@ -26,14 +26,23 @@ Note that only logged in users can start a lab.
 * "Authorized User" - Only logged in users can view the course content.
 * "No One" - Course is locked and visible only to instructors and administrators.
 
-!> The last two options may only be changed by an administrator:
 
 #### Meta Permissions
 Determines whether a course is included in the explore and search features.
 
+!> Can only be changed by a Global Administrator.
+
+* true
+* false
+
 #### Featured
 Whether the course is included in the "featured" section at the top of the
 dashboard.
+
+* true
+* false
+
+!> Can only be changed by a Global Administrator.
 
 ---
 
