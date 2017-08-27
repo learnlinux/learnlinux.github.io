@@ -7,10 +7,10 @@ or through a 3rd-party authentication method such as Google or Shibboleth.
 ---
 
 ### Permissions
-###### Course Settings
+##### Course Settings
 There are four permissions options for each course:
 
-__Enroll Permissions__
+###### Enroll Permissions
 Determines who can enroll in the course:
 
 * "Authorized User" - Only logged in users can join the course.
@@ -19,7 +19,7 @@ Determines who can enroll in the course:
 NOTE: If you wish to manually add students to your course, choose the
 "No One" option, and add users in the Course Admin View.
 
-__Content Permissions__
+###### Content Permissions
 Determine who can view the content (description and labs) in a course.
 Note that only logged in users can start a lab.
 
@@ -29,31 +29,31 @@ Note that only logged in users can start a lab.
 
 !> The last two options may only be changed by an administrator:
 
-__Meta Permissions__
+###### Meta Permissions
 Determines whether a course is included in the explore and search features.
 
-__Featured__
+###### Featured
 Whether the course is included in the "featured" section at the top of the
 dashboard.
 
 ###### User Roles
 There are five distinct user roles:
 
-__Guest__
+###### Guest
 Users who aren't authenticated.
 
-__Student__
+###### Student
 Users who have been added as a student to a course, or have begun a lab in
 a course with "Anyone" enroll permissions.
 
-__Instructor__
+###### Instructor
 Instructors have the ability to view course records and user sessions, but
 cannot add or change labs within the course.
 
-__Course Admin__
+###### Course Admin
 Course administrators have the ability to edit a course; adding, changing or
 removing labs.  However, they cannot add or delete courses.
 
-__Global Admin__
+###### Global Admin
 Global administrators have the ability to create, edit and delete courses, as well as promote
 users to course administrators and instructors.
