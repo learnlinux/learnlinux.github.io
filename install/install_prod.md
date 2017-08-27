@@ -79,6 +79,7 @@ Edit the `config.yml` configuration file found in the repository root.
 The options are outlined here:
 
 __Domain Configuration__
+| Option          | Value                                                 |
 |-----------------|-------------------------------------------------------|
 | TUX_DOMAIN      | Domain name used for TuxLab                           |
 | TUX_ORG         | Organization name, used in SSL CA.                    |
@@ -86,6 +87,7 @@ __Domain Configuration__
 | TUX_HOMEPAGE    | Root URL.  Mut be suffixed by `/`                   	|
 
 __SSL Configuration__
+| Option          | Value                                                 |
 |-----------------|-------------------------------------------------------|
 | SSL_COUNTRY     | Organization country, used in SSL CA.                 |
 | SSL_STATE       | Organization state, used in SSL CA.                   |
@@ -94,11 +96,13 @@ __SSL Configuration__
 | SSL_ORG_UNIT    | Organization unit name, used in SSL CA.               |
 
 __LabEnv Configuration__
+| Option          | Value                                                                     |
 |-----------------|---------------------------------------------------------------------------|
 | LAB_IMAGES      | A list of Lab Images to be downloaded from the Docker Hub.  [Read more]() |
 
 __Auth Configuration__
 ###### Google Authentication
+| Option                     | Value                                                |
 |----------------------------|------------------------------------------------------|
 | AUTH_GOOGLE                | Whether to use Google Authentication                 |
 | AUTH_GOOGLE_CLIENTID       | Google API Client ID                                 |
