@@ -5,6 +5,8 @@
 A labfile is a Javascript application, written using the Lab API which
 instructs the TuxLab server on how to setup, and step users through a lab.
 
+You can find tons of examples on the [course repository](https://github.com/learnlinux/tuxlab-courses).
+
 ---
 ### Anatomy of a Labfile
 A labfile is comprised of four main blocks, each which handle part of the Lab lifecycle:
@@ -28,7 +30,7 @@ Lab = new TuxLab({
 !> The output of the constructor **MUST** be assigned to the global `Lab`.  This is
 how the server executor knows how to find it.
 
-### Init (optional)
+#### Init (optional)
 Init defines a function which is run before the lab is begun.  This should
 setup folders, install programs, and initialize user data.
 
@@ -45,10 +47,9 @@ which determines the appropriate action based on the users' performance.
 
 In addition, the comments preceding task blocks (when written using the notation provided)
 are interpreted as Markdown instructions for the user. This makes it easy to write a lab
-as a single file.
+as a single file:
 
-```
-
+```javascript
   /* @Task Name
      Description of task.  
   */
@@ -109,7 +110,7 @@ preferable to callbacks.  Be careful to use them appropriately.
 2. Try using [Typescript](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html)
 Typescript is a language which extends the features of Javascript to include
 Typings, as well as polyfills for the older Node.JS version used by Meteor.  We use
-Typescript to create the courses in the [Course Repository](https://github.com/learnlinux/tuxlab-courses).
+Typescript to create the courses in the [course repository](https://github.com/learnlinux/tuxlab-courses).
 
 3. Debug using the Console
 Any errors at compilation (when you drag the file into the course) and at execution

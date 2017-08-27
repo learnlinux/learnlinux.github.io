@@ -1,8 +1,10 @@
+# TuxLab Demo
+
+# What Is TuxLab?
 ![alt text](./tuxlab-assets/screenshots/lab_view.png "Lab View")
 
-TuxLab is a framework for creating interactive Linux courses developed
-by students of Carnegie Mellon University with the generous support
-of Red Hat. It operates under a simple architectural model:
+TuxLab is a framework for creating Interactive Linux courses.
+ It operates under a simple architectural model:
 
 * Instructors develop "Labfiles" using Javascript, which provide instructions
   to the student, as well as code to setup and verify each step in the lab.

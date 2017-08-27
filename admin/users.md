@@ -49,21 +49,21 @@ dashboard.
 ### User Roles
 There are five distinct user roles:
 
-* Guest
+* Guest<br>
 Users who aren't authenticated.
 
-* Student
+* Student<br>
 Users who have been added as a student to a course, or have begun a lab in
 a course with "Anyone" enroll permissions.
 
-* Instructor
+* Instructor<br>
 Instructors have the ability to view course records and user sessions, but
 cannot add or change labs within the course.
 
-* Course Admin
+* Course Admin<br>
 Course administrators have the ability to edit a course; adding, changing or
 removing labs.  However, they cannot add or delete courses.
 
-* Global Admin
+* Global Admin<br>
 Global administrators have the ability to create, edit and delete courses, as well as promote
 users to course administrators and instructors.
