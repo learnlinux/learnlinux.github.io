@@ -7,6 +7,8 @@ from the Docker Hub, however, only **specifically-designed** containers will
 work with TuxLab.  We call these images **LabVM images**, as they can be used to
 execute TuxLab Labs.
 
+---
+
 ### Official LabVM Images
 The TuxLab project currently publishes
 two official LabVM images:
@@ -21,6 +23,8 @@ Red Hat Enterprise Linux (RHEL) is the most popular commercial Linux distribuiti
 and is trusted by IT professionals for use in production contexts.  RHEL includes
 support for many features and tools not included in lightweight distributions (like Alpine),
 and is thus is the best choice for courses targeted at more advanced users.
+
+---
 
 ### Creating a LabVM Image
 There are two reasons to create your own Lab VM Image:
@@ -56,9 +60,11 @@ RUN apk add vim
 
 ```
 
->! Docker maintains copies of images as [a series of layers](https://docs.docker.com/engine/userguide/storagedriver/imagesandcontainers/),
+!> Docker maintains copies of images as [a series of layers](https://docs.docker.com/engine/userguide/storagedriver/imagesandcontainers/),
 so try to use similar base images for all the labs in an environment to conserve
 storage space.
+
+---
 
 ### Publishing a LabVM Image
 Once you have created a new Dockerfile for your LabVM image, it must be published
@@ -72,6 +78,8 @@ from GitHub, as this encourages code transparency and eases the process of makin
 to your image later:
 
 * https://docs.docker.com/docker-hub/github/#linking-docker-hub-to-a-github-account
+
+---
 
 ### Configuring your LabVM inside a Labfile
 In order to use your newly created LabVM inside a Labfile, you must define a

@@ -67,6 +67,8 @@ be sure to use the following images:
 * [AWS](https://seven.centos.org/2016/10/new-centos-atomic-host-with-optional-docker-1-12/)
 * [Vagrant](https://app.vagrantup.com/centos/boxes/atomic-host/versions/7.20161006)
 
+---
+
 ### Download TuxLab Installer
 #### Clone TuxLab-Infra
 Clone the [tuxlab-infra](https://github.com/learnlinux/tuxlab-infra) repository
@@ -119,7 +121,9 @@ The options are outlined here:
 ###### SAML Authentication
 Not yet implemented.  A work in progress.
 
-### Provisioning using Ansible
+---
+
+### Option 1: Provisioning Manually
 Once the requisite systems are configured, create an Ansible inventory file
 containing the systems you wish to provision. For example:
 
@@ -137,4 +141,20 @@ dhost ansible_host=10.100.1.11 ansible_port=22 ansible_user='username' ansible_p
 meteor ansible_host=10.100.1.2 ansible_port=22 ansible_user='username' ansible_password='password'
 ```
 
-Then execute the
+Then execute the playbook using the Ansible shell command:
+
+```bash
+ansible-playbook -i /path/to/inventory.yml setup.yml
+```
+
+### Option 2: Automated Scaling / Provisioning
+TuxLab is designed to be provisioned automatically using a separate server application,
+such as Ansible Tower or Rundeck.  This provides a number of benefits:
+
+* Reduce server resources, and/or cloud service costs.
+* Increase performance during peak usage.
+* Recover from server failures.
+* Automatically update on code changes.
+
+To enable this, TuxLab exposes the `setup.yml` playbook for provisioning servers,
+and the `test.yml` for repeatedly testing cluster health.

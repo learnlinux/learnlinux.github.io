@@ -4,9 +4,8 @@
   - [Local Installation](install/install_local.md)
   - [Production Installation](install/install_prod.md)
 - Administration
-  - [Users and Authentication](admin/auth.md)
   - [Courses and Grading](admin/course.md)
-  - [Cluster Health](admin/cluster.md)
+  - [Users and Permissions](admin/users.md)
 - Developing Courses
   - [Lab API](develop/lab.md)
   - [VM Images](develop/vm.md)
