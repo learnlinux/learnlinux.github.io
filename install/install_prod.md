@@ -123,17 +123,17 @@ Not yet implemented.  A work in progress.
 Once the requisite systems are configured, create an Ansible inventory file
 containing the systems you wish to provision. For example:
 
-```YAML
-[all:vars]
+```yaml
+\[all:vars\]
 swarm_node_ip: 10.100.1.10
 
-[tuxlab-swarm-manager]
+\[tuxlab-swarm-manager\]
 dswarm ansible_host=10.100.1.10 ansible_port=22 ansible_user='username' ansible_password='password'
 
-[tuxlab-swarm-host]
+\[tuxlab-swarm-host\]
 dhost ansible_host=10.100.1.11 ansible_port=22 ansible_user='username' ansible_password='password'
 
-[tuxlab-meteor]
+\[tuxlab-meteor\]
 meteor ansible_host=10.100.1.2 ansible_port=22 ansible_user='username' ansible_password='password'
 ```
 
